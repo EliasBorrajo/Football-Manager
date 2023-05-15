@@ -1,0 +1,38 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
+    
+
+    <!-- 
+        Problèmes de dépendances, on utilise le mirror pour forcer MAVEN
+        à téécharger depuis les REPO en HTTP et non que les HTTPS
+     -->
+    <mirrors>
+        <mirror>
+            <id>releases-java-net-http-unblocker</id>
+            <mirrorOf>releases.java.net</mirrorOf>
+            <name>releases.java.net</name>
+            <url>http://maven.java.net/content/repositories/releases/</url>
+            <blocked>false</blocked>
+        </mirror>
+        <mirror>
+            <id>jboss-maven2</id>
+            <mirrorOf>repository.jboss.org</mirrorOf>
+            <name>JBoss Maven Repository</name>
+            <url>http://repository.jboss.org/maven2/</url>
+            <blocked>false</blocked>
+        </mirror>
+    </mirrors>
+    <!--  
+        Explications :
+
+<id> : Un identifiant unique pour le miroir. Il peut être de votre choix, mais il doit être unique parmi les autres miroirs définis.
+<mirrorOf> : L'URL ou le motif d'URL du référentiel à refléter. Dans ce cas, nous utilisons "repository.jboss.org" pour correspondre à l'URL "http://repository.jboss.org/maven2/".
+<name> : Un nom descriptif pour le miroir.
+<url> : L'URL du miroir.
+<blocked> : Une valeur booléenne indiquant si le miroir est bloqué ou non. Dans ce cas, nous le définissons sur "false" pour indiquer qu'il n'est pas bloqué.
+    -->
+    
+     
+
+</settings>
