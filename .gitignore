@@ -14,6 +14,16 @@ local.properties
 .loadpath
 .recommenders
 
+# Fichiers spécifiques à Eclipse
+.project
+.classpath
+
+# Fichiers et dossiers générés
+target/
+bin/
+
+
+
 # External tool builders
 .externalToolBuilders/
 
@@ -115,3 +125,4 @@ jboss/server/minimal/work/**/*
 *.DEPLOYED
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,jboss
+/target/
