@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity     // TODO : CHANGER TYPE HERITAGE
-@Inheritance ( strategy = InheritanceType.JOINED ) // one table per class
+@Inheritance ( strategy = InheritanceType.TABLE_PER_CLASS )
 public abstract class Person
 {
     // A T T R I B U T S
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long   id;
     private String firstname;
     private String lastname;
