@@ -1,10 +1,14 @@
 package ch.hevs.businessobject;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Club {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String name;
     private String location;
     private String stadName;
