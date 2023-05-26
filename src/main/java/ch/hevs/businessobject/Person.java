@@ -1,10 +1,10 @@
 package ch.hevs.businessobject;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity     // TODO : CHANGER TYPE HERITAGE
+@Inheritance ( strategy = InheritanceType.JOINED ) // one table per class
 public abstract class Person
 {
     // A T T R I B U T S
@@ -15,5 +15,8 @@ public abstract class Person
     private String lastname;
     private Date   birthdate;
 
+    // R E L A T I O N S
+    @Embedded
+    private Country country;
 
 }

@@ -1,10 +1,9 @@
 package ch.hevs.businessobject;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Player extends Person
 {
     // A T T R I B U T S
