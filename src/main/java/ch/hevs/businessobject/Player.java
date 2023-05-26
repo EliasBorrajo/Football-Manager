@@ -15,6 +15,7 @@ public class Player extends Person
     private double weight;
 
     // R E L A T I O N S
+    // PLAYER <-1..*------1..1-> CLUB
     @ManyToOne ( mappedBy = "players" )
     private Club playsForClub;
 }
