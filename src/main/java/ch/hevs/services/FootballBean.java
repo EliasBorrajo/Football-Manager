@@ -4,6 +4,11 @@ import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
 
+import javax.ejb.Local;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
+@Local
 public interface FootballBean
 {
     // CLUB - Use Cases :
@@ -13,6 +18,7 @@ public interface FootballBean
     // 3) Consulter les infos de la ligue
     //  3.1) obtenir liste des clubs
 
+    @TransactionAttribute(value = TransactionAttributeType.REQUIRED) // TODO : Changer
     public void updateClubInfo(Club club);
     public void addPlayer(Player player);
     public void removePlayer(Player player);

@@ -4,6 +4,9 @@ import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
 
+import javax.ejb.Stateless;
+
+@Stateless
 public class Football implements FootballBean
 {
     // CLUB - Use Cases :
