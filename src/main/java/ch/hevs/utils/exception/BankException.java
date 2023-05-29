@@ -1,5 +1,8 @@
-package ch.hevs.exception;
+package ch.hevs.utils.exception;
 
+/**
+ * Exception class for the Bank application
+ */
 public class BankException extends RuntimeException {
 
 	public BankException() {
