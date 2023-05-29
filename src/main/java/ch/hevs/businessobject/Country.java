@@ -2,6 +2,7 @@ package ch.hevs.businessobject;
 
 import javax.persistence.Embeddable;
 
+// NE SERA PAS DANS LA DB, mais sera dans PERSISTENCE.XML
 @Embeddable
 public class Country {
 

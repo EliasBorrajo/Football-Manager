@@ -15,7 +15,7 @@ public class Player extends Person
 
     // R E L A T I O N S
     // PLAYER <-1..*------1..1-> CLUB
-    @ManyToOne ( mappedBy = "players" )
+    @ManyToOne (cascade = CascadeType.ALL) //( mappedBy = "players" ) // TODO : ça bug "cannot find symbol" --> signifie que j'ai pas de players dans Club
     private Club playsForClub;
 
     // C O N S T R U C T O R
@@ -41,27 +41,21 @@ public class Player extends Person
     // position
     public String getPosition() {return position;}
     public void setPosition(String position) {this.position = position;}
-
     // number
     public int getNumber() {return number;}
     public void setNumber(int number) {this.number = number;}
-
     // isRightFooted
     public boolean isRightFooted() {return isRightFooted;}
     public void setRightFooted(boolean rightFooted) {isRightFooted = rightFooted;}
-
     // height
     public double getHeight() {return height;}
     public void setHeight(double height) {this.height = height;}
-
     // weight
     public double getWeight() {return weight;}
     public void setWeight(double weight) {this.weight = weight;}
-
     // playsForClub
     public Club getPlaysForClub() {return playsForClub;}
     public void setPlaysForClub(Club playsForClub) {this.playsForClub = playsForClub;}
-
 
 
     // C O N V E N I E N C E   M E T H O D S
