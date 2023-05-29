@@ -15,6 +15,6 @@ public class Player extends Person
 
     // R E L A T I O N S
     // PLAYER <-1..*------1..1-> CLUB
-    @ManyToOne ( mappedBy = "players" )
+    @ManyToOne ( cascade = CascadeType.ALL )
     private Club playsForClub;
 }
