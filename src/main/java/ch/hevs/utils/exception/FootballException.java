@@ -1,4 +1,4 @@
-package ch.hevs.exception;
+package ch.hevs.utils.exception;
 
 /**
  * Exception class for the Football application
