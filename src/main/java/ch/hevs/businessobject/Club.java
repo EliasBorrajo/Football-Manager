@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 public class Club {
 
+    // A T T R I B U T S
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -13,14 +14,14 @@ public class Club {
     private String location;
     private String stadName;
 
-    //Relations
+    // R E L A T I O N S
     @Embedded
     private Country country;
 
     @ManyToOne
     private League league;
 
-    @OneToMany
+    @OneToMany(mappedBy = "playsForClub")
     private List<Player> players;
 
     //name
