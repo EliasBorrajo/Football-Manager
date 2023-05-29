@@ -27,7 +27,6 @@ public class League
     public League() {
         this.clubs = new ArrayList<Club>();
     }
-
     public League(String name, String division)
     {
         this.clubs = new ArrayList<Club>();

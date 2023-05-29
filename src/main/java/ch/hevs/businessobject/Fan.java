@@ -25,13 +25,10 @@ public class Fan extends Person
     }
     public Fan(String firstname, String lastname,
                Date birthdate, Country country,
-               Date subscriptionDate, Club fanOfClub,
-               Player favoritePlayer)
+               Date subscriptionDate)
     {
         super(firstname, lastname, birthdate, country);
         this.subscriptionDate = subscriptionDate;
-//        this.fanOfClub = fanOfClub;           // TODO METTRE ? JE PENSE PAS CAR MIS AVEC METHODES DEPUIS GRAPHIQUE
-//        this.favoritePlayer = favoritePlayer;
     }
 
 
@@ -45,7 +42,6 @@ public class Fan extends Person
     {
         this.subscriptionDate = subscriptionDate;
     }
-
     // fanOfClub
     public Club getFanOfClub()
     {
@@ -55,7 +51,6 @@ public class Fan extends Person
     {
         this.fanOfClub = fanOfClub;
     }
-
     // favoritePlayer
     public Player getFavoritePlayer()
     {
