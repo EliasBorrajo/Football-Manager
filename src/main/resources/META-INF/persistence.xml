@@ -25,10 +25,10 @@
 			 Connection to the DB (HSQLDB) -->
 		<properties>
 			<!-- Update the DB at each start, but don't drop it -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 
 			<!-- Creates a new DB at each start, and drops it at the end -->
-			<!--   property name="hibernate.hbm2ddl.auto" value="create-drop" />    -->
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 
 			<property name="hibernate.show_sql" value="true" />
 			<property name="dialect" value="org.hibernate.dialect.HSQLDialect"/>

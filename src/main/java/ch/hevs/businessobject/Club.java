@@ -11,6 +11,7 @@ public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(name = "nameClub")
     private String name;
     private String location;
     private String stadName;

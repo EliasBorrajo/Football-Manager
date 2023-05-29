@@ -11,6 +11,7 @@ public class League
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(name = "nameLeague")
     private String name;
     private String division;
 
