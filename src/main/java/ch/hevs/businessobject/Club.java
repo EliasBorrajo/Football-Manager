@@ -16,12 +16,15 @@ public class Club {
     private String stadName;
 
     // R E L A T I O N S
+    // Club <>---------------| Country
     @Embedded
     private Country country;
 
-    @ManyToOne
+    // Club <-1..*------1..1-> League
+    @ManyToOne ( cascade = CascadeType.ALL)
     private League league;
 
+    // Club <-1..1------1..*-> Player
     @OneToMany(mappedBy = "playsForClub", cascade = CascadeType.ALL)
     private List<Player> players;
 

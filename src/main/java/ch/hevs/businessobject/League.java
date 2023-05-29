@@ -16,7 +16,7 @@ public class League
 
     // R E L A T I O N S
     // League <-1..1------1..*-> Club
-    @OneToMany
+    @OneToMany ( mappedBy = "league" , cascade = CascadeType.ALL)
     private List<Club> clubs;
 
     // League <>---------------| Country

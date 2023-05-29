@@ -16,6 +16,7 @@ public class Fan extends Person
 
     // FAN |-0..1------1..1-> PLAYER
     @OneToOne // Uni-directional, Fan knows his favorite player but not the opposite
+    @JoinColumn( nullable = true ) // a fan must have a favorite player
     private Player favoritePlayer; // Par défaut peut avoir du null
 
     // C O N S T R U C T O R
