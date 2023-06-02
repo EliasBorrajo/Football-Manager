@@ -7,20 +7,20 @@ import javax.persistence.Embeddable;
 public class Country {
 
     // A T T R I B U T S
-    private String name;
+    private String nameCountry;
 
     // C O N S T R U C T O R S
     public Country(){    }
-    public Country(String name) {
-        this.name = name;
+    public Country(String nameCountry) {
+        this.nameCountry = nameCountry;
     }
 
     // G E T T E R S   &   S E T T E R S
     //Name
-    public String getName() {
-        return name;
+    public String getNameCountry() {
+        return nameCountry;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setNameCountry(String name) {
+        this.nameCountry = nameCountry;
     }
 }

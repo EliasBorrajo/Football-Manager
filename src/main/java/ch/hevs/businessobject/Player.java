@@ -4,10 +4,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Player extends Person
-{
+public class Player extends Person {
     // A T T R I B U T S
-    private String  position;
+    private String  positionPlayer;
     private int     number;
     private boolean isRightFooted;
     private double  height;
@@ -24,12 +23,12 @@ public class Player extends Person
     }
     public Player(String firstname, String lastname,
                   Date birthdate, Country country,
-                  String position, int number,
+                  String positionPlayer, int number,
                   boolean isRightFooted, double height,
                   double weight /*, Club playsForClub*/)
     {
         super(firstname, lastname, birthdate, country);
-        this.position = position;
+        this.positionPlayer = positionPlayer;
         this.number = number;
         this.isRightFooted = isRightFooted;
         this.height = height;
@@ -39,8 +38,8 @@ public class Player extends Person
 
     // G E T T E R S   &   S E T T E R S
     // position
-    public String getPosition() {return position;}
-    public void setPosition(String position) {this.position = position;}
+    public String getPositionPlayer() {return positionPlayer;}
+    public void setPositionPlayer(String positionPlayer) {this.positionPlayer = positionPlayer;}
     // number
     public int getNumber() {return number;}
     public void setNumber(int number) {this.number = number;}
@@ -62,7 +61,7 @@ public class Player extends Person
     @Override
     public String toString() {
         return "Player{" +
-                "position='" + position + '\'' +
+                "position='" + positionPlayer + '\'' +
                 ", number=" + number +
                 ", isRightFooted=" + isRightFooted +
                 ", height=" + height +

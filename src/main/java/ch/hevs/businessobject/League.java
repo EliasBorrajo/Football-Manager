@@ -11,8 +11,7 @@ public class League
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(name = "nameLeague")
-    private String name;
+    private String nameLeague;
     private String division;
 
     // R E L A T I O N S
@@ -28,10 +27,10 @@ public class League
     public League() {
         this.clubs = new ArrayList<Club>();
     }
-    public League(String name, String division)
+    public League(String nameLeague, String division)
     {
         this.clubs = new ArrayList<Club>();
-        this.name = name;
+        this.nameLeague = nameLeague;
         this.division = division;
     }
 
@@ -59,13 +58,13 @@ public class League
         this.id = id;
     }
     // name
-    public String getName()
+    public String getNameLeague()
     {
-        return name;
+        return nameLeague;
     }
-    public void setName(String name)
+    public void setNameLeague(String name)
     {
-        this.name = name;
+        this.nameLeague = nameLeague;
     }
     // division
     public String getDivision()

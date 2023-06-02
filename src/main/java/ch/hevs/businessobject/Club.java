@@ -11,8 +11,7 @@ public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(name = "nameClub")
-    private String name;
+    private String nameClub;
     private String location;
     private String stadName;
 
@@ -33,9 +32,9 @@ public class Club {
     public Club(){
         this.players = new ArrayList<Player>();
     }
-    public Club(String name, String location, String stadName) {
+    public Club(String nameClub, String location, String stadName) {
         this.players = new ArrayList<Player>();
-        this.name = name;
+        this.nameClub = nameClub;
         this.location = location;
         this.stadName = stadName;
     }
@@ -65,8 +64,8 @@ public class Club {
         this.id = id;
     }
     //name
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
+    public String getNameClub() {return nameClub;}
+    public void setNameClub(String name) {this.nameClub = name;}
     //location
     public String getLocation() {return location;}
     public void setLocation(String location) {this.location = location;}
