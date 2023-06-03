@@ -8,17 +8,19 @@ import javax.faces.event.ValueChangeEvent;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import ch.hevs.businessobject.League;
 import ch.hevs.services.Bank;
 import ch.hevs.businessobject.Account;
 import ch.hevs.businessobject.Client;
+import ch.hevs.services.Football;
 
 /**
  * TransferBean.java
  * 
  */
-
 public class TransferBean
 {
+	// A T T R I B U T S
     private List<Client> clients;
     private List<String> clientNames;
     private List<String> sourceAccountDescriptions;
@@ -30,14 +32,23 @@ public class TransferBean
     private String transactionResult;
     private int transactionAmount;
     private Bank bank;
+	private Football football;
     
     @PostConstruct
     public void initialize() throws NamingException {
     	
     	// use JNDI to inject reference to bank EJB
     	InitialContext ctx = new InitialContext();
-		bank = (Bank) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.services.Bank"); // TODO : VERIFIER NOM SI ON MODIFIE PACKAGE
-			
+																// TODO : VERIFIER NOM SI ON MODIFIE PACKAGE
+		bank = (Bank) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.services.Bank");
+		football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
+
+		// populate football database
+		System.out.println("populate football database...");
+		System.out.println("POPULATE : " + football.populateDB());
+
+
+
     	// get clients
 		List<Client> clientList = bank.getClients();
 		this.clientNames = new ArrayList<String>();
