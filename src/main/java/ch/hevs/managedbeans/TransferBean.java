@@ -9,6 +9,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import ch.hevs.businessobject.League;
+import ch.hevs.businessobject.Player;
 import ch.hevs.services.Bank;
 import ch.hevs.businessobject.Account;
 import ch.hevs.businessobject.Client;
@@ -22,6 +23,8 @@ public class TransferBean
 	// A T T R I B U T S
     private List<Client> clients;
     private List<String> clientNames;
+
+	private List<String> playerNames;
     private List<String> sourceAccountDescriptions;
     private List<String> destinationAccountDescriptions;
     private String sourceAccountDescription;
@@ -53,6 +56,13 @@ public class TransferBean
 		this.clientNames = new ArrayList<String>();
 		for (Client client : clientList) {
 			this.clientNames.add(client.getLastname());
+		}
+
+		//get players
+		List<Player> playerList = football.getPlayers();
+		this.playerNames = new ArrayList<String>();
+		for(Player player : playerList){
+			this.playerNames.add(player.getLastname());
 		}
 		
 		// initialize account descriptions
@@ -93,6 +103,7 @@ public class TransferBean
     public String getDestinationClientName () {
     	return destinationClientName;
     }
+
     public void setDestinationClientName (final String destinationClientName) {
     	this.destinationClientName=destinationClientName;
     }
@@ -148,6 +159,11 @@ public class TransferBean
     public List<String> getClientNames() {
     	return clientNames;
     }
+
+	public List<String> getPlayerNames() {
+
+		return playerNames;
+	}
     
     
     public String performTransfer() {

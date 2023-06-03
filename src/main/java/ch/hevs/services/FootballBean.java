@@ -1,15 +1,12 @@
 package ch.hevs.services;
 
-import ch.hevs.businessobject.Club;
-import ch.hevs.businessobject.Country;
-import ch.hevs.businessobject.Fan;
-import ch.hevs.businessobject.League;
-import ch.hevs.businessobject.Player;
+import ch.hevs.businessobject.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import java.util.List;
 
 @Stateless
 public class FootballBean implements Football
@@ -223,5 +220,9 @@ public class FootballBean implements Football
         return clubInfo;
     }
 
+    @Override
+    public List<Player> getPlayers() {
+        return em.createQuery("FROM Player").getResultList();
+    }
 
 }

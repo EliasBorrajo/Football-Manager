@@ -1,13 +1,11 @@
 package ch.hevs.services;
 
-import ch.hevs.businessobject.Club;
-import ch.hevs.businessobject.Fan;
-import ch.hevs.businessobject.League;
-import ch.hevs.businessobject.Player;
+import ch.hevs.businessobject.*;
 
 import javax.ejb.Local;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import java.util.List;
 
 @Local
 public interface Football
@@ -24,6 +22,7 @@ public interface Football
     public void addPlayer(Club club ,Player player);
     public void removePlayer(Player player);
     public void subscribeToLeague(League league, Club club);
+    List<Player> getPlayers();
 
 
     // FAN - Use Cases :
