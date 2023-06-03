@@ -15,7 +15,14 @@ import ch.hevs.businessobject.Client;
 import ch.hevs.services.Football;
 
 /**
- * TransferBean.java
+ * 1) Attributs
+ * 2) PostConstruct initialize() Attributs
+ * 3) Methodes :
+ * 		GET
+ * 		SET
+ * 		Update
+ * 		transfer()
+ *
  */
 public class TransferBean
 {
