@@ -13,7 +13,7 @@ public abstract class Person  // TODO LAISSER ABSTRACT ? Ou ça casse tout ?
     private Long   id;
     private String firstname;
     private String lastname;
-    private Date   birthdate;
+    private String   birthdate;
 
     // R E L A T I O N S
     @Embedded
@@ -22,7 +22,7 @@ public abstract class Person  // TODO LAISSER ABSTRACT ? Ou ça casse tout ?
     // C O N S T R U C T O R S
     public Person() {
     }
-    public Person(String firstname, String lastname, Date birthdate, Country country) {
+    public Person(String firstname, String lastname, String birthdate, Country country) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthdate = birthdate;
@@ -61,11 +61,11 @@ public abstract class Person  // TODO LAISSER ABSTRACT ? Ou ça casse tout ?
     }
 
     // birthdate
-    public Date getBirthdate()
+    public String getBirthdate()
     {
         return birthdate;
     }
-    public void setBirthdate(Date birthdate)
+    public void setBirthdate(String birthdate)
     {
         this.birthdate = birthdate;
     }

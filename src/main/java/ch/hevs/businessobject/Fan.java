@@ -24,7 +24,7 @@ public class Fan extends Person
         super();
     }
     public Fan(String firstname, String lastname,
-               Date birthdate, Country country,
+               String birthdate, Country country,
                Date subscriptionDate)
     {
         super(firstname, lastname, birthdate, country);

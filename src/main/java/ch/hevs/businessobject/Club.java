@@ -32,13 +32,14 @@ public class Club {
     public Club(){
         this.players = new ArrayList<Player>();
     }
-    public Club(String nameClub, String location, String stadName) {
+    public Club(String nameClub, String location, String stadName, Country country, League league) {
         this.players = new ArrayList<Player>();
         this.nameClub = nameClub;
         this.location = location;
         this.stadName = stadName;
+        this.country = country;
+        this.league = league;
     }
-
 
     // M E T H O D S  &  O T H E R S
     public void addPlayer(Player player)

@@ -14,6 +14,7 @@ public class League
     private String nameLeague;
     private String division;
 
+
     // R E L A T I O N S
     // League <-1..1------1..*-> Club
     @OneToMany ( mappedBy = "league" , cascade = CascadeType.ALL)
@@ -27,11 +28,11 @@ public class League
     public League() {
         this.clubs = new ArrayList<Club>();
     }
-    public League(String nameLeague, String division)
-    {
+    public League( String nameLeague, String division, Country country) {
         this.clubs = new ArrayList<Club>();
         this.nameLeague = nameLeague;
         this.division = division;
+        this.country = country;
     }
 
     // M E T H O D S  &  O T H E R S
@@ -45,6 +46,7 @@ public class League
         this.clubs.remove(club);
         club.setLeague(null); // TODO : Peut on laisser null ?  Voir RELATION
     }
+
 
 
     // G E T T E R S   &   S E T T E R S
@@ -93,4 +95,5 @@ public class League
     {
         this.country = country;
     }
+
 }

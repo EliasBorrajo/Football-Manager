@@ -22,10 +22,10 @@ public class Player extends Person {
         super();
     }
     public Player(String firstname, String lastname,
-                  Date birthdate, Country country,
+                  String birthdate, Country country,
                   String positionPlayer, int number,
                   boolean isRightFooted, double height,
-                  double weight /*, Club playsForClub*/)
+                  double weight , Club playsForClub)
     {
         super(firstname, lastname, birthdate, country);
         this.positionPlayer = positionPlayer;
@@ -33,8 +33,10 @@ public class Player extends Person {
         this.isRightFooted = isRightFooted;
         this.height = height;
         this.weight = weight;
-        //this.playsForClub = playsForClub; // TODO METTRE ? JE PENSE PAS CAR MIS AVEC METHODES DEPUIS GRAPHIQUE
+        this.playsForClub = playsForClub; // TODO METTRE ? JE PENSE PAS CAR MIS AVEC METHODES DEPUIS GRAPHIQUE
     }
+
+
 
     // G E T T E R S   &   S E T T E R S
     // position
