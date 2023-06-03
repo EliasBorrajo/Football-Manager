@@ -16,7 +16,6 @@ import ch.hevs.services.Football;
 
 /**
  * TransferBean.java
- * 
  */
 public class TransferBean
 {
@@ -34,7 +33,7 @@ public class TransferBean
     private Bank bank;
 	private Football football;
     
-    @PostConstruct
+    @PostConstruct // exécutée QUE si l'interface graphique est utilisée
     public void initialize() throws NamingException {
     	
     	// use JNDI to inject reference to bank EJB
