@@ -7,7 +7,7 @@
 	version="1.0">
 
 	<!-- Name of the DB -->
-	<persistence-unit name="bankPU">
+	<persistence-unit name="dbFootballPU">
 		<!-- JTA data source name -->
 		<!-- this is the name of the datasource defined in the application server -->
 		<jta-data-source>java:/labsDS</jta-data-source>

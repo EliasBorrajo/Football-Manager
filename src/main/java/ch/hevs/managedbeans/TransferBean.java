@@ -40,7 +40,7 @@ public class TransferBean
     	// use JNDI to inject reference to bank EJB
     	InitialContext ctx = new InitialContext();
 																// TODO : VERIFIER NOM SI ON MODIFIE PACKAGE
-		bank = (Bank) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.services.Bank");
+		bank 	 = (Bank) 	  ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.services.Bank");
 		football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
 
 		// populate football database

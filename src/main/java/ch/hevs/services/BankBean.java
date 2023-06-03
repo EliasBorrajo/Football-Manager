@@ -14,7 +14,7 @@ import ch.hevs.businessobject.Client;
 @Stateless
 public class BankBean implements Bank {
 	
-	@PersistenceContext(name = "bankPU", type=PersistenceContextType.TRANSACTION)
+	@PersistenceContext(name = "dbFootballPU", type=PersistenceContextType.TRANSACTION)
 	private EntityManager em;
 
 	public Account getAccount(String accountDescription, String lastnameOwner) {

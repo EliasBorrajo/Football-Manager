@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContextType;
 @Stateless
 public class FootballBean implements Football
 {
-    @PersistenceContext (name = "bankPU", type= PersistenceContextType.TRANSACTION)
+    @PersistenceContext (name = "dbFootballPU", type= PersistenceContextType.TRANSACTION)
     private EntityManager em;
 
     @Override
