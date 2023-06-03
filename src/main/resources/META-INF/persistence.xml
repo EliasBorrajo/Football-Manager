@@ -7,7 +7,7 @@
 	version="1.0">
 
 	<!-- Name of the DB -->
-	<persistence-unit name="dbFootball">
+	<persistence-unit name="bankPU">
 		<!-- JTA data source name -->
 		<!-- this is the name of the datasource defined in the application server -->
 		<jta-data-source>java:/labsDS</jta-data-source>
@@ -29,7 +29,7 @@
 			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 
 			<!-- Creates a new DB at each start, and drops it at the end -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 
 			<property name="hibernate.show_sql" value="true" />
 			<property name="dialect" value="org.hibernate.dialect.HSQLDialect"/>
