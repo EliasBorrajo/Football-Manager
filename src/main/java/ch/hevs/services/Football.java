@@ -1,6 +1,7 @@
 package ch.hevs.services;
 
 import ch.hevs.businessobject.Club;
+import ch.hevs.businessobject.Fan;
 import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
 
@@ -20,9 +21,9 @@ public interface Football
 
     @TransactionAttribute(value = TransactionAttributeType.REQUIRED) // TODO : Changer
     public void updateClubInfo(Club club);
-    public void addPlayer(Player player);
+    public void addPlayer(Club club ,Player player);
     public void removePlayer(Player player);
-    public void subscribeToLeague(League league);
+    public void subscribeToLeague(League league, Club club);
 
 
     // FAN - Use Cases :
@@ -37,7 +38,7 @@ public interface Football
     //  2.1) obtenir liste des joueurs
 
     public void updatePlayerInfo(Player player);
-    public Club getClubInfo();
+    public Club getClubInfo(Club club);
 
     public boolean populateDB();
 

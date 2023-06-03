@@ -16,7 +16,6 @@ import ch.hevs.services.Football;
 
 /**
  * TransferBean.java
- * 
  */
 public class TransferBean
 {
@@ -34,13 +33,13 @@ public class TransferBean
     private Bank bank;
 	private Football football;
     
-    @PostConstruct
+    @PostConstruct // exécutée QUE si l'interface graphique est utilisée
     public void initialize() throws NamingException {
     	
     	// use JNDI to inject reference to bank EJB
     	InitialContext ctx = new InitialContext();
 																// TODO : VERIFIER NOM SI ON MODIFIE PACKAGE
-		bank = (Bank) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.services.Bank");
+		bank 	 = (Bank) 	  ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.services.Bank");
 		football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
 
 		// populate football database
