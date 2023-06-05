@@ -125,7 +125,8 @@ public class TransferBean
 
 	public void updateSourceAccounts(ValueChangeEvent event) {
     	this.sourceClientName = (String)event.getNewValue();
-    	
+
+		// ensure that the source and destination accounts are different (if not, the transfer button is disabled)
 	    List<Account> accounts = bank.getAccountListFromClientLastname(this.sourceClientName);
 	    this.sourceAccountDescriptions = new ArrayList<String>();
 		for (Account account : accounts) {

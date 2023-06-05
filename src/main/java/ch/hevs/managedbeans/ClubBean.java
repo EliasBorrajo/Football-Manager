@@ -32,6 +32,9 @@ public class ClubBean
     // Club
     private List<Club>  clubs;
     private Club        selectedClub;
+    private String      selectedClubName;
+    private List<String> clubNames;
+
 
 
     //  C O N S T R U C T O R S
@@ -55,15 +58,19 @@ public class ClubBean
 
 
         //get players
-        players = football.getPlayers();                // Get all players from DB
+        players = football.getPlayers();                 // Get all players from DB
         this.playerLNames = new ArrayList<String>();     // Initialize list of player names
         for (Player player : players) {
             this.playerLNames.add(player.getLastname());
         }
 
         // get clubs
-        clubs = football.getClubs();
-        selectedClub = clubs.get(0);
+        this.clubs = football.getClubs();
+//        selectedClub = clubs.get(0);
+        this.clubNames = new ArrayList<String>();     // Initialize list of player names
+        for (Club club : clubs ) {
+            this.clubNames.add(club.getNameClub());
+        }
 
         // get leagues
 
@@ -84,14 +91,12 @@ public class ClubBean
         football.updateClub(selectedClub);
         FacesContext.getCurrentInstance()
                 .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club updated successfully", null));
-
     }
 
     public void updateClubSelected(ValueChangeEvent event) {
         // Mettez à jour les informations du club sélectionné en fonction de la nouvelle sélection
         this.selectedClub = (Club) event.getNewValue();
         // Faites les opérations nécessaires avec le club sélectionné
-
 
     }
 
@@ -138,6 +143,16 @@ public class ClubBean
     public void setSelectedClub(Club selectedClub) {
         this.selectedClub = selectedClub;
     }
-
-
+    public String getSelectedClubName() {
+        return selectedClubName;
+    }
+    public void setSelectedClubName(String selectedClubName) {
+        this.selectedClubName = selectedClubName;
+    }
+    public List<String> getClubNames() {
+        return clubNames;
+    }
+    public void setClubNames(List<String> clubNames) {
+        this.clubNames = clubNames;
+    }
 }
