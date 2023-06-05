@@ -1,6 +1,7 @@
 package ch.hevs.managedbeans;
 
 
+import ch.hevs.businessobject.Account;
 import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
@@ -8,6 +9,7 @@ import ch.hevs.services.Football;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
+import javax.faces.event.ValueChangeEvent;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class ClubBean {
     private List<String> clubNames;
     private List<String> leagueNames;
     private Player selectedPlayer;
+    private String selectedPlayerName;
+    private List<String> dropDownPlayersName;
 
 
     //  C O N S T R U C T O R S
@@ -113,6 +117,16 @@ public class ClubBean {
 
     public void setSelectedPlayer(Player selectedPlayer) {
         this.selectedPlayer = selectedPlayer;
+    }
+
+    public void updatePlayers(ValueChangeEvent event) {
+        this.selectedPlayerName = (String)event.getNewValue();
+
+        List<Player> players = football.getPlayerInfo(this.selectedPlayerName);
+        this.dropDownPlayersName = new ArrayList<String>();
+        for (Player player : players) {
+            this.dropDownPlayersName.add(player.getLastname());
+        }
     }
 
     //Extend --> get players list from the previous club

@@ -13,7 +13,7 @@
             <br />
             <h:panelGrid columns="5">
                 <h:outputText value="players:" />
-                <h:selectOneMenu value="#{clubBean.selectedPlayer}" onchange="submit()">
+                <h:selectOneMenu value="#{clubBean.selectedPlayer}" valueChangeListener="#{clubBean.updatePlayers}" onchange="submit()">
                     <f:selectItems value="#{clubBean.playerNames}" />
                 </h:selectOneMenu>
 

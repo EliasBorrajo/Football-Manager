@@ -274,10 +274,9 @@ public class FootballBean implements Football
     // FAN - Use Cases :
     // 1) Consulter les infos de son joueur préféré
     @Override
-    public Player getPlayerInfo(Player player)
+    public List<Player> getPlayerInfo(String playerName)
     {
-        Player playerInfo = em.merge(player);
-        return playerInfo;
+        return (List<Player>) em.createQuery("FROM Player p where p.lastname=:lastname").setParameter("lastname", playerName).getResultList();
     }
 
     // PLAYER - Use Cases :

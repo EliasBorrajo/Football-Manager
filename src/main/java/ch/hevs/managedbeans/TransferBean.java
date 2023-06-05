@@ -144,6 +144,8 @@ public class TransferBean
 			this.destinationAccountDescriptions.add(account.getDescription());
 		}
     }
+
+
     public List<Client> getClients() {
 		return clients;
     }

@@ -26,10 +26,11 @@ public interface Football
     List<Club> getClubs();
     List<League> getLeagues();
 
+
     // FAN - Use Cases :
     // 1) Consulter les infos de son joueur préféré
 
-    public Player getPlayerInfo(Player player);
+    public List<Player> getPlayerInfo(String playerName);
 
 
     // PLAYER - Use Cases :
