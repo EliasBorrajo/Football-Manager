@@ -3,6 +3,7 @@ package ch.hevs.managedbeans;
 
 import ch.hevs.businessobject.Account;
 import ch.hevs.businessobject.Club;
+import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
 import ch.hevs.services.Football;
 
@@ -42,6 +43,9 @@ public class ClubBean {
     private String      selectedClubName;
     private List<String> clubNames;
 
+    // League
+    private List<String> leagueNames;
+
     //  C O N S T R U C T O R S
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
     public void initialize() throws NamingException
@@ -77,7 +81,11 @@ public class ClubBean {
 //        }
 
         // get leagues
-
+        List<League> leagueList = football.getLeagues();
+        this.leagueNames = new ArrayList<String>();
+        for(League league : leagueList) {
+            this.leagueNames.add(league.getNameLeague());
+        }
 
         List<Player> players = new ArrayList<Player>();
 
@@ -135,44 +143,53 @@ public class ClubBean {
     }
 
     //  G E T T E R S   &   S E T T E R S
-
-    //Get all players names
+    public Football getFootball() {
+        return football;
+    }
+    public void setFootball(Football football) {
+        this.football = football;
+    }
+    public boolean isServiceLayerResult() {
+        return serviceLayerResult;
+    }
+    public void setServiceLayerResult(boolean serviceLayerResult) {
+        this.serviceLayerResult = serviceLayerResult;
+    }
+    public List<String> getMessages() {
+        return messages;
+    }
+    public void setMessages(List<String> messages) {
+        this.messages = messages;
+    }
+    public String getCurrentURL() {
+        return currentURL;
+    }
+    public void setCurrentURL(String currentURL) {
+        this.currentURL = currentURL;
+    }
     public List<String> getPlayerNames() {
         return playerNames;
     }
-
-    //Get all clubs names
-    public List<String> getClubNames() {
-
-        return clubNames;
-    }
-
-
-
     public void setPlayerNames(List<String> playerNames) {
         this.playerNames = playerNames;
     }
-
-    public void setClubNames(List<String> clubNames) {
-        this.clubNames = clubNames;
-    }
-
-
-
     public String getSelectedPlayerName() {
-        System.out.println("Get name player: "+selectedPlayerName);
         return selectedPlayerName;
     }
-
     public void setSelectedPlayerName(String selectedPlayerName) {
         this.selectedPlayerName = selectedPlayerName;
     }
-
     public Player getSelectedPlayer() {
         return selectedPlayer;
     }
     public void setSelectedPlayer(Player selectedPlayer) {
         this.selectedPlayer = selectedPlayer;
+    }
+    public List<Player> getPlayersList() {
+        return playersList;
+    }
+    public void setPlayersList(List<Player> playersList) {
+        this.playersList = playersList;
     }
     public Player getPlayertoUpdate() {
         return playertoUpdate;
@@ -180,15 +197,6 @@ public class ClubBean {
     public void setPlayertoUpdate(Player playertoUpdate) {
         this.playertoUpdate = playertoUpdate;
     }
-
-    public List<Player> getPlayersList() {
-        return playersList;
-    }
-
-    public void setPlayersList(List<Player> playersList) {
-        this.playersList = playersList;
-    }
-    // Club
     public List<Club> getClubs() {
         return clubs;
     }
@@ -212,5 +220,11 @@ public class ClubBean {
     }
     public void setClubNames(List<String> clubNames) {
         this.clubNames = clubNames;
+    }
+    public List<String> getLeagueNames() {
+        return leagueNames;
+    }
+    public void setLeagueNames(List<String> leagueNames) {
+        this.leagueNames = leagueNames;
     }
 }
