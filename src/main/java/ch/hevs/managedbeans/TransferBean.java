@@ -32,6 +32,8 @@ public class TransferBean
     private List<String> clientNames;
 
 	private List<String> playerNames;
+
+	private String clubInfos;
     private List<String> sourceAccountDescriptions;
     private List<String> destinationAccountDescriptions;
     private String sourceAccountDescription;
@@ -159,6 +161,7 @@ public class TransferBean
 		}
     }
 
+
     public List<Client> getClients() {
 		return clients;
     }
@@ -167,12 +170,19 @@ public class TransferBean
     	return clientNames;
     }
 
+	//Get all players names
 	public List<String> getPlayerNames() {
 
 		return playerNames;
 	}
-    
-    
+
+	//Get club infos
+	public String getClubInfos(){
+	return clubInfos;
+	}
+
+	//Extend --> get players list from the previous club
+
     public String performTransfer() {
     	
     	try {

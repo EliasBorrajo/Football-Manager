@@ -24,7 +24,6 @@ public interface Football
     public void subscribeToLeague(League league, Club club);
     List<Player> getPlayers();
 
-
     // FAN - Use Cases :
     // 1) Consulter les infos de son joueur préféré
 
