@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <h:outputLabel value="Football Informations:" />
+            <br />
+            <h:panelGrid columns="5">
+                <h:outputText value="players:" />
+                <h:selectOneMenu value="#{clubBean.playerNames}">
+                    <f:selectItems value="#{clubBean.playerNames}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <h:panelGrid columns="5">
+                <h:outputText value="clubs:" />
+                <h:selectOneMenu value="#{clubBean.clubNames}">
+                    <f:selectItems value="#{clubBean.clubNames}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <h:panelGrid columns="5">
+                <h:outputText value="leagues:" />
+                <h:selectOneMenu value="#{clubBean.leagueNames}">
+                    <f:selectItems value="#{clubBean.leagueNames}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

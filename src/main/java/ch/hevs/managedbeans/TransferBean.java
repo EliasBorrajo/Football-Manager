@@ -30,10 +30,6 @@ public class TransferBean
 	// A T T R I B U T S
     private List<Client> clients;
     private List<String> clientNames;
-
-	private List<String> playerNames;
-
-	private String clubInfos;
     private List<String> sourceAccountDescriptions;
     private List<String> destinationAccountDescriptions;
     private String sourceAccountDescription;
@@ -43,7 +39,6 @@ public class TransferBean
     private String transactionResult;
     private int transactionAmount;
     private Bank bank;
-	private Football football;
     
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
     public void initialize() throws NamingException {
@@ -52,13 +47,6 @@ public class TransferBean
     	InitialContext ctx = new InitialContext();
 																// TODO : VERIFIER NOM SI ON MODIFIE PACKAGE
 		bank 	 = (Bank) 	  ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.services.Bank");
-		football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
-
-		// populate football database
-		System.out.println("populate football database...");
-		System.out.println("POPULATE : " + football.populateDB());
-
-
 
     	// get clients
 		List<Client> clientList = bank.getClients();
@@ -67,13 +55,6 @@ public class TransferBean
 			this.clientNames.add(client.getLastname());
 		}
 
-		//get players
-		List<Player> playerList = football.getPlayers();
-		this.playerNames = new ArrayList<String>();
-		for(Player player : playerList){
-			this.playerNames.add(player.getLastname());
-		}
-		
 		// initialize account descriptions
 		this.sourceAccountDescriptions = new ArrayList<String>();
 		this.destinationAccountDescriptions = new ArrayList<String>();
@@ -160,8 +141,6 @@ public class TransferBean
 			this.destinationAccountDescriptions.add(account.getDescription());
 		}
     }
-
-
     public List<Client> getClients() {
 		return clients;
     }
@@ -169,19 +148,6 @@ public class TransferBean
     public List<String> getClientNames() {
     	return clientNames;
     }
-
-	//Get all players names
-	public List<String> getPlayerNames() {
-
-		return playerNames;
-	}
-
-	//Get club infos
-	public String getClubInfos(){
-	return clubInfos;
-	}
-
-	//Extend --> get players list from the previous club
 
     public String performTransfer() {
     	

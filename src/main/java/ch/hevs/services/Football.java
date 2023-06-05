@@ -23,6 +23,8 @@ public interface Football
     public void removePlayer(Player player);
     public void subscribeToLeague(League league, Club club);
     List<Player> getPlayers();
+    List<Club> getClubs();
+    List<League> getLeagues();
 
     // FAN - Use Cases :
     // 1) Consulter les infos de son joueur préféré

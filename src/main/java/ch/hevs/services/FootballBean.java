@@ -225,4 +225,14 @@ public class FootballBean implements Football
         return em.createQuery("FROM Player").getResultList();
     }
 
+    @Override
+    public List<Club> getClubs() {
+        return em.createQuery("FROM Club").getResultList();
+    }
+
+    @Override
+    public List<League> getLeagues() {
+        return em.createQuery("FROM League").getResultList();
+    }
+
 }
