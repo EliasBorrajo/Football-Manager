@@ -8,7 +8,6 @@ import javax.faces.event.ValueChangeEvent;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
 import ch.hevs.services.Bank;
 import ch.hevs.businessobject.Account;
@@ -30,6 +29,7 @@ public class TransferBean
 	// A T T R I B U T S
     private List<Client> clients;
     private List<String> clientNames;
+
     private List<String> sourceAccountDescriptions;
     private List<String> destinationAccountDescriptions;
     private String sourceAccountDescription;
@@ -39,7 +39,8 @@ public class TransferBean
     private String transactionResult;
     private int transactionAmount;
     private Bank bank;
-    
+
+
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
     public void initialize() throws NamingException {
     	
@@ -54,6 +55,8 @@ public class TransferBean
 		for (Client client : clientList) {
 			this.clientNames.add(client.getLastname());
 		}
+
+
 
 		// initialize account descriptions
 		this.sourceAccountDescriptions = new ArrayList<String>();
@@ -142,6 +145,8 @@ public class TransferBean
 			this.destinationAccountDescriptions.add(account.getDescription());
 		}
     }
+
+
     public List<Client> getClients() {
 		return clients;
     }
@@ -149,6 +154,9 @@ public class TransferBean
     public List<String> getClientNames() {
     	return clientNames;
     }
+
+
+
 
     public String performTransfer() {
     	

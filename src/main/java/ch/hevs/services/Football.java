@@ -31,7 +31,6 @@ public interface Football
 //    public void subscribeToLeague(League league, Club club);
 
 
-
     // FAN - Use Cases :
     // 1) Consulter les infos de son joueur préféré
 //    public Player getPlayerInfo(Player player);
@@ -45,5 +44,6 @@ public interface Football
 //    public Club getClubInfo(Club club);
 
 
+    public boolean seedDB();
 
 }

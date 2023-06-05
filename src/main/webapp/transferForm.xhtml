@@ -32,7 +32,9 @@
 	        	</h:selectOneMenu>
 	        	<h:outputText value="amount:"></h:outputText>
                 <h:inputText value="#{transferBean.transactionAmount}" maxlength="6" style="width: 40px;"></h:inputText>
-			</h:panelGrid>
+
+
+        	</h:panelGrid>
      		<h:commandButton value="transfer" action="#{transferBean.performTransfer}"></h:commandButton>
         </h:form>
     </ui:define>
