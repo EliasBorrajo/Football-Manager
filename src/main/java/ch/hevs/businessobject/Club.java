@@ -100,4 +100,29 @@ public class Club {
     {
         this.league = league;
     }
+
+    // T O   S T R I N G
+    /**
+     * Converter for the Club entity uses the toString() method of the entity to convert the entity to a String.
+     *
+     * Make sure that the toString() of your Club entity returns an unique representation of the entity.
+     * You could for instance directly return the ID:
+     */
+    @Override
+    public String toString() {
+        return "Club{id=" + id + "}";
+        //return String.valueOf(id);// works too
+    }
+
+    public String show() {
+        return "Club{" +
+                "id=" + id +
+                ", nameClub='" + nameClub + '\'' +
+                ", location='" + location + '\'' +
+                ", stadName='" + stadName + '\'' +
+                ", country=" + country +
+                ", league=" + league +
+                ", players=" + players +
+                '}';
+    }
 }

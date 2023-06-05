@@ -66,11 +66,11 @@ public class ClubBean
 
         // get clubs
         this.clubs = football.getClubs();
-//        selectedClub = clubs.get(0);
-        this.clubNames = new ArrayList<String>();     // Initialize list of player names
-        for (Club club : clubs ) {
-            this.clubNames.add(club.getNameClub());
-        }
+        selectedClub = clubs.get(0);
+//        this.clubNames = new ArrayList<String>();     // Initialize list of player names
+//        for (Club club : clubs ) {
+//            this.clubNames.add(club.getNameClub());
+//        }
 
         // get leagues
 

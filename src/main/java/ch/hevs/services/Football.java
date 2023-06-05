@@ -24,6 +24,8 @@ public interface Football
     //  3.1) obtenir liste des clubs
 //    @TransactionAttribute(value = TransactionAttributeType.REQUIRED) // TODO : Changer
     public void updateClub(Club club);
+
+    Club getClubById(Long clubId);
 //    public void addPlayer(Club club ,Player player);
 //    public void removePlayer(Player player);
 //    public void subscribeToLeague(League league, Club club);

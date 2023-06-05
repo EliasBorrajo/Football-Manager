@@ -15,31 +15,31 @@
          <!-- crée une liste déroulante des clubs où chaque élément de la liste est représenté par un objet club.
               Lorsque l'utilisateur sélectionne un club dans la liste,
               la propriété selectedClub dans le bean clubBean sera mise à jour avec le club sélectionné. -->
-         <h:selectOneMenu value="#{clubBean.selectedClubName}" onchange="submit()" >
-<!--            <f:selectItems value="#{clubBean.clubs}"-->
-<!--                           var="club"-->
-<!--                           itemLabel="#{club.nameClub}"-->
-<!--                           itemValue="#{club}" />-->
-               <f:selectItems value="#{clubBean.clubNames}"  />
+         <h:selectOneMenu value="#{clubBean.selectedClub}" onchange="submit()" >
+          <f:selectItems value="#{clubBean.clubs}"
+                         var="club"
+                         converter="omnifaces.SelectItemsConverter"
+                         itemLabel="#{club.nameClub}"
+                         itemValue="#{club}" />
          </h:selectOneMenu>
          <br />
 
          <!-- Afficher un form avec les infos du club, on peut modifier directement la donné dans la table & cliquer sur SEND -->
          <h:panelGrid columns="2">
             <h:outputText value="Name:" />
-            <h:inputText  value="#{clubBean.selectedClubName}"  />
+            <h:inputText  value="#{clubBean.selectedClub.nameClub}"  />
 
-<!--            <h:outputText value="Location:" />-->
-<!--            <h:inputText id="inputLocation" value="#{clubBean.selectedClub.location}" />-->
+            <h:outputText value="Location:" />
+            <h:inputText  value="#{clubBean.selectedClub.location}" />
 
-<!--            <h:outputText value="Stadium Name:" />-->
-<!--            <h:inputText id="inputStadiumName" value="#{clubBean.selectedClub.stadName}" />-->
+            <h:outputText value="Stadium Name:" />
+            <h:inputText  value="#{clubBean.selectedClub.stadName}" />
 
-<!--            <h:outputText value="Country:" />-->
-<!--            <h:inputText id="inputCountry" value="#{clubBean.selectedClub.country.nameCountry}" disabled="true" />-->
+            <h:outputText value="Country:" />
+            <h:inputText value="#{clubBean.selectedClub.country.nameCountry}" disabled="true" />
 
-<!--            <h:outputText value="League:" />-->
-<!--            <h:inputText id="inputLeague" value="#{clubBean.selectedClub.league.nameLeague}" disabled="true" />-->
+            <h:outputText value="League:" />
+            <h:inputText  value="#{clubBean.selectedClub.league.nameLeague}" disabled="true" />
          </h:panelGrid>
          <br />
 

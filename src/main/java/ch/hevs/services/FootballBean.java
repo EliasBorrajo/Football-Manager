@@ -36,6 +36,11 @@ public class FootballBean implements Football
         // em.flush(); pas nécessaire, se fait automatiquement à la fin de la transaction (commit)
     }
 
+    @Override
+    public Club getClubById(Long clubId) {
+        return em.find(Club.class, clubId);
+    }
+
 
     @Override
     public boolean populateDB()
