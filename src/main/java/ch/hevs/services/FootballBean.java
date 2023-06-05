@@ -27,8 +27,10 @@ public class FootballBean implements Football
         if (!isDatabaseInitialized())
         {
             System.out.println("Database is not initialized. Initializing...");
-            initializeDatabase();
-            System.out.println("Database initialized.");
+
+            throw new FootballException("Database is not initialized. run script \"startDB.bat\" to initialize it.");
+            //initializeDatabase();
+            //System.out.println("Database initialized.");
         }
 
         System.out.println("Seeding database...");
@@ -69,6 +71,7 @@ public class FootballBean implements Football
      */
     private void initializeDatabase()
     {
+
         try {
             // TODO : On peut pas créer la DB après avoir démarré le serveur, il faut la créer avant
             System.out.println("Starting database...");
