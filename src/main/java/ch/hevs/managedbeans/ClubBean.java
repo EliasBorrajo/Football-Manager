@@ -23,6 +23,8 @@ public class ClubBean {
     private List<String> clubNames;
     private List<String> leagueNames;
     private String selectedPlayerName;
+    private Player selectedPlayer;
+    private List<Player> playersList;
 
     //  C O N S T R U C T O R S
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
@@ -36,9 +38,9 @@ public class ClubBean {
         loadData();
 
         //get players
-        List<Player> playerList = football.getPlayers();
+         this.playersList = football.getPlayers();
         this.playerNames = new ArrayList<String>();
-        for (Player player : playerList) {
+        for (Player player : playersList) {
             this.playerNames.add(player.getLastname());
         }
 
@@ -55,6 +57,8 @@ public class ClubBean {
         for(League league : leagueList) {
             this.leagueNames.add(league.getNameLeague());
         }
+
+        List<Player> players = new ArrayList<Player>();
 
     }
 
@@ -80,6 +84,18 @@ public class ClubBean {
 
 
         return false;
+    }
+
+    public void updateSelectedPlayer(ValueChangeEvent event) {
+        selectedPlayerName = (String) event.getNewValue();
+        selectedPlayer = null; // Réinitialiser selectedPlayer
+
+        for (Player player : playersList) {
+            if (player.getLastname().equals(selectedPlayerName)) {
+                selectedPlayer = player;
+                break;
+            }
+        }
     }
 
     //  G E T T E R S   &   S E T T E R S
@@ -122,4 +138,19 @@ public class ClubBean {
         this.selectedPlayerName = selectedPlayerName;
     }
 
+    public Player getSelectedPlayer() {
+        return selectedPlayer;
+    }
+
+    public void setSelectedPlayer(Player selectedPlayer) {
+        this.selectedPlayer = selectedPlayer;
+    }
+
+    public List<Player> getPlayersList() {
+        return playersList;
+    }
+
+    public void setPlayersList(List<Player> playersList) {
+        this.playersList = playersList;
+    }
 }
