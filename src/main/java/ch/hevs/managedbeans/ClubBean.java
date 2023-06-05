@@ -100,6 +100,14 @@ public class ClubBean {
         return leagueNames;
     }
 
+    public Player getSelectedPlayer() {
+        return selectedPlayer;
+    }
+
+    public void setSelectedPlayer(Player selectedPlayer) {
+        this.selectedPlayer = selectedPlayer;
+    }
+
     //Extend --> get players list from the previous club
 
 }

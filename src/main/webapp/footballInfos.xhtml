@@ -13,9 +13,22 @@
             <br />
             <h:panelGrid columns="5">
                 <h:outputText value="players:" />
-                <h:selectOneMenu value="#{clubBean.playerNames}">
+                <h:selectOneMenu value="#{clubBean.selectedPlayer}" onchange="submit()">
                     <f:selectItems value="#{clubBean.playerNames}" />
                 </h:selectOneMenu>
+
+                <h:panelGrid columns="2">
+                    <h:outputText value="Nom: " />
+                    <h:outputText value="#{clubBean.selectedPlayer.firstname}" />
+
+                    <h:outputText value="Prénom: " />
+                    <h:outputText value="#{clubBean.selectedPlayer.lastname}" />
+
+                    <h:outputText value="Date de naissance: " />
+                    <h:outputText value="#{clubBean.selectedPlayer.birthdate}" />
+
+                    <!-- Ajoutez les autres attributs du joueur ici -->
+                </h:panelGrid>
             </h:panelGrid>
             <h:panelGrid columns="5">
                 <h:outputText value="clubs:" />
