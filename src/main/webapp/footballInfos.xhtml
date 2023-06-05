@@ -11,34 +11,36 @@
         <h:form>
             <h:outputLabel value="Football Informations:" />
             <br />
+
             <h:panelGrid columns="5">
-                <h:outputText value="players:" />
-                <h:selectOneMenu value="#{clubBean.selectedPlayer}" valueChangeListener="#{clubBean.updatePlayers}" onchange="submit()">
+                <h:outputText value="players (name):" />
+                <h:selectOneMenu value="#{clubBean.selectedPlayerName}" onchange="submit()">
                     <f:selectItems value="#{clubBean.playerNames}" />
                 </h:selectOneMenu>
 
-                <h:panelGrid columns="2">
-                    <h:outputText value="Nom: " />
-                    <h:outputText value="#{clubBean.selectedPlayer.firstname}" />
-
-                    <h:outputText value="Prénom: " />
-                    <h:outputText value="#{clubBean.selectedPlayer.lastname}" />
-
-                    <h:outputText value="Date de naissance: " />
-                    <h:outputText value="#{clubBean.selectedPlayer.birthdate}" />
-
-                    <!-- Ajoutez les autres attributs du joueur ici -->
                 </h:panelGrid>
+            <h:panelGrid columns="2">
+                <h:outputText value="Nom: " />
+                <h:outputText value="#{clubBean.selectedPlayerName}" />
+
+                <h:outputText value="Prénom: " />
+
+
+                <h:outputText value="Date de naissance: " />
+
             </h:panelGrid>
+
+
+
             <h:panelGrid columns="5">
                 <h:outputText value="clubs:" />
-                <h:selectOneMenu value="#{clubBean.clubNames}">
+                <h:selectOneMenu>
                     <f:selectItems value="#{clubBean.clubNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>
             <h:panelGrid columns="5">
                 <h:outputText value="leagues:" />
-                <h:selectOneMenu value="#{clubBean.leagueNames}">
+                <h:selectOneMenu>
                     <f:selectItems value="#{clubBean.leagueNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>

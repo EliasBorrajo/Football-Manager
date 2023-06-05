@@ -19,14 +19,10 @@ import java.util.List;
 public class ClubBean {
     //  A T T R I B U T S
     private Football football;
-    private boolean  serviceLayerResult;
     private List<String> playerNames;
     private List<String> clubNames;
     private List<String> leagueNames;
-    private Player selectedPlayer;
     private String selectedPlayerName;
-    private List<String> dropDownPlayersName;
-
 
     //  C O N S T R U C T O R S
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
@@ -59,12 +55,6 @@ public class ClubBean {
         for(League league : leagueList) {
             this.leagueNames.add(league.getNameLeague());
         }
-
-        // get fans
-
-        // initalize attributes for the view
-
-        //get player
 
     }
 
@@ -111,24 +101,25 @@ public class ClubBean {
         return leagueNames;
     }
 
-    public Player getSelectedPlayer() {
-        return selectedPlayer;
+    public void setPlayerNames(List<String> playerNames) {
+        this.playerNames = playerNames;
     }
 
-    public void setSelectedPlayer(Player selectedPlayer) {
-        this.selectedPlayer = selectedPlayer;
+    public void setClubNames(List<String> clubNames) {
+        this.clubNames = clubNames;
     }
 
-    public void updatePlayers(ValueChangeEvent event) {
-        this.selectedPlayerName = (String)event.getNewValue();
-
-        List<Player> players = football.getPlayerInfo(this.selectedPlayerName);
-        this.dropDownPlayersName = new ArrayList<String>();
-        for (Player player : players) {
-            this.dropDownPlayersName.add(player.getLastname());
-        }
+    public void setLeagueNames(List<String> leagueNames) {
+        this.leagueNames = leagueNames;
     }
 
-    //Extend --> get players list from the previous club
+    public String getSelectedPlayerName() {
+        System.out.println("Get name player: "+selectedPlayerName);
+        return selectedPlayerName;
+    }
+
+    public void setSelectedPlayerName(String selectedPlayerName) {
+        this.selectedPlayerName = selectedPlayerName;
+    }
 
 }
