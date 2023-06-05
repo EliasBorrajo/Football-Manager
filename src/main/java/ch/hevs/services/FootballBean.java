@@ -1,11 +1,14 @@
 package ch.hevs.services;
 
 import ch.hevs.businessobject.*;
+import ch.hevs.utils.exception.FootballException;
+import ch.hevs.utils.serverHSQLDB.HSQLDBServer;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -14,8 +17,67 @@ public class FootballBean implements Football
     @PersistenceContext (name = "dbFootballPU", type= PersistenceContextType.TRANSACTION)
     private EntityManager em;
 
+
+    /**
+     * Verify if database is initialized, and initialize it if not done yet, then populate it
+     */
+    private void populateDB()
+    {
+        System.out.println("Populating database...");
+        if (!isDatabaseInitialized())
+        {
+            System.out.println("Database is not initialized. Initializing...");
+            initializeDatabase();
+            System.out.println("Database initialized.");
+        }
+
+        System.out.println("Seeding database...");
+        seedDB();
+        System.out.println("Database seeded.");
+    }
+
+    /**
+     * Check if database is initialized by counting the number of rows in each table of the DB
+     * @return : true if database is initialized, false if not
+     */
+    private boolean isDatabaseInitialized()
+    {
+        System.out.println("Checking if database is initialized...");
+        try {
+            Query queryClub     = em.createQuery("SELECT COUNT(*) FROM Club");
+            queryClub.getSingleResult();
+
+            Query queryPlayer   = em.createQuery("SELECT COUNT(*) FROM Player");
+            queryPlayer.getSingleResult();
+
+            Query queryFan      = em.createQuery("SELECT COUNT(*) FROM Fan");
+            queryFan.getSingleResult();
+
+            System.out.println("Database is initialized.");
+            return true;
+        } catch (Exception e) // If no result found in database, an exception is thrown
+        {
+            System.err.println("Database is not initialized." + e.getMessage());
+            return false;
+        }
+    }
+
+    private void initializeDatabase()
+    {
+        try {
+            System.out.println("Starting database...");
+            HSQLDBServer.getInstance().start();
+            System.out.println("Database started succesfully.");
+        }catch (Exception e)
+        {
+            System.err.println("Error while initializing database : " + e.getMessage());
+            throw new FootballException("Database is not initialized. run script \"startDB.bat\" to initialize it.");
+        }
+
+    }
+
     @Override
-    public boolean populateDB()
+    public boolean seedDB()
     {
         Country country1 = new Country("France");
         Country country2 = new Country("England");
@@ -26,14 +88,14 @@ public class FootballBean implements Football
         Country country7 = new Country("Egypt");
         Country country8 = new Country("Italia");
         /**
-        em.persist(country1);
-        em.persist(country2);
-        em.persist(country3);
-        em.persist(country4);
-        em.persist(country5);
-        em.persist(country6);
-        em.persist(country7);
-        em.persist(country8);
+         em.persist(country1);
+         em.persist(country2);
+         em.persist(country3);
+         em.persist(country4);
+         em.persist(country5);
+         em.persist(country6);
+         em.persist(country7);
+         em.persist(country8);
          **/
 
 
@@ -143,7 +205,6 @@ public class FootballBean implements Football
 
         return true;
     }
-
 
     // CLUB - Use Cases :
     // 1) MAJ infos du club

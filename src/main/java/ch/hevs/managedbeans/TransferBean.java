@@ -8,7 +8,6 @@ import javax.faces.event.ValueChangeEvent;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
 import ch.hevs.services.Bank;
 import ch.hevs.businessobject.Account;
@@ -31,7 +30,6 @@ public class TransferBean
     private List<Client> clients;
     private List<String> clientNames;
 
-	private List<String> playerNames;
     private List<String> sourceAccountDescriptions;
     private List<String> destinationAccountDescriptions;
     private String sourceAccountDescription;
@@ -41,7 +39,7 @@ public class TransferBean
     private String transactionResult;
     private int transactionAmount;
     private Bank bank;
-	private Football football;
+
     
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
     public void initialize() throws NamingException {
@@ -50,12 +48,6 @@ public class TransferBean
     	InitialContext ctx = new InitialContext();
 																// TODO : VERIFIER NOM SI ON MODIFIE PACKAGE
 		bank 	 = (Bank) 	  ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/BankBean!ch.hevs.services.Bank");
-		football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
-
-		// populate football database
-		System.out.println("populate football database...");
-		System.out.println("POPULATE : " + football.populateDB());
-
 
 
     	// get clients
@@ -65,12 +57,7 @@ public class TransferBean
 			this.clientNames.add(client.getLastname());
 		}
 
-		//get players
-		List<Player> playerList = football.getPlayers();
-		this.playerNames = new ArrayList<String>();
-		for(Player player : playerList){
-			this.playerNames.add(player.getLastname());
-		}
+
 		
 		// initialize account descriptions
 		this.sourceAccountDescriptions = new ArrayList<String>();
@@ -167,10 +154,7 @@ public class TransferBean
     	return clientNames;
     }
 
-	public List<String> getPlayerNames() {
 
-		return playerNames;
-	}
     
     
     public String performTransfer() {

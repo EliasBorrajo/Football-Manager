@@ -3,10 +3,12 @@ package ch.hevs.managedbeans;
 
 import ch.hevs.services.Football;
 
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+@ManagedBean // TODO : Verifier le @ManagedBean
 public class ClubBean {
     //  A T T R I B U T S
     private Football football;
@@ -20,11 +22,8 @@ public class ClubBean {
         InitialContext ctx = new InitialContext();
         football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
 
-        // Verifiy if DB exists and is populated
-
         // populate football database
-        System.out.println("populate football database...");
-        System.out.println("POPULATE : " + football.populateDB());
+        loadData();
 
         // get players
 
@@ -38,13 +37,21 @@ public class ClubBean {
 
     }
 
+    /**
+     * Load data
+     */
+    private void loadData()
+    {
+        football.seedDB();
+    }
+
 
     //  M E T H O D S
     public void populateDB()
     {
         // populate football database
         System.out.println("populate football database...");
-        System.out.println("POPULATE : " + football.populateDB());
+        System.out.println("POPULATE : " + football.seedDB());
     }
 
     public boolean verifyDB()

@@ -33,10 +33,7 @@
 	        	<h:outputText value="amount:"></h:outputText>
                 <h:inputText value="#{transferBean.transactionAmount}" maxlength="6" style="width: 40px;"></h:inputText>
 
-				<h:outputText value="players:"></h:outputText>
-				<h:selectOneMenu value="#{transferBean.playerNames}">
-					<f:selectItems value="#{transferBean.playerNames}"/>
-				</h:selectOneMenu>
+
         	</h:panelGrid>
      		<h:commandButton value="transfer" action="#{transferBean.performTransfer}"></h:commandButton>
         </h:form>
