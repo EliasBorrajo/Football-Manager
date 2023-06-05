@@ -40,6 +40,6 @@ public interface Football
     public void updatePlayerInfo(Player player);
     public Club getClubInfo(Club club);
 
-    public boolean populateDB();
+    public boolean seedDB();
 
 }
