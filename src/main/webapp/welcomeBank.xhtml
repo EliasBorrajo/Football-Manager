@@ -20,6 +20,9 @@
             <h:commandLink action="showAllPlayers" style="display:block;">
                 <h:outputText value="See all players" />
             </h:commandLink>
+            <h:commandLink action="/Club/showClubInfos" style="display:block;">
+                <h:outputText value="Show Clubs" />
+            </h:commandLink>
             <h:commandButton value="populate FootballDB" action="#{clubBean.populateDB()}" style="display:block;"></h:commandButton>
         </h:form>
     </ui:define>

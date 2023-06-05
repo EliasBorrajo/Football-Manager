@@ -1,16 +1,20 @@
 package ch.hevs.managedbeans;
 
 
+import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.Player;
 import ch.hevs.services.Football;
-
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClubBean {
+public class ClubBean
+{
     //  A T T R I B U T S
     // General
     private Football football;
@@ -25,7 +29,9 @@ public class ClubBean {
     private Player       selectedPlayer;
     private Player       playertoUpdate;
 
-
+    // Club
+    private List<Club>  clubs;
+    private Club        selectedClub;
 
 
     //  C O N S T R U C T O R S
@@ -56,7 +62,8 @@ public class ClubBean {
         }
 
         // get clubs
-
+        clubs = football.getClubs();
+        selectedClub = clubs.get(0);
 
         // get leagues
 
@@ -71,11 +78,28 @@ public class ClubBean {
 
 
     //  M E T H O D S
+    public void saveClub()
+    {
+        System.out.println("Selected Club tu update : " + selectedClub.getNameClub());
+        football.updateClub(selectedClub);
+        FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club updated successfully", null));
+
+    }
+
+    public void updateClubSelected(ValueChangeEvent event) {
+        // Mettez à jour les informations du club sélectionné en fonction de la nouvelle sélection
+        this.selectedClub = (Club) event.getNewValue();
+        // Faites les opérations nécessaires avec le club sélectionné
+
+
+    }
 
 
 
 
     //  G E T T E R S   &   S E T T E R S
+    // Player
     public List<Player> getPlayers() {
         return players;
     }
@@ -100,4 +124,20 @@ public class ClubBean {
     public void setPlayertoUpdate(Player playertoUpdate) {
         this.playertoUpdate = playertoUpdate;
     }
+
+    // Club
+    public List<Club> getClubs() {
+        return clubs;
+    }
+    public void setClubs(List<Club> clubs) {
+        this.clubs = clubs;
+    }
+    public Club getSelectedClub() {
+        return selectedClub;
+    }
+    public void setSelectedClub(Club selectedClub) {
+        this.selectedClub = selectedClub;
+    }
+
+
 }

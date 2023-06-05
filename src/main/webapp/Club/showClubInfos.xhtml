@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+   <ui:define name="content">
+      <h:form>
+         <h:outputLabel value="My Club:" />
+         <br />
+         <!-- liste déroulante de tous les clubs, et sélectionner son propre club -->
+         <!-- crée une liste déroulante des clubs où chaque élément de la liste est représenté par un objet club.
+              Lorsque l'utilisateur sélectionne un club dans la liste,
+              la propriété selectedClub dans le bean clubBean sera mise à jour avec le club sélectionné. -->
+         <h:selectOneMenu value="#{clubBean.selectedClub}" onchange="submit()" >
+            <f:selectItems value="#{clubBean.clubs}"
+                           var="club"
+                           itemLabel="#{club.nameClub}"
+                           itemValue="#{club}" />
+         </h:selectOneMenu>
+         <br />
+
+         <!-- Afficher un form avec les infos du club, on peut modifier directement la donné dans la table & cliquer sur SEND -->
+         <h:panelGrid columns="2">
+            <h:outputText value="Name:" />
+            <h:inputText id="inputName" value="#{clubBean.selectedClub.nameClub}" />
+
+            <h:outputText value="Location:" />
+            <h:inputText id="inputLocation" value="#{clubBean.selectedClub.location}" />
+
+            <h:outputText value="Stadium Name:" />
+            <h:inputText id="inputStadiumName" value="#{clubBean.selectedClub.stadName}" />
+
+            <h:outputText value="Country:" />
+            <h:inputText id="inputCountry" value="#{clubBean.selectedClub.country.nameCountry}" disabled="true" />
+
+            <h:outputText value="League:" />
+            <h:inputText id="inputLeague" value="#{clubBean.selectedClub.league.nameLeague}" disabled="true" />
+         </h:panelGrid>
+         <br />
+
+         <!-- Bouton pour sauvegarder les modifications -->
+         <h:commandButton value="Save" action="#{clubBean.saveClub}" />
+
+
+
+      </h:form>
+   </ui:define>
+</ui:composition>
+
+
+</html>
