@@ -62,6 +62,11 @@ public class FootballBean implements Football
         }
     }
 
+    /**
+     * Initialize database by starting HSQLDB server
+     * no need to delete database before initializing it, as it is done automatically by HSQLDB server (Singleton)
+     * @throws FootballException : if an error occurs while initializing database
+     */
     private void initializeDatabase()
     {
         try {
@@ -79,131 +84,139 @@ public class FootballBean implements Football
     @Override
     public boolean seedDB()
     {
-        Country country1 = new Country("France");
-        Country country2 = new Country("England");
-        Country country3 = new Country("Switzerland");
-        Country country4 = new Country("Spain");
-        Country country5 = new Country("Germany");
-        Country country6 = new Country("Portugal");
-        Country country7 = new Country("Egypt");
-        Country country8 = new Country("Italia");
-        /**
-         em.persist(country1);
-         em.persist(country2);
-         em.persist(country3);
-         em.persist(country4);
-         em.persist(country5);
-         em.persist(country6);
-         em.persist(country7);
-         em.persist(country8);
-         **/
+        try {
+            Country country1 = new Country("France");
+            Country country2 = new Country("England");
+            Country country3 = new Country("Switzerland");
+            Country country4 = new Country("Spain");
+            Country country5 = new Country("Germany");
+            Country country6 = new Country("Portugal");
+            Country country7 = new Country("Egypt");
+            Country country8 = new Country("Italia");
+            /**
+             em.persist(country1);
+             em.persist(country2);
+             em.persist(country3);
+             em.persist(country4);
+             em.persist(country5);
+             em.persist(country6);
+             em.persist(country7);
+             em.persist(country8);
+             **/
 
 
-        League leagueCH1 = new League("Super League", "Division 1",country3);
-        League leagueCH2 = new League("Challenge League", "Division 2",country3);
-        League leagueGB1 = new League("Premier League", "Division 1",country2);
-        League leagueGB2 = new League("EFL Championship", "Division 2",country2);
-        League leagueIT1 = new League("Serie A", "Division 1",country8);
-        League leagueIT2 = new League("Serie B", "Division 2",country8);
-        em.persist(leagueCH1);
-        em.persist(leagueCH2);
-        em.persist(leagueGB1);
-        em.persist(leagueGB2);
-        em.persist(leagueIT1);
-        em.persist(leagueIT2);
+            League leagueCH1 = new League("Super League", "Division 1",country3);
+            League leagueCH2 = new League("Challenge League", "Division 2",country3);
+            League leagueGB1 = new League("Premier League", "Division 1",country2);
+            League leagueGB2 = new League("EFL Championship", "Division 2",country2);
+            League leagueIT1 = new League("Serie A", "Division 1",country8);
+            League leagueIT2 = new League("Serie B", "Division 2",country8);
+            em.persist(leagueCH1);
+            em.persist(leagueCH2);
+            em.persist(leagueGB1);
+            em.persist(leagueGB2);
+            em.persist(leagueIT1);
+            em.persist(leagueIT2);
 
-        Club chelsea = new Club("Chelsea FC","London","Stamford Bridge",country2,leagueGB1);
-        Club arsenal = new Club("Arsenal","London","Emirates Stadium",country2,leagueGB1);
-        Club manu = new Club("Manchester United", "Manchester", "Old Trafford",country2,leagueGB1);
-        Club liverpool = new Club("Liverpool FC", "Liverpool", "Anfield",country2,leagueGB1);
+            Club chelsea = new Club("Chelsea FC","London","Stamford Bridge",country2,leagueGB1);
+            Club arsenal = new Club("Arsenal","London","Emirates Stadium",country2,leagueGB1);
+            Club manu = new Club("Manchester United", "Manchester", "Old Trafford",country2,leagueGB1);
+            Club liverpool = new Club("Liverpool FC", "Liverpool", "Anfield",country2,leagueGB1);
 
-        Club juventus = new Club("Juventus FC","Turin","Juventus Stadium",country8,leagueIT1);
-        Club roma = new Club("AS Roma","Rome","Stade Olympique de Rome",country8,leagueIT1);
-        Club acmilan = new Club("AC Milan", "Milan", "San Siro",country8,leagueIT1);
-        Club intermilan = new Club("Inter Milan", "Milan", "San Siro",country8,leagueIT1);
+            Club juventus = new Club("Juventus FC","Turin","Juventus Stadium",country8,leagueIT1);
+            Club roma = new Club("AS Roma","Rome","Stade Olympique de Rome",country8,leagueIT1);
+            Club acmilan = new Club("AC Milan", "Milan", "San Siro",country8,leagueIT1);
+            Club intermilan = new Club("Inter Milan", "Milan", "San Siro",country8,leagueIT1);
 
-        Club basel = new Club("FC Basel", "Basel", "St. Jakob-Park",country3,leagueCH1);
-        Club yb = new Club("BSC Young Boys", "Bern", "Stade de Suisse",country3,leagueCH1);
+            Club basel = new Club("FC Basel", "Basel", "St. Jakob-Park",country3,leagueCH1);
+            Club yb = new Club("BSC Young Boys", "Bern", "Stade de Suisse",country3,leagueCH1);
 
-        em.persist(basel);
-        em.persist(yb);
-        em.persist(manu);
-        em.persist(liverpool);
-        em.persist(acmilan);
-        em.persist(intermilan);
-        em.persist(chelsea);
-        em.persist(arsenal);
-        em.persist(juventus);
-        em.persist(roma);
+            em.persist(basel);
+            em.persist(yb);
+            em.persist(manu);
+            em.persist(liverpool);
+            em.persist(acmilan);
+            em.persist(intermilan);
+            em.persist(chelsea);
+            em.persist(arsenal);
+            em.persist(juventus);
+            em.persist(roma);
 
 
-        Player player1 = new Player("Edouard","Mendy","01.03.1992",country1,"GK",1,true,194,85,chelsea);
-        Player player2 = new Player("N'Golo", "Kanté", "29.03.1991", country1, "MF", 7, false, 168, 70,chelsea);
-        Player player3 = new Player("Mason", "Mount", "10.01.1999", country2, "MF", 19, false, 185, 73,chelsea);
-        Player player4 = new Player("Timo", "Werner", "06.03.1996", country5, "FW", 11, false, 180, 75,chelsea);
+            Player player1 = new Player("Edouard","Mendy","01.03.1992",country1,"GK",1,true,194,85,chelsea);
+            Player player2 = new Player("N'Golo", "Kanté", "29.03.1991", country1, "MF", 7, false, 168, 70,chelsea);
+            Player player3 = new Player("Mason", "Mount", "10.01.1999", country2, "MF", 19, false, 185, 73,chelsea);
+            Player player4 = new Player("Timo", "Werner", "06.03.1996", country5, "FW", 11, false, 180, 75,chelsea);
 
 // Pour les joueurs d'Arsenal
-        Player player5 = new Player("Pierre-Emerick", "Aubameyang", "18.06.1989", country1, "FW", 14, false, 187, 80,arsenal);
-        Player player6 = new Player("Bukayo", "Saka", "05.09.2001", country2, "MF", 7, false, 178, 68,arsenal);
+            Player player5 = new Player("Pierre-Emerick", "Aubameyang", "18.06.1989", country1, "FW", 14, false, 187, 80,arsenal);
+            Player player6 = new Player("Bukayo", "Saka", "05.09.2001", country2, "MF", 7, false, 178, 68,arsenal);
 
 // Pour les joueurs de Manchester United
-        Player player7 = new Player("Bruno", "Fernandes", "08.09.1994", country6, "MF", 18, false, 179, 69,manu);
-        Player player8 = new Player("Harry", "Maguire", "05.03.1993", country2, "DF", 5, true, 194, 88,manu);
+            Player player7 = new Player("Bruno", "Fernandes", "08.09.1994", country6, "MF", 18, false, 179, 69,manu);
+            Player player8 = new Player("Harry", "Maguire", "05.03.1993", country2, "DF", 5, true, 194, 88,manu);
 
 // Pour les joueurs de Liverpool FC
-        Player player9 = new Player("Mohamed", "Salah", "15.06.1992", country7, "FW", 11, false, 175, 71,liverpool);
-        Player player10 = new Player("Virgil", "van Dijk", "08.07.1991", country2, "DF", 4, true, 193, 92, liverpool);
+            Player player9 = new Player("Mohamed", "Salah", "15.06.1992", country7, "FW", 11, false, 175, 71,liverpool);
+            Player player10 = new Player("Virgil", "van Dijk", "08.07.1991", country2, "DF", 4, true, 193, 92, liverpool);
 
 // Pour les joueurs de Juventus FC
-        Player player11 = new Player("Cristiano", "Ronaldo", "05.02.1985", country3, "FW", 7, false, 187, 83,juventus);
-        Player player12 = new Player("Giorgio", "Chiellini", "14.08.1984", country8, "DF", 3, true, 187, 85,juventus);
+            Player player11 = new Player("Cristiano", "Ronaldo", "05.02.1985", country3, "FW", 7, false, 187, 83,juventus);
+            Player player12 = new Player("Giorgio", "Chiellini", "14.08.1984", country8, "DF", 3, true, 187, 85,juventus);
 
 // Pour les joueurs de AS Roma
-        Player player13 = new Player("Lorenzo", "Pellegrini", "19.06.1996", country8, "MF", 7, false, 185, 74,roma);
-        Player player14 = new Player("Bryan", "Cristante", "03.03.1995", country8, "MF", 4, false, 188, 79, roma);
+            Player player13 = new Player("Lorenzo", "Pellegrini", "19.06.1996", country8, "MF", 7, false, 185, 74,roma);
+            Player player14 = new Player("Bryan", "Cristante", "03.03.1995", country8, "MF", 4, false, 188, 79, roma);
 
 // Pour les joueurs de AC Milan
-        Player player15 = new Player("Zlatan", "Ibrahimović", "03.10.1981", country3, "FW", 11, false, 195, 95,acmilan);
-        Player player16 = new Player("Gianluigi", "Donnarumma", "25.02.1999", country1, "GK", 99, true, 196, 90,acmilan);
+            Player player15 = new Player("Zlatan", "Ibrahimović", "03.10.1981", country3, "FW", 11, false, 195, 95,acmilan);
+            Player player16 = new Player("Gianluigi", "Donnarumma", "25.02.1999", country1, "GK", 99, true, 196, 90,acmilan);
 
 // Pour les joueurs de Inter Milan
-        Player player17 = new Player("Romelu", "Lukaku", "13.05.1993", country2, "FW", 9, false, 190, 94,intermilan);
-        Player player18 = new Player("Stefan", "de Vrij", "05.02.1992", country2, "DF", 6, true, 188, 78,intermilan);
+            Player player17 = new Player("Romelu", "Lukaku", "13.05.1993", country2, "FW", 9, false, 190, 94,intermilan);
+            Player player18 = new Player("Stefan", "de Vrij", "05.02.1992", country2, "DF", 6, true, 188, 78,intermilan);
 
 // Pour les joueurs de FC Basel
-        Player player19 = new Player("Valentin", "Stocker", "12.04.1989", country1, "MF", 14, false, 180, 72,basel);
-        Player player20 = new Player("Noah", "Okafor", "24.05.2001", country1, "FW", 9, false, 176, 68,basel);
+            Player player19 = new Player("Valentin", "Stocker", "12.04.1989", country1, "MF", 14, false, 180, 72,basel);
+            Player player20 = new Player("Noah", "Okafor", "24.05.2001", country1, "FW", 9, false, 176, 68,basel);
 
 // Pour les joueurs de BSC Young Boys
-        Player player21 = new Player("Jean-Pierre", "Nsame", "01.02.1993", country1, "FW", 9, false, 186, 79,yb);
-        Player player22 = new Player("Nicolas", "Ngamaleu", "10.09.1991", country1, "MF", 7, false, 177, 71,yb);
+            Player player21 = new Player("Jean-Pierre", "Nsame", "01.02.1993", country1, "FW", 9, false, 186, 79,yb);
+            Player player22 = new Player("Nicolas", "Ngamaleu", "10.09.1991", country1, "MF", 7, false, 177, 71,yb);
 
-        em.persist(player1);
-        em.persist(player2);
-        em.persist(player3);
-        em.persist(player4);
-        em.persist(player5);
-        em.persist(player6);
-        em.persist(player7);
-        em.persist(player8);
-        em.persist(player9);
-        em.persist(player10);
-        em.persist(player11);
-        em.persist(player12);
-        em.persist(player13);
-        em.persist(player14);
-        em.persist(player15);
-        em.persist(player16);
-        em.persist(player17);
-        em.persist(player18);
-        em.persist(player19);
-        em.persist(player20);
-        em.persist(player21);
-        em.persist(player22);
+            em.persist(player1);
+            em.persist(player2);
+            em.persist(player3);
+            em.persist(player4);
+            em.persist(player5);
+            em.persist(player6);
+            em.persist(player7);
+            em.persist(player8);
+            em.persist(player9);
+            em.persist(player10);
+            em.persist(player11);
+            em.persist(player12);
+            em.persist(player13);
+            em.persist(player14);
+            em.persist(player15);
+            em.persist(player16);
+            em.persist(player17);
+            em.persist(player18);
+            em.persist(player19);
+            em.persist(player20);
+            em.persist(player21);
+            em.persist(player22);
+
+            em.flush(); // synchronise la base de données avec les objets persistants
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            throw new FootballException("Error while seeding database : " + e.getMessage());
+        }
 
 
-
-        return true;
     }
 
     // CLUB - Use Cases :
