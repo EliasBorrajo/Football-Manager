@@ -16,6 +16,10 @@ public interface Football
     List<Club> getClubs();
     List<League> getLeagues();
 
+    public void updateClub(Club club);
+    Club getClubById(Long clubId);
+
+    public boolean seedDB();
     // CLUB - Use Cases :
     // 1) MAJ infos du club
     //  1.1) ajout suppresion jueur
@@ -23,9 +27,7 @@ public interface Football
     // 3) Consulter les infos de la ligue
     //  3.1) obtenir liste des clubs
 //    @TransactionAttribute(value = TransactionAttributeType.REQUIRED) // TODO : Changer
-    public void updateClub(Club club);
 
-    Club getClubById(Long clubId);
 //    public void addPlayer(Club club ,Player player);
 //    public void removePlayer(Player player);
 //    public void subscribeToLeague(League league, Club club);
@@ -44,6 +46,6 @@ public interface Football
 //    public Club getClubInfo(Club club);
 
 
-    public boolean seedDB();
+
 
 }

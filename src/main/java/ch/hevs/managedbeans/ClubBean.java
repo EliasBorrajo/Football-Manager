@@ -30,18 +30,19 @@ public class ClubBean {
 
 
     // Player
-    private List<String> playerNames;
-    private String selectedPlayerName;
-    private Player selectedPlayer;
     private List<Player> playersList;
-    private Player       playertoUpdate;
+    private Player       selectedPlayer;
+    private List<String> playerNames;          // Nécessaire pour le menu déroulant
+    private String       selectedPlayerName;   // Nécessaire pour le menu déroulant
+    private Player       playertoUpdate; // TODO Remove?
 
 
     // Club
-    private List<Club>  clubs;
-    private Club        selectedClub;
-    private String      selectedClubName;
-    private List<String> clubNames;
+    private List<Club>   clubs;
+    private Club         selectedClub;
+    private List<String> clubNames;         // Nécessaire pour le menu déroulant
+    private String       selectedClubName;  // Nécessaire pour le menu déroulant
+
 
     // League
     private List<String> leagueNames;
@@ -61,8 +62,8 @@ public class ClubBean {
 
         // TODO : CHANGER
         // populate football database
-        loadData();
-
+        //loadData();
+        football.populateDB();
 
 
         //get players
@@ -74,11 +75,11 @@ public class ClubBean {
 
         // get clubs
         this.clubs = football.getClubs();
-        selectedClub = clubs.get(0);
-//        this.clubNames = new ArrayList<String>();     // Initialize list of player names
-//        for (Club club : clubs ) {
-//            this.clubNames.add(club.getNameClub());
-//        }
+        //this.selectedClub = clubs.get(0);
+        this.clubNames = new ArrayList<String>();
+        for (Club club : clubs ) {
+            this.clubNames.add(club.getNameClub());
+        }
 
         // get leagues
         List<League> leagueList = football.getLeagues();
@@ -87,18 +88,6 @@ public class ClubBean {
             this.leagueNames.add(league.getNameLeague());
         }
 
-        List<Player> players = new ArrayList<Player>();
-
-    }
-
-
-
-    /**
-     * Load data
-     */
-    private void loadData()
-    {
-        football.seedDB();
     }
 
 
@@ -109,6 +98,18 @@ public class ClubBean {
         System.out.println("populate football database...");
         System.out.println("POPULATE : " + football.seedDB());
     }
+    /**
+     * Load data into the database if it is empty
+     */
+    private void loadData()
+    {
+        football.seedDB();
+    }
+    public boolean verifyDB()
+    {
+        return false;
+    }
+
     public void saveClub()
     {
         System.out.println("Selected Club tu update : " + selectedClub.getNameClub());
@@ -118,16 +119,18 @@ public class ClubBean {
     }
 
     public void updateClubSelected(ValueChangeEvent event) {
-        // Mettez à jour les informations du club sélectionné en fonction de la nouvelle sélection
-        this.selectedClub = (Club) event.getNewValue();
-        // Faites les opérations nécessaires avec le club sélectionné
+        selectedClubName = (String) event.getNewValue();
+        selectedClub = null; // Réinitialiser selectedClub
+        //setSelectedClub(null);
 
-    }
-    public boolean verifyDB()
-    {
-
-
-        return false;
+        // Rechercher le club sélectionné dans la liste des clubs
+        for (Club club : clubs) {
+            if (club.getNameClub().equals(selectedClubName)) {
+                //setSelectedClub(club);
+                selectedClub = club;
+                break;
+            }
+        }
     }
 
     public void updateSelectedPlayer(ValueChangeEvent event) {
@@ -141,6 +144,11 @@ public class ClubBean {
             }
         }
     }
+
+
+
+
+
 
     //  G E T T E R S   &   S E T T E R S
     public Football getFootball() {
@@ -227,4 +235,6 @@ public class ClubBean {
     public void setLeagueNames(List<String> leagueNames) {
         this.leagueNames = leagueNames;
     }
+
+
 }

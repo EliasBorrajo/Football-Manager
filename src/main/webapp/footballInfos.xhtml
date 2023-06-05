@@ -17,8 +17,9 @@
                 <h:selectOneMenu value="#{clubBean.selectedPlayerName}" valueChangeListener="#{clubBean.updateSelectedPlayer}" onchange="submit()">
                     <f:selectItems value="#{clubBean.playerNames}" />
                 </h:selectOneMenu>
-                </h:panelGrid>
-                <h:panelGrid columns="2">
+            </h:panelGrid>
+
+            <h:panelGrid columns="2">
                 <h:outputText value="Nom: " />
                 <h:outputText value="#{clubBean.selectedPlayer.lastname}" />
                 <h:outputText value="Prénom: " />

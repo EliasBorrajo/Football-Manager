@@ -15,13 +15,12 @@
          <!-- crée une liste déroulante des clubs où chaque élément de la liste est représenté par un objet club.
               Lorsque l'utilisateur sélectionne un club dans la liste,
               la propriété selectedClub dans le bean clubBean sera mise à jour avec le club sélectionné. -->
-         <h:selectOneMenu value="#{clubBean.selectedClub}" onchange="submit()" >
-          <f:selectItems value="#{clubBean.clubs}"
-                         var="club"
-                         converter="omnifaces.SelectItemsConverter"
-                         itemLabel="#{club.nameClub}"
-                         itemValue="#{club}" />
-         </h:selectOneMenu>
+         <h:panelGrid columns="5">
+            <h:selectOneMenu value="#{clubBean.selectedClub}" onchange="submit()" valueChangeListener="#{clubBean.updateClubSelected}">
+                  <f:selectItems value="#{clubBean.clubNames}" />
+            </h:selectOneMenu>
+         </h:panelGrid>
+
          <br />
 
          <!-- Afficher un form avec les infos du club, on peut modifier directement la donné dans la table & cliquer sur SEND -->
@@ -33,7 +32,7 @@
             <h:inputText  value="#{clubBean.selectedClub.location}" />
 
             <h:outputText value="Stadium Name:" />
-            <h:inputText  value="#{clubBean.selectedClub.stadName}" />
+            <h:inputText  value="#{clubBean.selectedClub.stadName}" disabled="true" />
 
             <h:outputText value="Country:" />
             <h:inputText value="#{clubBean.selectedClub.country.nameCountry}" disabled="true" />
