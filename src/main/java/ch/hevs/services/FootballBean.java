@@ -70,6 +70,7 @@ public class FootballBean implements Football
     private void initializeDatabase()
     {
         try {
+            // TODO : On peut pas créer la DB après avoir démarré le serveur, il faut la créer avant
             System.out.println("Starting database...");
             HSQLDBServer.getInstance().start();
             System.out.println("Database started succesfully.");
