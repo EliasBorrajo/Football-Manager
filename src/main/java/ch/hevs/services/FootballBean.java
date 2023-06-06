@@ -101,6 +101,11 @@ public class FootballBean implements Football
     }
 
     @Override
+    public void updatePlayer(Player player) {
+        em.merge(player);
+    }
+
+    @Override
     public boolean seedDB()
     {
         try {

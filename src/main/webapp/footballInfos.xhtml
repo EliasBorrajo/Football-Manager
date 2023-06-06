@@ -17,16 +17,32 @@
                 <h:selectOneMenu value="#{clubBean.selectedPlayerName}" valueChangeListener="#{clubBean.updateSelectedPlayer}" onchange="submit()">
                     <f:selectItems value="#{clubBean.playerNames}" />
                 </h:selectOneMenu>
-                </h:panelGrid>
-                <h:panelGrid columns="2">
-                <h:outputText value="Nom: " />
-                <h:outputText value="#{clubBean.selectedPlayer.lastname}" />
-                <h:outputText value="Prénom: " />
-                    <h:outputText value="#{clubBean.selectedPlayer.firstname}" />
-                <h:outputText value="Date de naissance: " />
-                    <h:outputText value="#{clubBean.selectedPlayer.birthdate}" />
-
             </h:panelGrid>
+            <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedPlayer}">
+                <h:outputText value="Lastname: " />
+                <h:outputText value="#{clubBean.selectedPlayer.lastname}"/>
+                <h:outputText value="Firstname: " />
+                <h:inputText value="#{clubBean.selectedPlayer.firstname}"/>
+                <!-- INPUT NE CHANGE PAS TANDIS QUE OUTPUT OUI-->
+                <h:outputText value="Birthdate: " />
+                <h:outputText value="#{clubBean.selectedPlayer.birthdate}"/>
+                <h:outputText value="Country: " />
+                <h:outputText value="#{clubBean.selectedPlayer.country.nameCountry}"/>
+                <h:outputText value="Club: " />
+                <h:outputText value="#{clubBean.selectedPlayer.playsForClub.nameClub}"/>
+                <h:outputText value="Position: " />
+                <h:outputText value="#{clubBean.selectedPlayer.positionPlayer}"/>
+                <h:outputText value="Number: " />
+                <h:outputText value="#{clubBean.selectedPlayer.number}"/>
+                <h:outputText value="RightFooted: " />
+                <h:outputText value="#{clubBean.selectedPlayer.rightFooted}"/>
+                <h:outputText value="Height: " />
+                <h:outputText value="#{clubBean.selectedPlayer.height}"/>
+                <h:outputText value="Weight: " />
+                <h:outputText value="#{clubBean.selectedPlayer.weight}"/>
+            </h:panelGrid>
+            <h:commandButton value="Validate modifications" action="#{clubBean.updatePlayer}" />
+
 
 
 

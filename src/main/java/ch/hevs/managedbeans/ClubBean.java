@@ -98,6 +98,13 @@ public class ClubBean {
         }
     }
 
+    public void updatePlayer() {
+        // Mettre à jour le joueur dans la base de données avec les nouvelles informations
+        football.updatePlayer(selectedPlayer);
+        // Réinitialiser la propriété selectedPlayer pour désélectionner le joueur
+        selectedPlayer = null;
+    }
+
     //  G E T T E R S   &   S E T T E R S
 
     //Get all players names
