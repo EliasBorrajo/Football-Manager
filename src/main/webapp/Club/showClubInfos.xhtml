@@ -8,7 +8,8 @@
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
    <ui:define name="content">
-      <h:form>
+      <h:form >
+         <script src="/Club/UpdateFilelds.js" type="text/javascript"></script>
          <h:outputLabel value="My Club:" />
          <br />
          <!-- liste déroulante de tous les clubs, et sélectionner son propre club -->
@@ -16,7 +17,7 @@
               Lorsque l'utilisateur sélectionne un club dans la liste,
               la propriété selectedClub dans le bean clubBean sera mise à jour avec le club sélectionné. -->
          <h:panelGrid columns="5">
-            <h:selectOneMenu value="#{clubBean.selectedClubName}" onchange="submit()" valueChangeListener="#{clubBean.updateClubSelected}">
+            <h:selectOneMenu value="#{clubBean.selectedClubName}" onchange="submit()" valueChangeListener="#{clubBean.updateClubSelected}" >
                   <f:selectItems value="#{clubBean.clubNames}" />
             </h:selectOneMenu>
          </h:panelGrid>
@@ -24,34 +25,39 @@
          <br />
 
          <!-- Afficher un form avec les infos du club, on peut modifier directement la donné dans la table & cliquer sur SEND -->
-         <h:panelGrid columns="2">
+         <h:panelGrid columns="3" rendered="#{not empty clubBean.selectedClubName}">
             <h:outputText value="Name:" />
             <h:outputText  value="#{clubBean.selectedClub.nameClub}"  />
+            <h:inputText  value="#{clubBean.selectedClub.nameClub}"  />
 
 
             <h:outputText value="Location:" />
             <h:outputText  value="#{clubBean.selectedClub.location}" />
+            <h:inputText  value="#{clubBean.selectedClub.location}" />
 
 
             <h:outputText value="Stadium Name:" />
             <h:outputText  value="#{clubBean.selectedClub.stadName.toString()}" disabled="true" />
+            <h:inputText  value="#{clubBean.selectedClub.stadName}" disabled="true" />
 
 
             <h:outputText value="Country:" />
             <h:outputText value="#{clubBean.selectedClub.country.nameCountry.toString()}" disabled="true" />
+            <h:inputText value="#{clubBean.selectedClub.country.nameCountry}" disabled="true" />
 
             <h:outputText value="League:" />
             <h:outputText  value="#{clubBean.selectedClub.league.nameLeague.toString()}" disabled="true" />
+            <h:inputText  value="#{clubBean.selectedClub.league.nameLeague}" disabled="true" />
 
 
          </h:panelGrid>
          <br />
 
          <h:commandButton value="Save"          action="#{clubBean.saveClub}" />
-         <h:commandButton value="Edit Club"     action="#{clubBean.saveClub}" />
-         <h:commandButton value="Add Player"    action="#{clubBean.saveClub}" />
-         <h:commandButton value="Delete Club"   action="#{clubBean.saveClub}" />
-         <h:commandButton value="Change league" action="#{clubBean.saveClub}" />
+         <h:commandButton value="Edit Club"     action="#{clubBean.editClub}" />
+         <h:commandButton value="Add Player"    action="#{clubBean.addPlayer}" />
+         <h:commandButton value="Delete Club"   action="#{clubBean.deleteClub}" />
+         <h:commandButton value="Change league" action="#{clubBean.changeLeague}" />
 
 
 

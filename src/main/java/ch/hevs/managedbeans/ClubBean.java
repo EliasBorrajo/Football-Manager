@@ -10,11 +10,15 @@ import ch.hevs.services.Football;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,6 +120,60 @@ public class ClubBean {
         football.updateClub(selectedClub);
         FacesContext.getCurrentInstance()
                 .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club updated successfully", null));
+    }
+
+    /**
+     * BTN de passage de Club à Edit Club
+     * Réalise une redirection vers la page d'édition du club sélectionné
+     * Recurperer le nom du club sélectionné
+     */
+    public void editClub()
+    {
+        // Récupérer l'instance de ExternalContext
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+        // Obtenir le nom du club sélectionné
+        String selectedClubName = selectedClub.getNameClub();
+
+        try {
+            // Redirection vers la page d'édition avec le nom du club en tant que paramètre
+            externalContext.redirect("editClub.xhtml?clubName=" + selectedClubName);
+        } catch (IOException e) {
+            // Gérer les exceptions si la redirection échoue
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * BTN de Edit Club à Club (retour) & envoyer les modifications à la DB (save)
+     */
+    public void updateClubInfos()
+    {
+        // TODO : Recuperer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
+        // Récupérer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
+        UIComponent component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:clubNameId");
+        String nameClub = ((UIInput) component).getValue().toString();
+        selectedClub.setNameClub(nameClub);
+
+        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:locationId");
+        String location = ((UIInput) component).getValue().toString();
+        selectedClub.setLocation(location);
+
+        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:stadNameId");
+        String stadName = ((UIInput) component).getValue().toString();
+        selectedClub.setStadName(stadName);
+
+        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:countryNameId");
+        String countryName = ((UIInput) component).getValue().toString();
+        selectedClub.getCountry().setNameCountry(countryName);
+
+
+        // Effectuer la mise à jour des informations du club dans la base de données
+        football.updateClub(selectedClub);
+
+        // Afficher un message de succès
+        FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club mis à jour avec succès", null));
     }
 
     public void updateClubSelected(ValueChangeEvent event) {
