@@ -16,7 +16,7 @@
               Lorsque l'utilisateur sélectionne un club dans la liste,
               la propriété selectedClub dans le bean clubBean sera mise à jour avec le club sélectionné. -->
          <h:panelGrid columns="5">
-            <h:selectOneMenu value="#{clubBean.selectedClub}" onchange="submit()" valueChangeListener="#{clubBean.updateClubSelected}">
+            <h:selectOneMenu value="#{clubBean.selectedClubName}" onchange="submit()" valueChangeListener="#{clubBean.updateClubSelected}">
                   <f:selectItems value="#{clubBean.clubNames}" />
             </h:selectOneMenu>
          </h:panelGrid>
@@ -26,24 +26,32 @@
          <!-- Afficher un form avec les infos du club, on peut modifier directement la donné dans la table & cliquer sur SEND -->
          <h:panelGrid columns="2">
             <h:outputText value="Name:" />
-            <h:inputText  value="#{clubBean.selectedClub.nameClub}"  />
+            <h:outputText  value="#{clubBean.selectedClub.nameClub}"  />
+
 
             <h:outputText value="Location:" />
-            <h:inputText  value="#{clubBean.selectedClub.location}" />
+            <h:outputText  value="#{clubBean.selectedClub.location}" />
+
 
             <h:outputText value="Stadium Name:" />
-            <h:inputText  value="#{clubBean.selectedClub.stadName}" disabled="true" />
+            <h:outputText  value="#{clubBean.selectedClub.stadName.toString()}" disabled="true" />
+
 
             <h:outputText value="Country:" />
-            <h:inputText value="#{clubBean.selectedClub.country.nameCountry}" disabled="true" />
+            <h:outputText value="#{clubBean.selectedClub.country.nameCountry.toString()}" disabled="true" />
 
             <h:outputText value="League:" />
-            <h:inputText  value="#{clubBean.selectedClub.league.nameLeague}" disabled="true" />
+            <h:outputText  value="#{clubBean.selectedClub.league.nameLeague.toString()}" disabled="true" />
+
+
          </h:panelGrid>
          <br />
 
-         <!-- Bouton pour sauvegarder les modifications -->
-         <h:commandButton value="Save" action="#{clubBean.saveClub}" />
+         <h:commandButton value="Save"          action="#{clubBean.saveClub}" />
+         <h:commandButton value="Edit Club"     action="#{clubBean.saveClub}" />
+         <h:commandButton value="Add Player"    action="#{clubBean.saveClub}" />
+         <h:commandButton value="Delete Club"   action="#{clubBean.saveClub}" />
+         <h:commandButton value="Change league" action="#{clubBean.saveClub}" />
 
 
 
