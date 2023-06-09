@@ -62,6 +62,7 @@ public class ClubBean {
         }
 
         List<Player> players = new ArrayList<Player>();
+        List<Player> leagues = new ArrayList<Player>();
 
     }
 
@@ -112,6 +113,8 @@ public class ClubBean {
             }
         }
     }
+
+
 
     public void updatePlayer() {
         // Mettre à jour le joueur dans la base de données avec les nouvelles informations
@@ -177,6 +180,7 @@ public class ClubBean {
     }
 
     public String getSelectedLeagueName() {
+        System.out.println("Get name league: "+selectedLeagueName);
         return selectedLeagueName;
     }
 
