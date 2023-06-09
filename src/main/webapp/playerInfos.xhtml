@@ -9,21 +9,20 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
         <h:form>
-            <h:outputLabel value="Football Informations:" />
+            <h:outputLabel value="Player Informations:" />
             <br />
 
             <h:panelGrid columns="5">
-                <h:outputText value="players (name):" />
+                <h:outputText value="Select player: " />
                 <h:selectOneMenu value="#{clubBean.selectedPlayerName}" valueChangeListener="#{clubBean.updateSelectedPlayer}" onchange="submit()">
                     <f:selectItems value="#{clubBean.playerNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>
-            <!-- INPUT NE CHANGE PAS TANDIS QUE OUTPUT OUI-->
             <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedPlayer}">
                 <h:outputText value="Lastname: " />
                 <h:outputText value="#{clubBean.selectedPlayer.lastname}"/>
                 <h:outputText value="Firstname: " />
-                <h:inputText value="#{clubBean.selectedPlayer.firstname}"/>
+                <h:outputText value="#{clubBean.selectedPlayer.firstname}"/>
                 <h:outputText value="Birthdate: " />
                 <h:outputText value="#{clubBean.selectedPlayer.birthdate}"/>
                 <h:outputText value="Country: " />
@@ -41,7 +40,7 @@
                 <h:outputText value="Weight: " />
                 <h:outputText value="#{clubBean.selectedPlayer.weight}"/>
             </h:panelGrid>
-            <h:commandButton value="Validate modifications" action="#{clubBean.updatePlayer}" />
+            <h:commandButton value="Modify player informations" action="playerUpdate" />
 
 
 

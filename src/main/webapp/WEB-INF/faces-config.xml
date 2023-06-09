@@ -26,8 +26,16 @@
 		<display-name>welcomeBank.xhtml</display-name>
 		<from-view-id>/welcomeBank.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>footballInfos</from-outcome>
-			<to-view-id>/footballInfos.xhtml</to-view-id>
+			<from-outcome>playerInfos</from-outcome>
+			<to-view-id>/playerInfos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>playerUpdate.xhtml</display-name>
+		<from-view-id>/playerUpdate.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>#{clubBean.updatePlayer}</from-outcome>
+			<to-view-id>/playerInfos.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
