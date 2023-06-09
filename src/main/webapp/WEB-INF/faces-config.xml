@@ -31,6 +31,14 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
+		<display-name>welcomeBank.xhtml</display-name>
+		<from-view-id>/welcomeBank.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>leagueInfos</from-outcome>
+			<to-view-id>/leagueInfos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
 		<display-name>playerUpdate.xhtml</display-name>
 		<from-view-id>/playerUpdate.xhtml</from-view-id>
 		<navigation-case>

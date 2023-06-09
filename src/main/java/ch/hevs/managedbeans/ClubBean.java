@@ -25,6 +25,9 @@ public class ClubBean {
     private String selectedPlayerName;
     private Player selectedPlayer;
     private List<Player> playersList;
+    private String selectedLeagueName;
+    private League selectedLeague;
+    private List<League> leaguesList;
 
     //  C O N S T R U C T O R S
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
@@ -52,9 +55,9 @@ public class ClubBean {
         }
 
         // get leagues
-        List<League> leagueList = football.getLeagues();
+        this.leaguesList = football.getLeagues();
         this.leagueNames = new ArrayList<String>();
-        for(League league : leagueList) {
+        for(League league : leaguesList) {
             this.leagueNames.add(league.getNameLeague());
         }
 
@@ -93,6 +96,18 @@ public class ClubBean {
         for (Player player : playersList) {
             if (player.getLastname().equals(selectedPlayerName)) {
                 selectedPlayer = player;
+                break;
+            }
+        }
+    }
+
+    public void updateSelectedLeague(ValueChangeEvent event) {
+        selectedLeagueName = (String) event.getNewValue();
+        selectedLeague = null; // Réinitialiser selectedPlayer
+
+        for (League league : leaguesList) {
+            if (league.getNameLeague().equals(selectedLeagueName)) {
+                selectedLeague = league;
                 break;
             }
         }
@@ -159,5 +174,29 @@ public class ClubBean {
 
     public void setPlayersList(List<Player> playersList) {
         this.playersList = playersList;
+    }
+
+    public String getSelectedLeagueName() {
+        return selectedLeagueName;
+    }
+
+    public void setSelectedLeagueName(String selectedLeagueName) {
+        this.selectedLeagueName = selectedLeagueName;
+    }
+
+    public League getSelectedLeague() {
+        return selectedLeague;
+    }
+
+    public void setSelectedLeague(League selectedLeague) {
+        this.selectedLeague = selectedLeague;
+    }
+
+    public List<League> getLeaguesList() {
+        return leaguesList;
+    }
+
+    public void setLeaguesList(List<League> leaguesList) {
+        this.leaguesList = leaguesList;
     }
 }
