@@ -185,9 +185,10 @@ public class ClubBean {
         String stadName = ((UIInput) component).getValue().toString();
         selectedClub.setStadName(stadName);
 
-        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:countryNameId");
-        String countryName = ((UIInput) component).getValue().toString();
-        selectedClub.getCountry().setNameCountry(countryName);
+//        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:countryNameId");
+//        String countryName = ((UIInput) component).getValue().toString();
+//        selectedClub.getCountry().setNameCountry(countryName );
+
 
 
         // Effectuer la mise à jour des informations du club dans la base de données
