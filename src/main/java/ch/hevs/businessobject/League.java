@@ -17,7 +17,7 @@ public class League
 
     // R E L A T I O N S
     // League <-1..1------1..*-> Club
-    @OneToMany ( mappedBy = "league"  /*,cascade = CascadeType.ALL*/)
+    @OneToMany ( mappedBy = "league" , cascade = CascadeType.REMOVE) // Remove : Supprime les clubs de la ligue si on supprime la ligue
     private List<Club> clubs;
 
     // League <>---------------| Country
