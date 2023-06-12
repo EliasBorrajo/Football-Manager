@@ -8,11 +8,9 @@ import javax.faces.event.ValueChangeEvent;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import ch.hevs.businessobject.Player;
 import ch.hevs.services.Bank;
-import ch.hevs.businessobject.Account;
-import ch.hevs.businessobject.Client;
-import ch.hevs.services.Football;
+import ch.hevs.businessobject.toRemove.Account;
+import ch.hevs.businessobject.toRemove.Client;
 
 /**
  * 1) Attributs

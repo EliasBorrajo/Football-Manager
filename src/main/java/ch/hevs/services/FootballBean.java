@@ -5,6 +5,8 @@ import ch.hevs.utils.exception.FootballException;
 import ch.hevs.utils.serverHSQLDB.HSQLDBServer;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -44,6 +46,19 @@ public class FootballBean implements Football
         return em.find(Club.class, clubId);
     }
 
+    @Override
+    public boolean deleteClub(Club club) {
+        try {
+            Club clubToRemove = em.merge(club);
+
+            em.remove(clubToRemove);
+            System.out.println("ENTITY REMOVED");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
 
     @Override
     public List<Fan> getFans() {
@@ -63,6 +78,7 @@ public class FootballBean implements Football
     /**
      * Verify if database is initialized, and initialize it if not done yet, then populate it
      */
+    //@TransactionAttribute( TransactionAttributeType.REQUIRED ) // Declarative demarcation JTA (Java Transaction API) // TODO
     public boolean populateDB()
     {
         System.out.println("Populating database...");
@@ -133,6 +149,7 @@ public class FootballBean implements Football
     @Override
     public void updatePlayer(Player player) {
         em.merge(player);
+        em.flush();
     }
 
     @Override

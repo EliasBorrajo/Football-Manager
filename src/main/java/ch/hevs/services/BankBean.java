@@ -8,8 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
-import ch.hevs.businessobject.Account;
-import ch.hevs.businessobject.Client;
+import ch.hevs.businessobject.toRemove.Account;
+import ch.hevs.businessobject.toRemove.Client;
 
 @Stateless
 public class BankBean implements Bank {

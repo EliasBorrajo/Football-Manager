@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import ch.hevs.businessobject.Client;
-import ch.hevs.businessobject.Account;
+import ch.hevs.businessobject.toRemove.Client;
+import ch.hevs.businessobject.toRemove.Account;
 
 @Local
 public interface Bank {

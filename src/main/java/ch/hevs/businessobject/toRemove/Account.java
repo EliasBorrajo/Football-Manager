@@ -1,4 +1,4 @@
-package ch.hevs.businessobject;
+package ch.hevs.businessobject.toRemove;
 
 import javax.persistence.Entity;
 import javax.persistence.PostPersist;
