@@ -45,7 +45,6 @@ public class ClubBean {
     private Player       playerAdd;
 
 
-
     // Club
     private List<Club>   clubs;
     private Club         selectedClub;

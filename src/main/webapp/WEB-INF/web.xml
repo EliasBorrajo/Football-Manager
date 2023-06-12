@@ -40,4 +40,42 @@
     <env-entry-value>am9kZXRlcHV0b2hhY2tlcg==</env-entry-value>
   </env-entry>
   <display-name>TP12-WEB-EJB-PC-EPC-DAO-E</display-name>
+
+
+  <!-- ADD HERE THE SECURITY CONSTRAINTS -->
+  <!-- CONTRAINTES -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Secure Content</web-resource-name>
+      <url-pattern>/*</url-pattern> <!-- Securiser l'URL depuis ROOT -->
+    </web-resource-collection>
+
+    <!-- DEFINIR LES ROLES -->
+    <auth-constraint>
+      <role-name>manager</role-name>
+      <role-name>Player</role-name>
+      <role-name>Fan</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <!-- TYPE DE LOGIN -->
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>Restricted Acces !</realm-name> <!-- Nom de la fenetre de login -->
+  </login-config>
+
+  <!-- DEFINIR LES RÔLES -->
+  <security-role>
+    <role-name>manager</role-name>
+    <description>Manager d'un club de football</description>
+  </security-role>
+  <security-role>
+    <role-name>Player</role-name>
+    <description>Joueur de football d'un club</description>
+  </security-role>
+  <security-role>
+    <role-name>Fan</role-name>
+    <description>Fan d'une équipe de football </description>
+  </security-role>
+
 </web-app>

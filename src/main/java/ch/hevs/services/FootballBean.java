@@ -4,6 +4,7 @@ import ch.hevs.businessobject.*;
 import ch.hevs.utils.exception.FootballException;
 import ch.hevs.utils.serverHSQLDB.HSQLDBServer;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -14,6 +15,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
+@RolesAllowed(value = {"manager", "fan", "player"})
 public class FootballBean implements Football
 {
     @PersistenceContext (name = "dbFootballPU", type= PersistenceContextType.TRANSACTION)

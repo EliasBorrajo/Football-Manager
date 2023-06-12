@@ -1,5 +1,7 @@
 package ch.hevs.businessobject;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.PostActivate;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,5 +129,41 @@ public class Club {
                 ", league=" + league +
                 ", players=" + players +
                 '}';
+    }
+
+    @PostPersist
+    public void acknowledgePersist()
+    {
+        System.out.println("Club " + this.nameClub + " persisted");
+    }
+
+    @PostRemove
+    public void acknowledgeRemove()
+    {
+        System.out.println("Club " + this.nameClub + " removed");
+    }
+
+    @PostUpdate
+    public void acknowledgeUpdate()
+    {
+        System.out.println("Club " + this.nameClub + " updated");
+    }
+
+    @PostLoad
+    public void acknowledgeLoad()
+    {
+        System.out.println("Club " + this.nameClub + " loaded");
+    }
+
+    @PostConstruct
+    public void acknowledgeConstruct()
+    {
+        System.out.println("Club " + this.nameClub + " constructed");
+    }
+
+    @PostActivate
+    public void acknowledgeActivate()
+    {
+        System.out.println("Club " + this.nameClub + " activated");
     }
 }
