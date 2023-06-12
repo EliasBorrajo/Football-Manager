@@ -15,6 +15,7 @@ public interface Football
     List<Player> getPlayers();
     List<Club> getClubs();
     List<League> getLeagues();
+    void updatePlayer(Player player);
 
     public void updateClub(Club club);
     Club getClubById(Long clubId);

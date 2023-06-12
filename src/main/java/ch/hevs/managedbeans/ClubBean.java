@@ -51,6 +51,11 @@ public class ClubBean {
 
     // League
     private List<String> leagueNames;
+    private String selectedLeagueName;
+    private League selectedLeague;
+    private List<League> leaguesList;
+
+
 
     //  C O N S T R U C T O R S
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
@@ -87,16 +92,20 @@ public class ClubBean {
         }
 
         // get leagues
-        List<League> leagueList = football.getLeagues();
+        this.leaguesList = football.getLeagues();
         this.leagueNames = new ArrayList<String>();
-        for(League league : leagueList) {
+        for(League league : leaguesList) {
             this.leagueNames.add(league.getNameLeague());
         }
 
+        // TODO : REMOVE ?
+        List<Player> players = new ArrayList<Player>();
+        List<Player> leagues = new ArrayList<Player>();
+
         // new player -- Initialize new player for form in JSF page
         playerAdd = new Player("Firstname", "Lastname","01.09.1997",
-                                new Country("Switzerland"), "Attaquant",
-                                1, false, 188.0, 76.8, clubs.get(1));
+                new Country("Switzerland"), "Attaquant",
+                1, false, 188.0, 76.8, clubs.get(1));
 
     }
 
@@ -209,10 +218,26 @@ public class ClubBean {
         }
     }
 
+    public void updateSelectedLeague(ValueChangeEvent event) {
+        selectedLeagueName = (String) event.getNewValue();
+        selectedLeague = null; // Réinitialiser selectedPlayer
+
+        for (League league : leaguesList) {
+            if (league.getNameLeague().equals(selectedLeagueName)) {
+                selectedLeague = league;
+                break;
+            }
+        }
+    }
 
 
 
-
+    public void updatePlayer() {
+        // Mettre à jour le joueur dans la base de données avec les nouvelles informations
+        football.updatePlayer(selectedPlayer);
+        // Réinitialiser la propriété selectedPlayer pour désélectionner le joueur
+        selectedPlayer = null;
+    }
 
     //  G E T T E R S   &   S E T T E R S
     public Football getFootball() {
@@ -304,5 +329,30 @@ public class ClubBean {
     }
     public void setPlayerAdd(Player playerAdd) {
         this.playerAdd = playerAdd;
+    }
+
+    public String getSelectedLeagueName() {
+        System.out.println("Get name league: "+selectedLeagueName);
+        return selectedLeagueName;
+    }
+
+    public void setSelectedLeagueName(String selectedLeagueName) {
+        this.selectedLeagueName = selectedLeagueName;
+    }
+
+    public League getSelectedLeague() {
+        return selectedLeague;
+    }
+
+    public void setSelectedLeague(League selectedLeague) {
+        this.selectedLeague = selectedLeague;
+    }
+
+    public List<League> getLeaguesList() {
+        return leaguesList;
+    }
+
+    public void setLeaguesList(List<League> leaguesList) {
+        this.leaguesList = leaguesList;
     }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <h:outputLabel value="League informations: " />
+            <br />
+
+            <h:panelGrid columns="5">
+                <h:outputText value="Select league: " />
+                <h:selectOneMenu value="#{clubBean.selectedLeagueName}" valueChangeListener="#{clubBean.updateSelectedLeague}" >
+                    <!--onchange="submit()" -->
+                    <f:selectItems value="#{clubBean.leagueNames}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <!--
+            <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedLeague}">
+                <h:outputText value="League name: " />
+                <h:outputText value="#{clubBean.selectedLeague.nameLeague}"/>
+                <h:outputText value="Country: " />
+                <h:outputText value="#{clubBean.selectedLeague.country.nameCountry}"/>
+                <h:outputText value="Division: " />
+                <h:outputText value="#{clubBean.selectedLeague.division}"/>
+
+                <h:outputText value="Clubs: " />
+                <h:outputText value="#{clubBean.selectedLeague.clubs}"/>
+
+                <h:outputText value="Clubs: " />
+                <ui:repeat value="#{clubBean.selectedLeague.clubs}" var="club">
+                    <h:outputText value="#{club.nameClub}" />
+                </ui:repeat>
+
+            </h:panelGrid>
+            -->
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
