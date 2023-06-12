@@ -9,7 +9,7 @@ import java.util.List;
 public interface Football
 {
 
-    public boolean populateDB();
+    boolean populateDB();
     List<Player> getPlayers();
     List<Club> getClubs();
     List<League> getLeagues();

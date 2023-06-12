@@ -45,4 +45,8 @@ public class HSQLDBServer
             isRunning = false;
         }
     }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
 }
