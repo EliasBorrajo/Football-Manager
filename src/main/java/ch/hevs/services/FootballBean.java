@@ -4,7 +4,9 @@ import ch.hevs.businessobject.*;
 import ch.hevs.utils.exception.FootballException;
 import ch.hevs.utils.serverHSQLDB.HSQLDBServer;
 
+import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -20,6 +22,9 @@ public class FootballBean implements Football
 {
     @PersistenceContext (name = "dbFootballPU", type= PersistenceContextType.TRANSACTION)
     private EntityManager em;
+
+    @Resource
+    private SessionContext ctx; // To get access to security information (user name, role, ...)
 
     @Override
     public List<Player> getPlayers() {
@@ -138,6 +143,24 @@ public class FootballBean implements Football
     public void updatePlayer(Player player) {
         em.merge(player);
         em.flush();
+    }
+
+    @Override
+    public boolean verifyManagerRole() {
+        System.out.println("Verify allowed role");
+        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +
+                            " with role : " + ctx.getCallerPrincipal().getName() + " is looking to acces the ressource");
+
+        if (ctx.isCallerInRole("manager"))
+        {
+            System.out.println("Manager is allowed to access the ressource");
+            return true;
+        }
+        else
+        {
+            System.out.println("Current role is not allowed to access the ressource");
+            return false;
+        }
     }
 
     @Override
@@ -277,6 +300,8 @@ public class FootballBean implements Football
 
 
     }
+
+
 
     // CLUB - Use Cases :
     // 1) MAJ infos du club

@@ -6,10 +6,10 @@ import ch.hevs.businessobject.Country;
 import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
 import ch.hevs.services.Football;
+import ch.hevs.utils.exception.FootballException;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
-import javax.annotation.security.RolesAllowed;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -173,7 +173,6 @@ public class ClubBean {
      */
     public void updateClubInfos()
     {
-        // TODO : Recuperer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
         // Récupérer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
         UIComponent component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:clubNameId");
         String nameClub = ((UIInput) component).getValue().toString();
@@ -269,8 +268,6 @@ public class ClubBean {
         }
     }
 
-
-
     public void updatePlayer() {
         // Mettre à jour le joueur dans la base de données avec les nouvelles informations
         football.updatePlayer(selectedPlayer);
@@ -279,6 +276,77 @@ public class ClubBean {
 
         initAttributes();
     }
+
+    // NAVIGATION BUTTONS
+    public void showClub() {
+        if (football.verifyManagerRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            try {
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+                String redirectUrl = facesContext.getApplication().getViewHandler().getActionURL(facesContext, "/Club/showClubInfos.xhtml");
+                facesContext.getExternalContext().redirect(redirectUrl);
+                facesContext.responseComplete();
+            } catch (IOException e) {
+                throw new FootballException("Erreur de redirection vers la page des clubs", e);
+            }
+        } else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            try {
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+                String redirectUrl = facesContext.getApplication().getViewHandler().getActionURL(facesContext, "/accessDenied.xhtml");
+                facesContext.getExternalContext().redirect(redirectUrl);
+                facesContext.responseComplete();
+            } catch (IOException e) {
+                throw new FootballException("Erreur de redirection vers la page ACCES DENIED", e);
+            }
+
+
+
+        }
+    }
+
+
+//    public void showClub()
+//    {
+//        if (football.verifyManagerRole())
+//        {
+//            // Role is allowed to go to the page requested
+//            try
+//            {
+//                // Redirection vers la page des clubs
+//                // Récupérer l'instance de ExternalContext
+//                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//                externalContext.redirect("showClubInfos.xhtml");
+//
+//            } catch (IOException e) {
+//
+//                // Gérer les exceptions si la redirection échoue
+//                throw new FootballException("Erreur de redirection vers la page des clubs" + e.getMessage(), e.getCause());
+//            }
+//        }
+//        else {
+//            try {
+//
+//                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//                externalContext.redirect("accessDenied.xhtml");
+//
+//            } catch (IOException e) {
+//
+//                try {
+//                    System.out.println("TRY 2 ");
+//                    FacesContext.getCurrentInstance().getExternalContext().redirect("/accessDenied.xhtml");
+//
+//                } catch (IOException ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//
+//                throw new FootballException("Erreur de redirection vers la ACCES DENIED" + e.getMessage(), e.getCause());
+//            }
+//        }
+//
+//
+//    }
+
 
     //  G E T T E R S   &   S E T T E R S
     public Football getFootball() {

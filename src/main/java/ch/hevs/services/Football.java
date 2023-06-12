@@ -3,8 +3,6 @@ package ch.hevs.services;
 import ch.hevs.businessobject.*;
 
 import javax.ejb.Local;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import java.util.List;
 
 @Local
@@ -22,6 +20,8 @@ public interface Football
     boolean deleteClub(Club club);
 
     public boolean seedDB();
+
+    boolean verifyManagerRole();
     // CLUB - Use Cases :
     // 1) MAJ infos du club
     //  1.1) ajout suppresion jueur
