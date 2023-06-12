@@ -25,7 +25,7 @@
          <br />
 
          <!-- Afficher un form avec les infos du club, on peut modifier directement la donné dans la table & cliquer sur SEND -->
-         <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedClubName}">
+         <h:panelGrid columns="3" rendered="#{not empty clubBean.selectedClubName}">
             <h:outputText value="Name:" />
             <h:outputText  value="#{clubBean.selectedClub.nameClub}"  />
 <!--            <h:inputText  value="#{clubBean.selectedClub.nameClub}"  />-->
@@ -54,7 +54,7 @@
          <br />
 
          <h:commandButton value="Edit Club"     action="#{clubBean.editClub}" />
-         <h:commandButton value="Add Player"    action="#{clubBean.addPlayer}" />
+         <h:commandButton value="Add Player"    action="/Club/addPlayer" />
          <h:commandButton value="Delete Club"   action="#{clubBean.deleteClub}" />
          <h:commandButton value="Change league" action="#{clubBean.changeLeague}" />
 

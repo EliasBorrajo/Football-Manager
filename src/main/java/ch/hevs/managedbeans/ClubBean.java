@@ -2,6 +2,7 @@ package ch.hevs.managedbeans;
 
 
 import ch.hevs.businessobject.Club;
+import ch.hevs.businessobject.Country;
 import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
 import ch.hevs.services.Football;
@@ -76,7 +77,6 @@ public class ClubBean {
         for (Player player : playersList) {
             this.playerNames.add(player.getLastname());
         }
-        playerAdd = new Player(); // Initialize new player for form in JSF page
 
         // get clubs
         this.clubs = football.getClubs();
@@ -92,6 +92,11 @@ public class ClubBean {
         for(League league : leagueList) {
             this.leagueNames.add(league.getNameLeague());
         }
+
+        // new player -- Initialize new player for form in JSF page
+        playerAdd = new Player("Firstname", "Lastname","01.09.1997",
+                                new Country("Switzerland"), "Attaquant",
+                                1, false, 188.0, 76.8, clubs.get(1));
 
     }
 
@@ -294,6 +299,10 @@ public class ClubBean {
     public void setLeagueNames(List<String> leagueNames) {
         this.leagueNames = leagueNames;
     }
-
-
+    public Player getPlayerAdd() {
+        return playerAdd;
+    }
+    public void setPlayerAdd(Player playerAdd) {
+        this.playerAdd = playerAdd;
+    }
 }

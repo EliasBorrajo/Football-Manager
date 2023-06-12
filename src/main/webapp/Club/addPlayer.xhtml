@@ -17,13 +17,13 @@
             <h:outputLabel value="#{clubBean.selectedClub.nameClub}"/>
 
             <h:outputLabel value="Player First Name:" />
-            <h:inputText value="#{clubBean}" />
+            <h:inputText   value="#{clubBean.playerAdd.firstname}" />
 
             <h:outputLabel value="Player Last Name:" />
-            <h:inputText value="#{clubBean}" />
+            <h:inputText   value="#{clubBean.playerAdd.lastname}" />
 
             <h:outputLabel value="Player birthdate:" />
-            <h:inputText value="#{clubBean}" />
+            <h:inputText   value="#{clubBean.playerAdd.birthdate}" />
 
 
             <h:commandButton value="Add Player" action="#{clubBean.addNewPlayerToClub}" />
