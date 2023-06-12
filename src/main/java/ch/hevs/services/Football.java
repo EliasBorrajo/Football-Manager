@@ -20,6 +20,10 @@ public interface Football
     public void updateClub(Club club);
     Club getClubById(Long clubId);
 
+    List<Fan> getFans();
+
+    List<Player> getPlayersFromClubForFan(Long clubId);
+
     public boolean seedDB();
     // CLUB - Use Cases :
     // 1) MAJ infos du club

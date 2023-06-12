@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <h:outputLabel value="Fan Informations:" />
+            <br />
+
+            <h:panelGrid columns="5">
+                <h:outputText value="Select Fan: " />
+                <h:selectOneMenu value="#{clubBean.selectedFanName}" valueChangeListener="#{clubBean.updateSelectedFan}" onchange="submit()">
+                    <f:selectItems value="#{clubBean.fansNames}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedFan}">
+                <h:outputText value="Lastname: " />
+                <h:outputText value="#{clubBean.selectedFan.lastname}"/>
+                <h:outputText value="Firstname: " />
+                <h:outputText value="#{clubBean.selectedFan.firstname}"/>
+                <h:outputText value="Birthdate: " />
+                <h:outputText value="#{clubBean.selectedFan.birthdate}"/>
+                <h:outputText value="Country: " />
+                <h:outputText value="#{clubBean.selectedFan.country.nameCountry}"/>
+                <h:outputText value="Favorite club: " />
+                <h:outputText value="#{clubBean.selectedFan.fanOfClub.nameClub}"/>
+
+                <h:commandButton value="See players list for ${clubBean.selectedFan.fanOfClub.nameClub}" action="/Fan/fanPlayersList"></h:commandButton>
+            </h:panelGrid>
+
+
+
+            <h:commandButton value="Back" action="/welcomeBank"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

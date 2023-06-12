@@ -45,6 +45,20 @@ public class FootballBean implements Football
     }
 
 
+    @Override
+    public List<Fan> getFans() {
+        return em.createQuery("FROM Fan").getResultList();
+    }
+
+    @Override
+    public List<Player> getPlayersFromClubForFan(Long clubId){
+
+        return em.createQuery("From Player p WHERE p.playsForClub.id = :clubId")
+                .setParameter("clubId",clubId)
+                .getResultList();
+
+    }
+
 
     /**
      * Verify if database is initialized, and initialize it if not done yet, then populate it
@@ -246,6 +260,12 @@ public class FootballBean implements Football
             em.persist(player20);
             em.persist(player21);
             em.persist(player22);
+
+            Fan fan1 = new Fan("Theo","Clerc","24.08.2002",country3,"12.06.2023",chelsea);
+            Fan fan2 = new Fan("Elias","Borrajo","01.01.1998",country4,"12.06.2023",acmilan);
+
+            em.persist(fan1);
+            em.persist(fan2);
 
             em.flush(); // synchronise la base de données avec les objets persistants
 

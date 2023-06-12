@@ -9,7 +9,7 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
         <h:form>
-            <h:outputLabel value="Player Informations:" />
+            <h:outputLabel value="Player Update:" />
             <br />
 
             <h:panelGrid columns="5">
@@ -20,27 +20,30 @@
             </h:panelGrid>
             <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedPlayer}">
                 <h:outputText value="Lastname: " />
-                <h:outputText value="#{clubBean.selectedPlayer.lastname}"/>
+                <h:inputText value="#{clubBean.selectedPlayer.lastname}"/>
                 <h:outputText value="Firstname: " />
-                <h:outputText value="#{clubBean.selectedPlayer.firstname}"/>
+                <h:inputText value="#{clubBean.selectedPlayer.firstname}"/>
                 <h:outputText value="Birthdate: " />
-                <h:outputText value="#{clubBean.selectedPlayer.birthdate}"/>
+                <h:inputText value="#{clubBean.selectedPlayer.birthdate}"/>
                 <h:outputText value="Country: " />
                 <h:outputText value="#{clubBean.selectedPlayer.country.nameCountry}"/>
                 <h:outputText value="Club: " />
                 <h:outputText value="#{clubBean.selectedPlayer.playsForClub.nameClub}"/>
                 <h:outputText value="Position: " />
-                <h:outputText value="#{clubBean.selectedPlayer.positionPlayer}"/>
+                <h:inputText value="#{clubBean.selectedPlayer.positionPlayer}"/>
                 <h:outputText value="Number: " />
-                <h:outputText value="#{clubBean.selectedPlayer.number}"/>
+                <h:inputText value="#{clubBean.selectedPlayer.number}"/>
                 <h:outputText value="RightFooted: " />
-                <h:outputText value="#{clubBean.selectedPlayer.rightFooted}"/>
+                <h:inputText value="#{clubBean.selectedPlayer.rightFooted}"/>
                 <h:outputText value="Height: " />
-                <h:outputText value="#{clubBean.selectedPlayer.height}"/>
+                <h:inputText value="#{clubBean.selectedPlayer.height}"/>
                 <h:outputText value="Weight: " />
-                <h:outputText value="#{clubBean.selectedPlayer.weight}"/>
-                <h:commandButton value="Modify player informations" action="playerUpdate" />
+                <h:inputText value="#{clubBean.selectedPlayer.weight}"/>
             </h:panelGrid>
+            <h:commandButton value="Validate modifications" action="playerInfos" />
+
+
+
 
             <h:panelGrid columns="5">
                 <h:outputText value="clubs:" />
@@ -54,7 +57,7 @@
                     <f:selectItems value="#{clubBean.leagueNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>
-            <h:commandButton value="Back" action="welcomeBank"/>
+            <h:commandButton value="Back" action="/welcomeBank"/>
         </h:form>
     </ui:define>
 </ui:composition>
