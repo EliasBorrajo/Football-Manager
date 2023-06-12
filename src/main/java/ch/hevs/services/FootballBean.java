@@ -15,7 +15,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
-@RolesAllowed(value = {"manager", "fan", "player"})
+@RolesAllowed(value = {"manager", "Fan", "Player"})
 public class FootballBean implements Football
 {
     @PersistenceContext (name = "dbFootballPU", type= PersistenceContextType.TRANSACTION)

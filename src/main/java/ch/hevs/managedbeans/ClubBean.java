@@ -9,6 +9,7 @@ import ch.hevs.services.Football;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
