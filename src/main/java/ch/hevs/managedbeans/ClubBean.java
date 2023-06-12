@@ -1,7 +1,6 @@
 package ch.hevs.managedbeans;
 
 
-import ch.hevs.businessobject.Account;
 import ch.hevs.businessobject.Club;
 import ch.hevs.businessobject.League;
 import ch.hevs.businessobject.Player;
@@ -14,7 +13,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -39,6 +37,8 @@ public class ClubBean {
     private List<String> playerNames;          // Nécessaire pour le menu déroulant
     private String       selectedPlayerName;   // Nécessaire pour le menu déroulant
     private Player       playertoUpdate; // TODO Remove?
+    private Player       playerAdd;
+
 
 
     // Club
@@ -76,6 +76,7 @@ public class ClubBean {
         for (Player player : playersList) {
             this.playerNames.add(player.getLastname());
         }
+        playerAdd = new Player(); // Initialize new player for form in JSF page
 
         // get clubs
         this.clubs = football.getClubs();
