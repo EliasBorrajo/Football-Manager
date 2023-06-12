@@ -142,6 +142,8 @@ public class ClubBean {
         football.updateClub(selectedClub);
         FacesContext.getCurrentInstance()
                 .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club updated successfully", null));
+
+        initAttributes();
     }
 
     /**
@@ -227,6 +229,7 @@ public class ClubBean {
 
     }
 
+    // DROP DOWN LIST UPDATERS
     public void updateClubSelected(ValueChangeEvent event) {
         selectedClubName = (String) event.getNewValue();
         selectedClub = null; // Réinitialiser selectedClub
@@ -273,6 +276,8 @@ public class ClubBean {
         football.updatePlayer(selectedPlayer);
         // Réinitialiser la propriété selectedPlayer pour désélectionner le joueur
         selectedPlayer = null;
+
+        initAttributes();
     }
 
     //  G E T T E R S   &   S E T T E R S

@@ -13,11 +13,8 @@
          <br />
 
          <h:panelGrid columns="2">
-            <h:outputLabel value="Select Club:" />
-            <h:selectOneMenu value="#{clubBean.selectedClubName}">
-               <f:selectItems value="#{clubBean.clubNames}" />
-               <f:ajax listener="#{clubBean.updateClubSelected}" />
-            </h:selectOneMenu>
+            <h:outputLabel value="Selected Club:" />
+            <h:outputLabel value="#{clubBean.selectedClub.nameClub}"/>
 
             <h:outputLabel value="Select Player:" />
             <h:selectOneMenu value="#{clubBean.selectedPlayerName}">
