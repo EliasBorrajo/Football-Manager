@@ -21,6 +21,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JSF Managed Bean
+ * Controller for the different views of the application
+ */
 @ManagedBean // TODO : Verifier le @ManagedBean
 public class ClubBean {
     //  A T T R I B U T S
@@ -66,15 +70,19 @@ public class ClubBean {
         InitialContext ctx = new InitialContext();
         football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
 
-        messages = new ArrayList<>();
-        currentURL = "";
-
-
         // TODO : CHANGER
         // populate football database
         //loadData();
         football.populateDB();
 
+        initAttributes();
+
+    }
+
+    private void initAttributes()
+    {
+        messages = new ArrayList<>();
+        currentURL = "";
 
         //get players
         this.playersList = football.getPlayers();
@@ -106,7 +114,6 @@ public class ClubBean {
         playerAdd = new Player("Firstname", "Lastname","01.09.1997",
                 new Country("Switzerland"), "Attaquant",
                 1, false, 188.0, 76.8, clubs.get(1));
-
     }
 
 
@@ -189,6 +196,34 @@ public class ClubBean {
         // Afficher un message de succès
         FacesContext.getCurrentInstance()
                 .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club mis à jour avec succès", null));
+
+        initAttributes();
+    }
+
+    public void deleteClub()
+    {
+        if( selectedClub != null)
+        {
+            System.out.println("Selected Club tu delete : " + selectedClub.getNameClub());
+            boolean isSuccess = football.deleteClub(selectedClub);
+
+            if(isSuccess)
+                FacesContext.getCurrentInstance()
+                        .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club deleted successfully", null));
+            else
+                FacesContext.getCurrentInstance()
+                        .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Club deletion could not happen", null));
+
+            initAttributes();
+
+        }
+        else
+        {
+            FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No club selected", null));
+        }
+
+
     }
 
     public void updateClubSelected(ValueChangeEvent event) {

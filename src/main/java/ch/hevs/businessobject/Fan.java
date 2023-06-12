@@ -10,7 +10,7 @@ public class Fan extends Person
 
     // R E L A T I O N S
     // FAN |-0..1------1..1-> CLUB
-    @ManyToOne ( cascade = CascadeType.ALL)//( mappedBy = "fans" ) //  // TODO : ça bug "cannot find symbol" --> signifie que j'ai pas de players dans Club
+    @ManyToOne ( cascade = CascadeType.ALL)
     @JoinColumn( nullable = false ) // a fan must have a club he is fan of
     private Club fanOfClub;
 

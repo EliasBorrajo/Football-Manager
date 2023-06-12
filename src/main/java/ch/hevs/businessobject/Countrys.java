@@ -1,5 +1,6 @@
 package ch.hevs.businessobject;
 
+// TODO : DELETE ?
 public enum Countrys
 {
     FRANCE,

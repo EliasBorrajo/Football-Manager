@@ -21,11 +21,11 @@ public class Club {
     private Country country;
 
     // Club <-1..*------1..1-> League
-    @ManyToOne ( cascade = CascadeType.ALL)
+    @ManyToOne
     private League league;
 
     // Club <-1..1------1..*-> Player
-    @OneToMany(mappedBy = "playsForClub", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "playsForClub", cascade = CascadeType.REMOVE)
     private List<Player> players;
 
     // C O N S T R U C T O R S
