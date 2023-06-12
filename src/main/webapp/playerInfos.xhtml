@@ -42,10 +42,6 @@
                 <h:commandButton value="Modify player informations" action="playerUpdate" />
             </h:panelGrid>
 
-
-
-
-
             <h:panelGrid columns="5">
                 <h:outputText value="clubs:" />
                 <h:selectOneMenu>
@@ -58,6 +54,7 @@
                     <f:selectItems value="#{clubBean.leagueNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>
+            <h:commandButton value="Back" action="welcomeBank"/>
         </h:form>
     </ui:define>
 </ui:composition>

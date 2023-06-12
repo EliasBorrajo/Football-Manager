@@ -26,9 +26,9 @@
                 <h:outputText value="Birthdate: " />
                 <h:inputText value="#{clubBean.selectedPlayer.birthdate}"/>
                 <h:outputText value="Country: " />
-                <h:inputText value="#{clubBean.selectedPlayer.country.nameCountry}"/>
+                <h:outputText value="#{clubBean.selectedPlayer.country.nameCountry}"/>
                 <h:outputText value="Club: " />
-                <h:inputText value="#{clubBean.selectedPlayer.playsForClub.nameClub}"/>
+                <h:outputText value="#{clubBean.selectedPlayer.playsForClub.nameClub}"/>
                 <h:outputText value="Position: " />
                 <h:inputText value="#{clubBean.selectedPlayer.positionPlayer}"/>
                 <h:outputText value="Number: " />
@@ -57,6 +57,7 @@
                     <f:selectItems value="#{clubBean.leagueNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>
+            <h:commandButton value="Back" action="welcomeBank"/>
         </h:form>
     </ui:define>
 </ui:composition>

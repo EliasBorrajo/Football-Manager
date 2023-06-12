@@ -14,10 +14,12 @@
 
             <h:panelGrid columns="5">
                 <h:outputText value="Select league: " />
-                <h:selectOneMenu value="#{clubBean.selectedLeagueName}" valueChangeListener="#{clubBean.updateSelectedLeague}" onchange="submit()">
+                <h:selectOneMenu value="#{clubBean.selectedLeagueName}" valueChangeListener="#{clubBean.updateSelectedLeague}" >
+                    <!--onchange="submit()" -->
                     <f:selectItems value="#{clubBean.leagueNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>
+            <!--
             <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedLeague}">
                 <h:outputText value="League name: " />
                 <h:outputText value="#{clubBean.selectedLeague.nameLeague}"/>
@@ -25,15 +27,17 @@
                 <h:outputText value="#{clubBean.selectedLeague.country.nameCountry}"/>
                 <h:outputText value="Division: " />
                 <h:outputText value="#{clubBean.selectedLeague.division}"/>
-                <!--
+
                 <h:outputText value="Clubs: " />
                 <h:outputText value="#{clubBean.selectedLeague.clubs}"/>
-                -->
+
                 <h:outputText value="Clubs: " />
                 <ui:repeat value="#{clubBean.selectedLeague.clubs}" var="club">
                     <h:outputText value="#{club.nameClub}" />
                 </ui:repeat>
+
             </h:panelGrid>
+            -->
         </h:form>
     </ui:define>
 </ui:composition>
