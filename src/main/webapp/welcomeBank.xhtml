@@ -1,33 +1,39 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html">
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-        <h:outputLabel value="Welcome to the football encyclopaedia" style="display:block;"></h:outputLabel>
-        <br />
+        <h2>Welcome to the Football Encyclopedia</h2>
+
         <h:form>
-            <h:commandLink action="/Player/playerInfos" style="display:block;">
-                <h:outputText value="Players infos" />
-            </h:commandLink>
-            <h:commandLink action="/Fan/fanInfos" style="display:block;">
-                <h:outputText value="Fan infos" />
-            </h:commandLink>
-            <h:commandLink action="/League/leagueInfos" style="display:block;">
-                <h:outputText value="League infos" />
-            </h:commandLink>
-            <h:commandLink action="#{clubBean.showClub}" style="display:block;">
-                <h:outputText value="Show Clubs" />
-            </h:commandLink>
-            <h:commandButton value="populate FootballDB" action="#{clubBean.populateDB()}" style="display:block;"></h:commandButton>
-            <h:commandButton value="Reset DB" action="#{clubBean.initializeDB}" style="display:block;"></h:commandButton>
+            <h:panelGrid columns="1" cellpadding="5">
+                <h:commandLink action="/Player/playerInfos">
+                    <h:outputText value="Players Info" />
+                </h:commandLink>
 
+                <h:commandLink action="/Fan/fanInfos">
+                    <h:outputText value="Fan Info" />
+                </h:commandLink>
 
+                <h:commandLink action="/League/leagueInfos">
+                    <h:outputText value="League Info" />
+                </h:commandLink>
+
+                <h:commandLink action="#{clubBean.showClub}">
+                    <h:outputText value="Show Clubs" />
+                </h:commandLink>
+            </h:panelGrid>
+
+            <br />
+
+            <h:panelGroup>
+                <h:commandButton value="Populate Football DB" action="#{clubBean.populateDB()}" styleClass="btn btn-primary" />
+                <h:commandButton value="Reset DB" action="#{clubBean.initializeDB}" styleClass="btn btn-danger" />
+            </h:panelGroup>
         </h:form>
     </ui:define>
 </ui:composition>
+
 </html>
