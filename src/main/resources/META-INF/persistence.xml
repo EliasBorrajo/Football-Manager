@@ -13,8 +13,6 @@
 		<jta-data-source>java:/labsDS</jta-data-source>
 
 		<!-- Business Objects to be persisted -->
-		<class>ch.hevs.businessobject.toRemove.Client</class>
-		<class>ch.hevs.businessobject.toRemove.Account</class>
 		<class>ch.hevs.businessobject.Person</class>
 		<class>ch.hevs.businessobject.Club</class>
 		<class>ch.hevs.businessobject.Country</class>

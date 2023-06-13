@@ -19,14 +19,6 @@
 		<display-name>welcomeBank.xhtml</display-name>
 		<from-view-id>/welcomeBank.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>transferForm</from-outcome>
-			<to-view-id>/transferForm.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>welcomeBank.xhtml</display-name>
-		<from-view-id>/welcomeBank.xhtml</from-view-id>
-		<navigation-case>
 			<from-outcome>playerInfos</from-outcome>
 			<to-view-id>/Player/playerInfos.xhtml</to-view-id>
 		</navigation-case>
@@ -53,14 +45,6 @@
 		<navigation-case>
 			<from-outcome>#{clubBean.updatePlayer}</from-outcome>
 			<to-view-id>/Player/playerInfos.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>transferForm.xhtml</display-name>
-		<from-view-id>/transferForm.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>#{transferBean.performTransfer}</from-outcome>
-			<to-view-id>/showTransferResult.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

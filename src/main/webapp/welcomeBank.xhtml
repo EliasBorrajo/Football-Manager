@@ -11,9 +11,6 @@
         <h:outputLabel value="Welcome to the football encyclopaedia" style="display:block;"></h:outputLabel>
         <br />
         <h:form>
-            <h:commandLink action="transferForm" style="display:block;">
-                <h:outputText value="Start new transfer" />
-            </h:commandLink>
             <h:commandLink action="/Player/playerInfos" style="display:block;">
                 <h:outputText value="Players infos" />
             </h:commandLink>
@@ -22,9 +19,6 @@
             </h:commandLink>
             <h:commandLink action="/League/leagueInfos" style="display:block;">
                 <h:outputText value="League infos" />
-            </h:commandLink>
-            <h:commandLink action="/Player/showAllPlayers" style="display:block;">
-                <h:outputText value="See all players" />
             </h:commandLink>
             <h:commandLink action="#{clubBean.showClub}" style="display:block;">
                 <h:outputText value="Show Clubs" />
