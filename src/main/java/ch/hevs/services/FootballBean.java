@@ -108,6 +108,7 @@ public class FootballBean implements Football
 
             return true;
         } catch (Exception e) {
+            System.out.println("Database reset failed." + e.getMessage());
             return false;
         }
     }

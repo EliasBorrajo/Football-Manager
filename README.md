@@ -7,11 +7,12 @@
 
 ## Utilisateurs / Groupes / Mots de passe
 
-| Utilisateur | Groupe  | Mot de passe |
-|-------------|---------|--------------|
-| Elias       | Manager | Elias        |
-| Theo        | Player  | Theo         |
-| Eric        | Fan     | Eric         |
+| Utilisateur | Groupe                | Mot de passe |
+|-------------|-----------------------|--------------|
+| Elias       | Manager               | Elias        |
+| Theo        | Player                | Theo         |
+| Eric        | Fan                   | Eric         |
+| Admin       | Manager, Player, Fan  | Admin        |
 
 ## Optional - Configuration de la base de données HSQLDB - Lancement automatique
 On a re-crée la database HSQL pour qu'elle se lance automatiquement au démarrage de l'application.

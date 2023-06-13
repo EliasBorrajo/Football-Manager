@@ -51,21 +51,6 @@ public class createDB {
         }
 
 
-// Pas besoin car BTN graphique dans l'application pour populate la DB
-//        Football football;
-//        try {
-//            System.out.println("getting service bean");
-//            InitialContext ctx = new InitialContext();
-//            football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
-//            System.out.println("service bean got");
-//
-//            System.out.println("Populating database...");
-//            football.seedDB();
-//            System.out.println("Database populated.");
-//
-//        } catch (Exception e) {
-//            throw new FootballException("Impossible to get the FootballBean to populate the DB", e);
-//        }
 
 
     }
