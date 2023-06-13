@@ -78,8 +78,8 @@ public class ClubBean {
 
         // TODO : CHANGER
         // populate football database
-        //loadData();
-        football.populateDB();
+        //football.populateDB();
+        populateDB();
 
         initAttributes();
 
@@ -149,17 +149,19 @@ public class ClubBean {
         System.out.println("populate football database...");
         System.out.println("POPULATE : " + football.seedDB());
     }
-    /**
-     * Load data into the database if it is empty
-     */
-    private void loadData()
+    public void resetDB()
     {
-        football.seedDB();
+        // populate football database
+        System.out.println("reset football database...");
+        System.out.println("RESET : " + football.resetDatabase() );
+
+        System.out.println("DB RESET, NOW POPULATE... " + football.seedDB());
+        System.out.println("DB POPULATED");
+
+        initAttributes();
+
     }
-    public boolean verifyDB()
-    {
-        return false;
-    }
+
 
     public void saveClub()
     {
@@ -341,46 +343,6 @@ public class ClubBean {
     }
 
 
-//    public void showClub()
-//    {
-//        if (football.verifyManagerRole())
-//        {
-//            // Role is allowed to go to the page requested
-//            try
-//            {
-//                // Redirection vers la page des clubs
-//                // Récupérer l'instance de ExternalContext
-//                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//                externalContext.redirect("showClubInfos.xhtml");
-//
-//            } catch (IOException e) {
-//
-//                // Gérer les exceptions si la redirection échoue
-//                throw new FootballException("Erreur de redirection vers la page des clubs" + e.getMessage(), e.getCause());
-//            }
-//        }
-//        else {
-//            try {
-//
-//                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//                externalContext.redirect("accessDenied.xhtml");
-//
-//            } catch (IOException e) {
-//
-//                try {
-//                    System.out.println("TRY 2 ");
-//                    FacesContext.getCurrentInstance().getExternalContext().redirect("/accessDenied.xhtml");
-//
-//                } catch (IOException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//
-//                throw new FootballException("Erreur de redirection vers la ACCES DENIED" + e.getMessage(), e.getCause());
-//            }
-//        }
-//
-//
-//    }
 
 
     //  G E T T E R S   &   S E T T E R S

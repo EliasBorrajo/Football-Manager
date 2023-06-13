@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
+import javax.security.auth.login.LoginException;
 import java.util.List;
 
 @Stateless
@@ -58,6 +59,8 @@ public class FootballBean implements Football
         try {
             Club clubToRemove = em.merge(club);
 
+
+
             em.remove(clubToRemove);
             System.out.println("ENTITY REMOVED");
             return true;
@@ -66,6 +69,8 @@ public class FootballBean implements Football
         }
 
     }
+
+
 
     @Override
     public List<Fan> getFans() {
@@ -82,82 +87,31 @@ public class FootballBean implements Football
     }
 
 
-    /**
-     * Verify if database is initialized, and initialize it if not done yet, then populate it
-     */
-    //@TransactionAttribute( TransactionAttributeType.REQUIRED ) // Declarative demarcation JTA (Java Transaction API) // TODO
-    public boolean populateDB()
-    {
-        System.out.println("Populating database...");
-        if (!isDatabaseInitialized())
-        {
-            System.out.println("Database is not initialized. Initializing...");
-
-            throw new FootballException("Database is not initialized. run script \"startDB.bat\" to initialize it.");
-            //initializeDatabase();
-            //System.out.println("Database initialized.");
-        }
-
-        System.out.println("Seeding database...");
-        seedDB();
-        System.out.println("Database seeded.");
-        return true;
-    }
-
-    /**
-     * Check if database is initialized by counting the number of rows in each table of the DB
-     * @return : true if database is initialized, false if not
-     */
-    private boolean isDatabaseInitialized()
-    {
-        System.out.println("Checking if database is initialized...");
-        try {
-            Query queryClub     = em.createQuery("SELECT COUNT(*) FROM Club");
-            queryClub.getSingleResult();
-
-            Query queryPlayer   = em.createQuery("SELECT COUNT(*) FROM Player");
-            queryPlayer.getSingleResult();
-
-            Query queryFan      = em.createQuery("SELECT COUNT(*) FROM Fan");
-            queryFan.getSingleResult();
-
-            System.out.println("Database is initialized.");
-            return true;
-        } catch (Exception e) // If no result found in database, an exception is thrown
-        {
-            System.err.println("Database is not initialized." + e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Initialize database by starting HSQLDB server
-     * no need to delete database before initializing it, as it is done automatically by HSQLDB server (Singleton)
-     * @throws FootballException : if an error occurs while initializing database
-     */
-    private void initializeDatabase()
-    {
-
-        try {
-            // TODO : On peut pas créer la DB après avoir démarré le serveur, il faut la créer avant
-            System.out.println("Starting database...");
-            HSQLDBServer.getInstance().start();
-            System.out.println("Database started succesfully.");
-        }catch (Exception e)
-        {
-            System.err.println("Error while initializing database : " + e.getMessage());
-            throw new FootballException("Database is not initialized. run script \"startDB.bat\" to initialize it.");
-        }
-
-    }
-
-
-
     @Override
     public void updatePlayer(Player player) {
         em.merge(player);
         em.flush();
     }
+
+
+    public boolean resetDatabase() {
+        System.out.println("Resetting the database...");
+
+        System.out.println("Deleting all data from the database...");
+        // Supprimer toutes les tables de la base de données
+        try {
+            em.createNativeQuery("DELETE FROM Fan").executeUpdate();
+            em.createNativeQuery("DELETE FROM Player").executeUpdate();
+            em.createNativeQuery("DELETE FROM Club").executeUpdate();
+            em.createNativeQuery("DELETE FROM League").executeUpdate();
+            System.out.println("Database reset complete.");
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     @Override
     public boolean verifyManagerRole() {
@@ -303,7 +257,7 @@ public class FootballBean implements Football
             em.persist(player21);
             em.persist(player22);
 
-            Fan fan1 = new Fan("Theo","Clerc","24.08.2002",country3,"12.06.2023",chelsea);
+            Fan fan1 = new Fan("Theo", "Clerc",  "24.08.2002",country3,"12.06.2023",chelsea);
             Fan fan2 = new Fan("Elias","Borrajo","01.01.1998",country4,"12.06.2023",acmilan);
 
             em.persist(fan1);
