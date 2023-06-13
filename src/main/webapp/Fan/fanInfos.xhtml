@@ -27,13 +27,16 @@
                 <h:outputText value="#{clubBean.selectedFan.birthdate}"/>
                 <h:outputText value="Country: " />
                 <h:outputText value="#{clubBean.selectedFan.country.nameCountry}"/>
-                <h:outputText value="Favorite club: " />
+                <h:outputText value="Favourite club: " />
                 <h:outputText value="#{clubBean.selectedFan.fanOfClub.nameClub}"/>
 
-                <h:commandButton value="See players list for ${clubBean.selectedFan.fanOfClub.nameClub}" action="/Fan/fanPlayersList"></h:commandButton>
+                <h:panelGrid columns="5">
+                    <h:outputText value="List of players for ${clubBean.selectedFan.fanOfClub.nameClub} " />
+                    <h:selectOneMenu value="#{clubBean.selectedPlayerFromClubName}">
+                        <f:selectItems value="#{clubBean.playerFromClubNames}" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
             </h:panelGrid>
-
-
 
             <h:commandButton value="Back" action="/welcomeBank"/>
         </h:form>

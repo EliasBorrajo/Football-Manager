@@ -121,13 +121,14 @@ public class ClubBean {
         }
 
         //get list of players for a defined club
+        /**
         Long test = 13L;
                 this.playersFromClubList = football.getPlayersFromClubForFan(test);
                 this.playerFromClubNames = new ArrayList<>();
                 for (Player player : playersFromClubList) {
                     this.playerFromClubNames.add(player.getLastname());
                 }
-
+        **/
 
 
 
@@ -437,7 +438,17 @@ public class ClubBean {
     }
 
     public Fan getSelectedFan() {
+        if(selectedFan!=null){
+            this.playersFromClubList = football.getPlayersFromClubForFan(this.selectedFan.getFanOfClub().getId());
+            this.playerFromClubNames = new ArrayList<>();
+            for (Player player : playersFromClubList) {
+                this.playerFromClubNames.add(player.getLastname());
+            }
+        }else{
+        }
+
         return selectedFan;
+
     }
 
     public void setSelectedFan(Fan selectedFan) {
@@ -453,7 +464,7 @@ public class ClubBean {
     }
 
     public String getSelectedFanName() {
-        System.out.println("Selected Fan: "+selectedFanName);
+        System.out.println("Get Selected Fan name: "+selectedFanName);
         return selectedFanName;
     }
 
