@@ -6,7 +6,7 @@ import java.util.Date;
 public class Fan extends Person
 {
     // A T T R I B U T S
-    private Date subscriptionDate;
+    private String subscriptionDate;
 
     // R E L A T I O N S
     // FAN |-0..1------1..1-> CLUB
@@ -25,20 +25,21 @@ public class Fan extends Person
     }
     public Fan(String firstname, String lastname,
                String birthdate, Country country,
-               Date subscriptionDate)
+               String subscriptionDate, Club fanOfClub)
     {
         super(firstname, lastname, birthdate, country);
         this.subscriptionDate = subscriptionDate;
+        this.fanOfClub = fanOfClub;
     }
 
 
     // G E T T E R S   &   S E T T E R S
     // subscriptionDate
-    public Date getSubscriptionDate()
+    public String getSubscriptionDate()
     {
         return subscriptionDate;
     }
-    public void setSubscriptionDate(Date subscriptionDate)
+    public void setSubscriptionDate(String subscriptionDate)
     {
         this.subscriptionDate = subscriptionDate;
     }

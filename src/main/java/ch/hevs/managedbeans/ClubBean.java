@@ -1,10 +1,7 @@
 package ch.hevs.managedbeans;
 
 
-import ch.hevs.businessobject.Club;
-import ch.hevs.businessobject.Country;
-import ch.hevs.businessobject.League;
-import ch.hevs.businessobject.Player;
+import ch.hevs.businessobject.*;
 import ch.hevs.services.Football;
 import ch.hevs.utils.exception.FootballException;
 
@@ -44,6 +41,9 @@ public class ClubBean {
     private String       selectedPlayerName;   // Nécessaire pour le menu déroulant
     private Player       playertoUpdate; // TODO Remove?
     private Player       playerAdd;
+    private List<Player> playersFromClubList;
+    private List<String> playerFromClubNames;
+    private String       selectedPlayerFromClubName;
 
 
     // Club
@@ -58,6 +58,12 @@ public class ClubBean {
     private String selectedLeagueName;
     private League selectedLeague;
     private List<League> leaguesList;
+
+    //Fan
+    private List<Fan> fansList;
+    private Fan       selectedFan;
+    private List<String> fansNames;          // Nécessaire pour le menu déroulant
+    private String       selectedFanName;
 
 
 
@@ -106,6 +112,26 @@ public class ClubBean {
             this.leagueNames.add(league.getNameLeague());
         }
 
+
+        // get fans
+        this.fansList = football.getFans();
+        this.fansNames = new ArrayList<String>();
+        for(Fan fan : fansList){
+            this.fansNames.add(fan.getLastname());
+        }
+
+        //get list of players for a defined club
+        /**
+        Long test = 13L;
+                this.playersFromClubList = football.getPlayersFromClubForFan(test);
+                this.playerFromClubNames = new ArrayList<>();
+                for (Player player : playersFromClubList) {
+                    this.playerFromClubNames.add(player.getLastname());
+                }
+        **/
+
+
+
         // TODO : REMOVE ?
         List<Player> players = new ArrayList<Player>();
         List<Player> leagues = new ArrayList<Player>();
@@ -115,7 +141,6 @@ public class ClubBean {
                 new Country("Switzerland"), "Attaquant",
                 1, false, 188.0, 76.8, clubs.get(1));
     }
-
 
     //  M E T H O D S
     public void populateDB()
@@ -268,6 +293,19 @@ public class ClubBean {
         }
     }
 
+    public void updateSelectedFan(ValueChangeEvent event) {
+        selectedFanName = (String) event.getNewValue();
+        selectedFan = null; // Réinitialiser selectedFan
+
+        for (Fan fan : fansList) {
+            if (fan.getLastname().equals(selectedFanName)) {
+                selectedFan = fan;
+                break;
+            }
+        }
+    }
+
+
     public void updatePlayer() {
         // Mettre à jour le joueur dans la base de données avec les nouvelles informations
         football.updatePlayer(selectedPlayer);
@@ -377,6 +415,7 @@ public class ClubBean {
         this.playerNames = playerNames;
     }
     public String getSelectedPlayerName() {
+        System.out.println("Get selected player : "+selectedPlayerName);
         return selectedPlayerName;
     }
     public void setSelectedPlayerName(String selectedPlayerName) {
@@ -460,5 +499,72 @@ public class ClubBean {
 
     public void setLeaguesList(List<League> leaguesList) {
         this.leaguesList = leaguesList;
+    }
+
+    public List<Fan> getFansList() {
+        return fansList;
+    }
+
+    public void setFansList(List<Fan> fansList) {
+        this.fansList = fansList;
+    }
+
+    public Fan getSelectedFan() {
+        if(selectedFan!=null){
+            this.playersFromClubList = football.getPlayersFromClubForFan(this.selectedFan.getFanOfClub().getId());
+            this.playerFromClubNames = new ArrayList<>();
+            for (Player player : playersFromClubList) {
+                this.playerFromClubNames.add(player.getLastname());
+            }
+        }else{
+        }
+
+        return selectedFan;
+
+    }
+
+    public void setSelectedFan(Fan selectedFan) {
+        this.selectedFan = selectedFan;
+    }
+
+    public List<String> getFansNames() {
+        return fansNames;
+    }
+
+    public void setFansNames(List<String> fansNames) {
+        this.fansNames = fansNames;
+    }
+
+    public String getSelectedFanName() {
+        System.out.println("Get Selected Fan name: "+selectedFanName);
+        return selectedFanName;
+    }
+
+    public void setSelectedFanName(String selectedFanName) {
+        this.selectedFanName = selectedFanName;
+    }
+
+    public List<Player> getPlayersFromClubList() {
+        return playersFromClubList;
+    }
+
+    public void setPlayersFromClubList(List<Player> playersFromClubList) {
+        this.playersFromClubList = playersFromClubList;
+    }
+
+    public List<String> getPlayerFromClubNames() {
+        return playerFromClubNames;
+    }
+
+    public void setPlayerFromClubNames(List<String> playerFromClubNames) {
+        this.playerFromClubNames = playerFromClubNames;
+    }
+
+    public String getSelectedPlayerFromClubName() {
+        return selectedPlayerFromClubName;
+    }
+
+    public void setSelectedPlayerFromClubName(String selectedPlayerFromClubName) {
+        this.selectedPlayerFromClubName = selectedPlayerFromClubName;
     }
 }

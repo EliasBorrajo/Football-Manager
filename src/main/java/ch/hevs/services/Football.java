@@ -19,6 +19,10 @@ public interface Football
     Club getClubById(Long clubId);
     boolean deleteClub(Club club);
 
+    List<Fan> getFans();
+
+    List<Player> getPlayersFromClubForFan(Long clubId);
+
     public boolean seedDB();
 
     boolean verifyManagerRole();
