@@ -53,17 +53,17 @@ public class ClubBean {
     private String       selectedClubName;  // Nécessaire pour le menu déroulant
 
 
-    // League
-    private List<String> leagueNames;
-    private String selectedLeagueName;
-    private League selectedLeague;
-    private List<League> leaguesList;
-
     //Fan
     private List<Fan> fansList;
     private Fan       selectedFan;
     private List<String> fansNames;          // Nécessaire pour le menu déroulant
     private String       selectedFanName;
+
+    //League
+    private List<League> leaguesList;
+    private League       selectedLeague;
+    private List<String> leaguesNames;          // Nécessaire pour le menu déroulant
+    private String       selectedLeagueName;
 
 
 
@@ -105,14 +105,6 @@ public class ClubBean {
             this.clubNames.add(club.getNameClub());
         }
 
-        // get leagues
-        this.leaguesList = football.getLeagues();
-        this.leagueNames = new ArrayList<String>();
-        for(League league : leaguesList) {
-            this.leagueNames.add(league.getNameLeague());
-        }
-
-
         // get fans
         this.fansList = football.getFans();
         this.fansNames = new ArrayList<String>();
@@ -120,17 +112,12 @@ public class ClubBean {
             this.fansNames.add(fan.getLastname());
         }
 
-        //get list of players for a defined club
-        /**
-        Long test = 13L;
-                this.playersFromClubList = football.getPlayersFromClubForFan(test);
-                this.playerFromClubNames = new ArrayList<>();
-                for (Player player : playersFromClubList) {
-                    this.playerFromClubNames.add(player.getLastname());
-                }
-        **/
-
-
+        //get leagues
+        this.leaguesList = football.getLeagues();
+        this.leaguesNames = new ArrayList<String>();
+        for(League league : leaguesList){
+            this.leaguesNames.add(league.getNameLeague());
+        }
 
         // TODO : REMOVE ?
         List<Player> players = new ArrayList<Player>();
@@ -281,18 +268,6 @@ public class ClubBean {
         }
     }
 
-    public void updateSelectedLeague(ValueChangeEvent event) {
-        selectedLeagueName = (String) event.getNewValue();
-        selectedLeague = null; // Réinitialiser selectedPlayer
-
-        for (League league : leaguesList) {
-            if (league.getNameLeague().equals(selectedLeagueName)) {
-                selectedLeague = league;
-                break;
-            }
-        }
-    }
-
     public void updateSelectedFan(ValueChangeEvent event) {
         selectedFanName = (String) event.getNewValue();
         selectedFan = null; // Réinitialiser selectedFan
@@ -305,12 +280,59 @@ public class ClubBean {
         }
     }
 
+    public void updateSelectedLeague(ValueChangeEvent event) {
+        selectedLeagueName = (String) event.getNewValue();
+        selectedLeague = null; // Réinitialiser selectedLeague
+
+        for (League league : leaguesList) {
+            if (league.getNameLeague().equals(selectedLeagueName)) {
+                selectedLeague = league;
+                break;
+            }
+        }
+    }
+
 
     public void updatePlayer() {
         // Mettre à jour le joueur dans la base de données avec les nouvelles informations
         football.updatePlayer(selectedPlayer);
         // Réinitialiser la propriété selectedPlayer pour désélectionner le joueur
         selectedPlayer = null;
+
+        initAttributes();
+    }
+
+    public void updatePlayerInfos()
+    {
+        // Récupérer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
+        UIComponent component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:positionPlayerId");
+        String positionPlayer = ((UIInput) component).getValue().toString();
+        selectedPlayer.setPositionPlayer(positionPlayer);
+
+        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:numberId");
+        String numberValue = ((UIInput) component).getValue().toString();
+        int number = Integer.parseInt(numberValue);
+        selectedPlayer.setNumber(number);
+
+        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:rightFootedId");
+        boolean rightFooted = Boolean.parseBoolean(((UIInput) component).getValue().toString());
+        selectedPlayer.setRightFooted(rightFooted);
+
+        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:heightId");
+        double height = Double.parseDouble(((UIInput) component).getValue().toString());
+        selectedPlayer.setHeight(height);
+
+        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:weightId");
+        double weight = Double.parseDouble(((UIInput) component).getValue().toString());
+        selectedPlayer.setWeight(weight);
+
+
+        // Effectuer la mise à jour des informations du club dans la base de données
+        football.updatePlayer(selectedPlayer);
+
+        // Afficher un message de succès
+        FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Player mis à jour avec succès", null));
 
         initAttributes();
     }
@@ -463,42 +485,11 @@ public class ClubBean {
     public void setClubNames(List<String> clubNames) {
         this.clubNames = clubNames;
     }
-    public List<String> getLeagueNames() {
-        return leagueNames;
-    }
-    public void setLeagueNames(List<String> leagueNames) {
-        this.leagueNames = leagueNames;
-    }
     public Player getPlayerAdd() {
         return playerAdd;
     }
     public void setPlayerAdd(Player playerAdd) {
         this.playerAdd = playerAdd;
-    }
-
-    public String getSelectedLeagueName() {
-        System.out.println("Get name league: "+selectedLeagueName);
-        return selectedLeagueName;
-    }
-
-    public void setSelectedLeagueName(String selectedLeagueName) {
-        this.selectedLeagueName = selectedLeagueName;
-    }
-
-    public League getSelectedLeague() {
-        return selectedLeague;
-    }
-
-    public void setSelectedLeague(League selectedLeague) {
-        this.selectedLeague = selectedLeague;
-    }
-
-    public List<League> getLeaguesList() {
-        return leaguesList;
-    }
-
-    public void setLeaguesList(List<League> leaguesList) {
-        this.leaguesList = leaguesList;
     }
 
     public List<Fan> getFansList() {
@@ -567,4 +558,38 @@ public class ClubBean {
     public void setSelectedPlayerFromClubName(String selectedPlayerFromClubName) {
         this.selectedPlayerFromClubName = selectedPlayerFromClubName;
     }
+
+    public List<League> getLeaguesList() {
+        return leaguesList;
+    }
+
+    public void setLeaguesList(List<League> leaguesList) {
+        this.leaguesList = leaguesList;
+    }
+
+    public League getSelectedLeague() {
+        return selectedLeague;
+    }
+
+    public void setSelectedLeague(League selectedLeague) {
+        this.selectedLeague = selectedLeague;
+    }
+
+    public List<String> getLeaguesNames() {
+        return leaguesNames;
+    }
+
+    public void setLeaguesNames(List<String> leaguesNames) {
+        this.leaguesNames = leaguesNames;
+    }
+
+    public String getSelectedLeagueName() {
+        return selectedLeagueName;
+    }
+
+    public void setSelectedLeagueName(String selectedLeagueName) {
+        this.selectedLeagueName = selectedLeagueName;
+    }
+
+
 }

@@ -55,8 +55,11 @@ public class FootballBean implements Football
 
     @Override
     public boolean deleteClub(Club club) {
+
+        /**
         try {
             Club clubToRemove = em.merge(club);
+            //Supprimer les fans et ensuite supprimer le club
 
             em.remove(clubToRemove);
             System.out.println("ENTITY REMOVED");
@@ -64,7 +67,28 @@ public class FootballBean implements Football
         } catch (Exception e) {
             return false;
         }
+        **/
 
+       try {
+            // Supprimer les fans associés au club
+           Club clubtoRemove = em.merge(club);
+           List<Fan> fans = em.createQuery("FROM Fan f WHERE f.fanOfClub = :club")
+                    .setParameter("club", clubtoRemove)
+                    .getResultList();
+
+            for (Fan fan : fans) {
+                em.remove(fan);
+            }
+
+            // Supprimer le club lui-même
+            em.remove(clubtoRemove);
+
+            System.out.println("Club and associated fans deleted successfully.");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Failed to delete club and associated fans: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -156,7 +180,7 @@ public class FootballBean implements Football
     @Override
     public void updatePlayer(Player player) {
         em.merge(player);
-        em.flush();
+        //em.flush();
     }
 
     @Override
