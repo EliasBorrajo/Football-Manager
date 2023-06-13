@@ -9,8 +9,9 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
         <h:form>
-            <h:outputLabel value="Fan Informations:" />
-            <br />
+            <h:outputLabel value="Fan Informations:" style="font-weight: bold;" />
+
+            <br/><br/>
 
             <h:panelGrid columns="5">
                 <h:outputText value="Select Fan: " />
@@ -18,24 +19,29 @@
                     <f:selectItems value="#{clubBean.fansNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>
-            <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedFan}">
-                <h:outputText value="Lastname: " />
-                <h:outputText value="#{clubBean.selectedFan.lastname}"/>
-                <h:outputText value="Firstname: " />
-                <h:outputText value="#{clubBean.selectedFan.firstname}"/>
-                <h:outputText value="Birthdate: " />
-                <h:outputText value="#{clubBean.selectedFan.birthdate}"/>
-                <h:outputText value="Country: " />
-                <h:outputText value="#{clubBean.selectedFan.country.nameCountry}"/>
-                <h:outputText value="Favourite club: " />
-                <h:outputText value="#{clubBean.selectedFan.fanOfClub.nameClub}"/>
 
-                <h:panelGrid columns="5">
-                    <h:outputText value="List of players for ${clubBean.selectedFan.fanOfClub.nameClub} " />
-                    <h:selectOneMenu value="#{clubBean.selectedPlayerFromClubName}">
-                        <f:selectItems value="#{clubBean.playerFromClubNames}" />
-                    </h:selectOneMenu>
-                </h:panelGrid>
+            <br/>
+
+            <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedFan}">
+                <h:outputText value="Lastname: " style="font-weight: bold;"/>
+                <h:outputText value="#{clubBean.selectedFan.lastname}"/>
+                <h:outputText value="Firstname: " style="font-weight: bold;"/>
+                <h:outputText value="#{clubBean.selectedFan.firstname}"/>
+                <h:outputText value="Birthdate: " style="font-weight: bold;"/>
+                <h:outputText value="#{clubBean.selectedFan.birthdate}"/>
+                <h:outputText value="Country: " style="font-weight: bold;"/>
+                <h:outputText value="#{clubBean.selectedFan.country.nameCountry}"/>
+                <h:outputText value="Favourite club: " style="font-weight: bold;"/>
+                <h:outputText value="#{clubBean.selectedFan.fanOfClub.nameClub}"/>
+            </h:panelGrid>
+
+            <br/>
+
+            <h:panelGrid columns="5" rendered="#{not empty clubBean.selectedFan}">
+                <h:outputText value="List of players for ${clubBean.selectedFan.fanOfClub.nameClub}"/>
+                <h:selectOneMenu value="#{clubBean.selectedPlayerFromClubName}">
+                    <f:selectItems value="#{clubBean.playerFromClubNames}" />
+                </h:selectOneMenu>
             </h:panelGrid>
 
             <br />

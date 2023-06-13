@@ -9,20 +9,25 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
         <h:form>
-            <h:outputLabel value="League informations: " />
-            <br />
+            <h:outputLabel value="League informations: " style="font-weight: bold;"/>
+
+            <br /><br />
+
             <h:panelGrid columns="5">
                 <h:outputText value="Select League: " />
                 <h:selectOneMenu value="#{clubBean.selectedLeagueName}" valueChangeListener="#{clubBean.updateSelectedLeague}" onchange="submit()">
                     <f:selectItems value="#{clubBean.leaguesNames}" />
                 </h:selectOneMenu>
             </h:panelGrid>
+
+            <br/>
+
             <h:panelGrid columns="2" rendered="#{not empty clubBean.selectedLeague}">
-                <h:outputText value="League name: " />
+                <h:outputText value="League name: " style="font-weight: bold;"/>
                 <h:outputText value="#{clubBean.selectedLeague.nameLeague}"/>
-                <h:outputText value="Country name: " />
+                <h:outputText value="Country name: " style="font-weight: bold;"/>
                 <h:outputText value="#{clubBean.selectedLeague.country.nameCountry}"/>
-                <h:outputText value="Division: " />
+                <h:outputText value="Division: " style="font-weight: bold;"/>
                 <h:outputText value="#{clubBean.selectedLeague.division}"/>
             </h:panelGrid>
 
