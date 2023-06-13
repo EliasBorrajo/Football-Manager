@@ -76,17 +76,15 @@ public class ClubBean {
         InitialContext ctx = new InitialContext();
         football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
 
-        // TODO : CHANGER
-        // populate football database
-        //loadData();
-        football.populateDB();
-
-        initAttributes();
-
+//        populateDB();
+//
+//        initAttributes();
+        initializeDB(); // Initial DB population && Reset si on change de User
     }
 
     private void initAttributes()
     {
+        System.out.println("I N I T    A T T R I B U T E S");
         messages = new ArrayList<>();
         currentURL = "";
 
@@ -136,26 +134,23 @@ public class ClubBean {
         System.out.println("populate football database...");
         System.out.println("POPULATE : " + football.seedDB());
     }
-    /**
-     * Load data into the database if it is empty
-     */
-    private void loadData()
-    {
-        football.seedDB();
-    }
-    public boolean verifyDB()
-    {
-        return false;
-    }
 
-    public void saveClub()
+    /**
+     * Reset DB and populate it again with the initial data set
+     * Used when changing user (manager, player, fan)
+     * Used initially to populate the DB with the initial data set (seedDB)
+     */
+    public void initializeDB()
     {
-        System.out.println("Selected Club tu update : " + selectedClub.getNameClub());
-        football.updateClub(selectedClub);
-        FacesContext.getCurrentInstance()
-                .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club updated successfully", null));
+        // populate football database
+        System.out.println("reset football database...");
+        System.out.println("RESET : " + football.resetDatabase() );
+
+        System.out.println("DB RESET, NOW POPULATE... " + football.seedDB());
+        System.out.println("DB POPULATED");
 
         initAttributes();
+
     }
 
     /**
@@ -201,7 +196,6 @@ public class ClubBean {
 //        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:countryNameId");
 //        String countryName = ((UIInput) component).getValue().toString();
 //        selectedClub.getCountry().setNameCountry(countryName );
-
 
 
         // Effectuer la mise à jour des informations du club dans la base de données
@@ -363,46 +357,6 @@ public class ClubBean {
     }
 
 
-//    public void showClub()
-//    {
-//        if (football.verifyManagerRole())
-//        {
-//            // Role is allowed to go to the page requested
-//            try
-//            {
-//                // Redirection vers la page des clubs
-//                // Récupérer l'instance de ExternalContext
-//                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//                externalContext.redirect("showClubInfos.xhtml");
-//
-//            } catch (IOException e) {
-//
-//                // Gérer les exceptions si la redirection échoue
-//                throw new FootballException("Erreur de redirection vers la page des clubs" + e.getMessage(), e.getCause());
-//            }
-//        }
-//        else {
-//            try {
-//
-//                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//                externalContext.redirect("accessDenied.xhtml");
-//
-//            } catch (IOException e) {
-//
-//                try {
-//                    System.out.println("TRY 2 ");
-//                    FacesContext.getCurrentInstance().getExternalContext().redirect("/accessDenied.xhtml");
-//
-//                } catch (IOException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//
-//                throw new FootballException("Erreur de redirection vers la ACCES DENIED" + e.getMessage(), e.getCause());
-//            }
-//        }
-//
-//
-//    }
 
 
     //  G E T T E R S   &   S E T T E R S

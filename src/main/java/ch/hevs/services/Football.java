@@ -8,8 +8,6 @@ import java.util.List;
 @Local
 public interface Football
 {
-
-    boolean populateDB();
     List<Player> getPlayers();
     List<Club> getClubs();
     List<League> getLeagues();
@@ -23,9 +21,11 @@ public interface Football
 
     List<Player> getPlayersFromClubForFan(Long clubId);
 
-    public boolean seedDB();
+    boolean seedDB();
 
     boolean verifyManagerRole();
+    boolean resetDatabase();
+
     // CLUB - Use Cases :
     // 1) MAJ infos du club
     //  1.1) ajout suppresion jueur

@@ -7,13 +7,19 @@
 
 ## Utilisateurs / Groupes / Mots de passe
 
-| Utilisateur | Groupe  | Mot de passe |
-|-------------|---------|--------------|
-| Elias       | manager | Elias        |
-| Theo        | Player  | Theo         |
-| Eric        | Fan     | Eric         |
+| Utilisateur | Groupe                | Mot de passe |
+|-------------|-----------------------|--------------|
+| Elias       | Manager               | Elias        |
+| Theo        | Player                | Theo         |
+| Eric        | Fan                   | Eric         |
+| Admin       | Manager, Player, Fan  | Admin        |
 
-## Configuration de la base de données HSQLDB
+## Optional - Configuration de la base de données HSQLDB - Lancement automatique
+On a re-crée la database HSQL pour qu'elle se lance automatiquement au démarrage de l'application.
+Normalement en cours nous devions lancer le scripte "startDB.bat" pour lancer la database HSQLDB, 
+mais étatn donné qe c'est embêtant de devoir le faire à chaque fois, nous avons ajouoté au code un programme "createDB.java" qui doit être lancé avant le serveur wildfly.
+
+
 Run configuration -> Edit Configurations -> Before launch -> Add new -> Run program -> /utils/serverHSQLDB/createDB
 
 Run before launch order : 
