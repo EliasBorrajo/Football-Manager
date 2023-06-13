@@ -51,6 +51,7 @@ public class createDB {
         }
 
 
+// Pas besoin car BTN graphique dans l'application pour populate la DB
 //        Football football;
 //        try {
 //            System.out.println("getting service bean");

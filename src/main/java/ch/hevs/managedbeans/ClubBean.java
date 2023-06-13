@@ -299,9 +299,6 @@ public class ClubBean {
             } catch (IOException e) {
                 throw new FootballException("Erreur de redirection vers la page ACCES DENIED", e);
             }
-
-
-
         }
     }
 

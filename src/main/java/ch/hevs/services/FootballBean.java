@@ -17,7 +17,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
-@RolesAllowed(value = {"manager", "Fan", "Player"})
+@RolesAllowed(value = {"Manager", "Fan", "Player"})
 public class FootballBean implements Football
 {
     @PersistenceContext (name = "dbFootballPU", type= PersistenceContextType.TRANSACTION)
@@ -149,9 +149,9 @@ public class FootballBean implements Football
     public boolean verifyManagerRole() {
         System.out.println("Verify allowed role");
         System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +
-                            " with role : " + ctx.getCallerPrincipal().getName() + " is looking to acces the ressource");
+                            " with role : " + ctx.getCallerPrincipal().getName() + " is looking to access the ressource");
 
-        if (ctx.isCallerInRole("manager"))
+        if (ctx.isCallerInRole("Manager"))
         {
             System.out.println("Manager is allowed to access the ressource");
             return true;

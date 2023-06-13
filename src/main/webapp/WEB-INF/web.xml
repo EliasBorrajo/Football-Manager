@@ -52,7 +52,7 @@
 
     <!-- DEFINIR LES ROLES -->
     <auth-constraint>
-      <role-name>manager</role-name>
+      <role-name>Manager</role-name>
       <role-name>Player</role-name>
       <role-name>Fan</role-name>
     </auth-constraint>
@@ -66,7 +66,7 @@
 
   <!-- DEFINIR LES RÔLES -->
   <security-role>
-    <role-name>manager</role-name>
+    <role-name>Manager</role-name>
     <description>Manager d'un club de football</description>
   </security-role>
   <security-role>
