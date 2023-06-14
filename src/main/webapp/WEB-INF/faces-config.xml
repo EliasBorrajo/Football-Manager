@@ -6,11 +6,6 @@
     version="2.2">
 
 	<managed-bean>
-		<managed-bean-name>transferBean</managed-bean-name>
-		<managed-bean-class>ch.hevs.managedbeans.TransferBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
 		<managed-bean-name>clubBean</managed-bean-name>
 		<managed-bean-class>ch.hevs.managedbeans.ClubBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>

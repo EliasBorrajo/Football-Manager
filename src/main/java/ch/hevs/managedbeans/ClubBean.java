@@ -121,7 +121,7 @@ public class ClubBean {
         List<Player> players = new ArrayList<Player>();
         List<Player> leagues = new ArrayList<Player>();
 
-        // new player -- Initialize new player for form in JSF page
+        // new player -- Initialize new player for form in JSF page TODO DELETE ?
         playerAdd = new Player("Firstname", "Lastname","01.09.1997",
                 new Country("Switzerland"), "Attaquant",
                 1, false, 188.0, 76.8, clubs.get(1));
