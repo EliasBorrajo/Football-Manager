@@ -139,14 +139,49 @@ public class FootballBean implements Football
 
 
     @Override
-    public boolean verifyManagerRole() {
+    public boolean verifyManagerRole()
+    {
+        String roleManager = "Manager";
         System.out.println("Verify allowed role");
-        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +
-                            " with role : " + ctx.getCallerPrincipal().getName() + " is looking to access the ressource");
+        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
 
-        if (ctx.isCallerInRole("Manager"))
+        if (ctx.isCallerInRole(roleManager))
         {
-            System.out.println("Manager is allowed to access the ressource");
+            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+roleManager+" and is allowed to access the ressource");
+            return true;
+        }
+        else
+        {
+            System.out.println("Current role is not allowed to access the ressource");
+            return false;
+        }
+    }
+    public boolean verifyPlayerRole()
+    {
+        String rolePlayer = "Player";
+        System.out.println("Verify allowed role");
+        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
+
+        if (ctx.isCallerInRole(rolePlayer))
+        {
+            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+rolePlayer+" and is allowed to access the ressource");
+            return true;
+        }
+        else
+        {
+            System.out.println("Current role is not allowed to access the ressource");
+            return false;
+        }
+    }
+    public boolean verifyFanRole()
+    {
+        String roleFan = "Fan";
+        System.out.println("Verify allowed role");
+        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
+
+        if (ctx.isCallerInRole(roleFan))
+        {
+            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+roleFan+" and is allowed to access the ressource");
             return true;
         }
         else

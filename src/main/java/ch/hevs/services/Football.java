@@ -8,23 +8,31 @@ import java.util.List;
 @Local
 public interface Football
 {
+    // Player
     List<Player> getPlayers();
-    List<Club> getClubs();
-    List<League> getLeagues();
     void updatePlayer(Player player);
+    List<Player> getPlayersFromClubForFan(Long clubId);
 
+    // Club
+    List<Club> getClubs();
     void updateClub(Club club);
     Club getClubById(Long clubId);
     boolean deleteClub(Club club);
 
+    // League
+    List<League> getLeagues();
+
+    // Fan
     List<Fan> getFans();
 
-    List<Player> getPlayersFromClubForFan(Long clubId);
-
-    boolean seedDB();
-
+    // Roles verifications
     boolean verifyManagerRole();
+    boolean verifyPlayerRole();
+    boolean verifyFanRole();
+
+    // Database
     boolean resetDatabase();
+    boolean seedDB();
 
     // CLUB - Use Cases :
     // 1) MAJ infos du club

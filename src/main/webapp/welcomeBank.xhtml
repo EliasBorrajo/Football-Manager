@@ -9,15 +9,15 @@
 
         <h:form>
             <h:panelGrid columns="1" cellpadding="5">
-                <h:commandLink action="/Player/playerInfos">
+                <h:commandLink action="#{clubBean.showPlayer()}">
                     <h:outputText value="Players Info" />
                 </h:commandLink>
 
-                <h:commandLink action="/Fan/fanInfos">
+                <h:commandLink action="#{clubBean.showFan()}">
                     <h:outputText value="Fan Info" />
                 </h:commandLink>
 
-                <h:commandLink action="/League/leagueInfos">
+                <h:commandLink action="#{clubBean.showLeague}">
                     <h:outputText value="League Info" />
                 </h:commandLink>
 

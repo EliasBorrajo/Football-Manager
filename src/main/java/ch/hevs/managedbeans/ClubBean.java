@@ -153,27 +153,7 @@ public class ClubBean {
 
     }
 
-    /**
-     * BTN de passage de Club à Edit Club
-     * Réalise une redirection vers la page d'édition du club sélectionné
-     * Recurperer le nom du club sélectionné
-     */
-    public void editClub()
-    {
-        // Récupérer l'instance de ExternalContext
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
-        // Obtenir le nom du club sélectionné
-        String selectedClubName = selectedClub.getNameClub();
-
-        try {
-            // Redirection vers la page d'édition avec le nom du club en tant que paramètre
-            externalContext.redirect("editClub.xhtml?clubName=" + selectedClubName);
-        } catch (IOException e) {
-            // Gérer les exceptions si la redirection échoue
-            e.printStackTrace();
-        }
-    }
 
     /**
      * BTN de Edit Club à Club (retour) & envoyer les modifications à la DB (save)
@@ -210,28 +190,33 @@ public class ClubBean {
 
     public void deleteClub()
     {
-        if( selectedClub != null)
+        if (football.verifyManagerRole())
         {
-            System.out.println("Selected Club tu delete : " + selectedClub.getNameClub());
-            boolean isSuccess = football.deleteClub(selectedClub);
+            if( selectedClub != null)
+            {
+                System.out.println("Selected Club tu delete : " + selectedClub.getNameClub());
+                boolean isSuccess = football.deleteClub(selectedClub);
 
-            if(isSuccess)
-                FacesContext.getCurrentInstance()
-                        .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club deleted successfully", null));
+                if(isSuccess)
+                    FacesContext.getCurrentInstance()
+                            .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club deleted successfully", null));
+                else
+                    FacesContext.getCurrentInstance()
+                            .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Club deletion could not happen", null));
+
+                initAttributes();
+
+            }
             else
+            {
                 FacesContext.getCurrentInstance()
-                        .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Club deletion could not happen", null));
-
-            initAttributes();
-
+                        .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No club selected", null));
+            }
         }
-        else
-        {
-            FacesContext.getCurrentInstance()
-                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No club selected", null));
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
         }
-
-
     }
 
     // DROP DOWN LIST UPDATERS
@@ -332,29 +317,117 @@ public class ClubBean {
     }
 
     // NAVIGATION BUTTONS
-    public void showClub() {
-        if (football.verifyManagerRole()) {
+    /*
+    * Manager --> Acces To League & Club
+    * Player  --> Acces To Player & Club (readOnly)
+    * Fan     --> Acces To Fan    & Player (readOnly)
+    */
+    public void showClub()
+    {
+        if (football.verifyManagerRole() || football.verifyPlayerRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
-            try {
-                FacesContext facesContext = FacesContext.getCurrentInstance();
-                String redirectUrl = facesContext.getApplication().getViewHandler().getActionURL(facesContext, "/Club/showClubInfos.xhtml");
-                facesContext.getExternalContext().redirect(redirectUrl);
-                facesContext.responseComplete();
-            } catch (IOException e) {
-                throw new FootballException("Erreur de redirection vers la page des clubs", e);
-            }
-        } else {
+            navigationRedirection("/Club/showClubInfos.xhtml" );
+        }
+        else {
             // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
-            try {
-                FacesContext facesContext = FacesContext.getCurrentInstance();
-                String redirectUrl = facesContext.getApplication().getViewHandler().getActionURL(facesContext, "/accessDenied.xhtml");
-                facesContext.getExternalContext().redirect(redirectUrl);
-                facesContext.responseComplete();
-            } catch (IOException e) {
-                throw new FootballException("Erreur de redirection vers la page ACCES DENIED", e);
-            }
+            navigationRedirection("/accessDenied.xhtml");
         }
     }
+    public void showLeague()
+    {
+        if (football.verifyManagerRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            navigationRedirection("/League/leagueInfos.xhtml");
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+    }
+    public void showPlayer()
+    {
+        if (football.verifyPlayerRole() || football.verifyFanRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            navigationRedirection("/Player/playerInfos.xhtml");
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+    }
+    public void showFan()
+    {
+        if (football.verifyFanRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            navigationRedirection("/Fan/fanInfos.xhtml");
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+    }
+    public void showEditPlayer()
+    {
+        if (football.verifyPlayerRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            navigationRedirection("/Player/playerUpdate.xhtml");
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+    }
+    /**
+     * BTN de passage de Club à Edit Club
+     * Réalise une redirection vers la page d'édition du club sélectionné
+     * Recurperer le nom du club sélectionné
+     */
+    public void showEditClub()
+    {
+        if (football.verifyManagerRole())
+        {
+            // Récupérer l'instance de ExternalContext
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+            // Obtenir le nom du club sélectionné
+            String selectedClubName = selectedClub.getNameClub();
+
+            try {
+                // Redirection vers la page d'édition avec le nom du club en tant que paramètre
+                externalContext.redirect("editClub.xhtml?clubName=" + selectedClubName);
+            } catch (IOException e) {
+                // Gérer les exceptions si la redirection échoue
+                e.printStackTrace();
+            }
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+
+
+    }
+
+    /**
+     * Redirection vers la page xhtml passée en paramètre (avec le chemin relatif)
+     * @param xhtmlPageName : nom de la page xhtml (avec le chemin relatif)
+     *                        Exemple : "/Club/showClubInfos.xhtml"
+     * @return true si la redirection a été effectuée, false sinon
+     */
+    private boolean navigationRedirection(String xhtmlPageName )
+    {
+        // L'utilisateur a le rôle requis, redirection vers la page des clubs
+        try {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            String redirectUrl = facesContext.getApplication().getViewHandler().getActionURL(facesContext, xhtmlPageName);
+            facesContext.getExternalContext().redirect(redirectUrl);
+            facesContext.responseComplete();
+            return true;
+        } catch (IOException e) {
+            throw new FootballException("Erreur de redirection vers la page : "+ xhtmlPageName, e);
+        }
+    }
+
 
 
 
