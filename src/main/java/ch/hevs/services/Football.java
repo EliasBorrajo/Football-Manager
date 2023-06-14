@@ -8,6 +8,9 @@ import java.util.List;
 @Local
 public interface Football
 {
+    // General
+    String getCurrentUser();
+
     // Player
     List<Player> getPlayers();
     void updatePlayer(Player player);

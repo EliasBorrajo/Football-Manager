@@ -27,6 +27,11 @@ public class FootballBean implements Football
     @Resource
     private SessionContext ctx; // To get access to security information (user name, role, ...)
 
+    public String getCurrentUser()
+    {
+        return  ctx.getCallerPrincipal().getName();
+    }
+
     @Override
     public List<Player> getPlayers() {
         return em.createQuery("FROM Player").getResultList();

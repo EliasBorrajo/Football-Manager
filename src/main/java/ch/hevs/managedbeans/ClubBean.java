@@ -1,6 +1,5 @@
 package ch.hevs.managedbeans;
 
-
 import ch.hevs.businessobject.*;
 import ch.hevs.services.Football;
 import ch.hevs.utils.exception.FootballException;
@@ -29,10 +28,7 @@ public class ClubBean {
     // General
     private Football football;
     private boolean  serviceLayerResult;
-    private List<String> messages;
-    private String       currentURL;
-    public static final String NOT_AUTHORIZED_MESSAGE = "You are not authorized to perform this operation";
-
+    private String currentUser;
 
     // Player
     private List<Player> playersList;
@@ -45,13 +41,11 @@ public class ClubBean {
     private List<String> playerFromClubNames;
     private String       selectedPlayerFromClubName;
 
-
     // Club
     private List<Club>   clubs;
     private Club         selectedClub;
     private List<String> clubNames;         // Nécessaire pour le menu déroulant
     private String       selectedClubName;  // Nécessaire pour le menu déroulant
-
 
     //Fan
     private List<Fan> fansList;
@@ -66,7 +60,6 @@ public class ClubBean {
     private String       selectedLeagueName;
 
 
-
     //  C O N S T R U C T O R S
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
     public void initialize() throws NamingException
@@ -76,17 +69,17 @@ public class ClubBean {
         InitialContext ctx = new InitialContext();
         football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
 
-//        populateDB();
-//
-//        initAttributes();
+
         initializeDB(); // Initial DB population && Reset si on change de User
+
     }
 
     private void initAttributes()
     {
         System.out.println("I N I T    A T T R I B U T E S");
-        messages = new ArrayList<>();
-        currentURL = "";
+
+        // General
+        this.currentUser = football.getCurrentUser();
 
         //get players
         this.playersList = football.getPlayers();
@@ -445,18 +438,6 @@ public class ClubBean {
     public void setServiceLayerResult(boolean serviceLayerResult) {
         this.serviceLayerResult = serviceLayerResult;
     }
-    public List<String> getMessages() {
-        return messages;
-    }
-    public void setMessages(List<String> messages) {
-        this.messages = messages;
-    }
-    public String getCurrentURL() {
-        return currentURL;
-    }
-    public void setCurrentURL(String currentURL) {
-        this.currentURL = currentURL;
-    }
     public List<String> getPlayerNames() {
         return playerNames;
     }
@@ -618,5 +599,11 @@ public class ClubBean {
         this.selectedLeagueName = selectedLeagueName;
     }
 
+    public String getCurrentUser() {
+        return currentUser;
+    }
 
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
 }
