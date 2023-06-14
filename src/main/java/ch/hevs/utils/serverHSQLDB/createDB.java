@@ -4,10 +4,6 @@ import ch.hevs.services.Football;
 import ch.hevs.services.FootballBean;
 import ch.hevs.utils.exception.FootballException;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
-import javax.ejb.Stateless;
-import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -49,10 +45,6 @@ public class createDB {
                 HSQLDBServer.getInstance().start();
             }
         }
-
-
-
-
     }
 
     /**
