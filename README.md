@@ -13,7 +13,7 @@
 | Theo        | Player                | Theo         |
 | Eric        | Fan                   | Eric         |
 | Admin       | Manager, Player, Fan  | Admin        |
-Ces utilisateurs sont a rentrer manuellement dans le registre du serveur WildFly, n'existent pas dans la DB.
+Ces utilisateurs sont à rentrer manuellement dans le registre du serveur WildFly, n'existent pas dans la DB.
 
 ## Optional - Configuration de la base de données HSQLDB - Lancement automatique
 On a re-crée la database HSQL pour qu'elle se lance automatiquement au démarrage de l'application.
@@ -31,3 +31,10 @@ Run before launch order :
 ### Run configuration 
 1) Click on the green arrow -> RUN -> this starts the HSQLDB server
 2) Click on the green arrow AGAIN -> RUN -> this starts the WildFly server and deploys the war file
+
+
+# Authors : 
+- Elias Borrajo
+- Theo Clerc
+
+GitLab repository : [Jakarta Footall Manager](https://gitlab.com/hes-so-elias/semestre6/jakarta_football)
