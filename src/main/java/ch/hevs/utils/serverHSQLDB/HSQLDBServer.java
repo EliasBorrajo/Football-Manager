@@ -13,12 +13,19 @@ public class HSQLDBServer
     private static final String DB_NAME = "DB";
     private static final String DB_PATH = "file:../database/db/DB";
 
-
+    /**
+     * Private constructor to prevent direct instantiation
+     * Use getInstance() instead to instantiate the class
+     */
     private HSQLDBServer() {
         // Private constructor to prevent direct instantiation
         // Use getInstance() instead to instantiate the class
     }
 
+    /**
+     * Method to get the instance of the class (Singleton)
+     * @return : the instance of the class (Singleton)
+     */
     public static HSQLDBServer getInstance() {
         if (instanceSingleton == null) {
             instanceSingleton = new HSQLDBServer();
@@ -26,6 +33,9 @@ public class HSQLDBServer
         return instanceSingleton;
     }
 
+    /**
+     * Method to start the HSQLDB server (Singleton)
+     */
     public void start()
     {
         // Start the server if it is not already running or if it has not been started yet
@@ -38,6 +48,9 @@ public class HSQLDBServer
         }
     }
 
+    /**
+     * Method to stop the HSQLDB server (Singleton)
+     */
     public void stop() {
         if (server != null) {
             server.stop();
@@ -46,6 +59,10 @@ public class HSQLDBServer
         }
     }
 
+    /**
+     * Method to check if the HSQLDB server is running (Singleton)
+     * @return : true if the server is running, false if not
+     */
     public boolean isRunning() {
         return isRunning;
     }

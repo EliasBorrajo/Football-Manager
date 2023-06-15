@@ -2,6 +2,11 @@ package ch.hevs.businessobject;
 
 import javax.persistence.*;
 
+/**
+ * Business object Person, wich is an abstract class and embeds Country
+ * Will not be in the DB, but will be in PERSISTENCE.XML file
+ * Parent class of Player and Fan
+ */
 @Entity
 @Inheritance ( strategy = InheritanceType.TABLE_PER_CLASS )
 public abstract class Person
@@ -12,7 +17,7 @@ public abstract class Person
     private Long   id;
     private String firstname;
     private String lastname;
-    private String   birthdate;
+    private String birthdate;
 
     // R E L A T I O N S
     @Embedded

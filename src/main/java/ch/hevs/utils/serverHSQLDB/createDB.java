@@ -9,12 +9,23 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
-
+/**
+ * Class to create the database (HSQLDB) before deploying the application on the server (wildfly)
+ * This class is used to create the database only once, when the application is deployed for the first time
+ * If the database already exists, it is reset (all data is deleted) and the HSQLDB server is restarted (Singleton).
+ * If the database does not exist, it is created and the HSQLDB server is started (Singleton).
+ *
+ * @PersitenceContext : used to inject the EntityManager (JPA) into the class (used to execute queries on the database)
+ */
 public class createDB {
 
     @PersistenceContext(name = "dbFootballPU", type= PersistenceContextType.TRANSACTION)
     private static EntityManager em;
 
+    /**
+     * Main method to create the database
+     * Program to run in the EDIT CONFIGURATION of IntelliJ IDEA BEFORE deploying the application on the server (wildfly)
+     */
     public static void main(String[] args)
     {
 

@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Business object League, used to persist data in the database.
+ */
 @Entity
 public class League
 {
@@ -25,9 +28,18 @@ public class League
     private Country country;
 
     // C O N S T R U C T O R S
+    /**
+     * Default constructor, required by JPA
+     */
     public League() {
         this.clubs = new ArrayList<Club>();
     }
+    /**
+     * Complete constructor to create a new league with all attributes
+     * @param nameLeague : name of the league (ex: Super League)
+     * @param division : division of the league (ex: 1)
+     * @param country : country of the league (ex: Switzerland)
+     */
     public League( String nameLeague, String division, Country country) {
         this.clubs = new ArrayList<Club>();
         this.nameLeague = nameLeague;
@@ -96,4 +108,14 @@ public class League
         this.country = country;
     }
 
+    @Override
+    public String toString() {
+        return "League{" +
+                "id=" + id +
+                ", nameLeague='" + nameLeague + '\'' +
+                ", division='" + division + '\'' +
+                ", clubs=" + clubs +
+                ", country=" + country +
+                '}';
+    }
 }

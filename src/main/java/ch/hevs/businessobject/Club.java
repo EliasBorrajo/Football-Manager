@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Business object Club, used to persist data in the database.
+ */
 @Entity
 public class Club {
 
@@ -31,9 +34,22 @@ public class Club {
     private List<Player> players;
 
     // C O N S T R U C T O R S
+
+    /**
+     * Default constructor, required by JPA
+     */
     public Club(){
         this.players = new ArrayList<Player>();
     }
+
+    /**
+     * Complete constructor to create a new club with all attributes
+     * @param nameClub : name of the club (ex: FC Sion)
+     * @param location : location of the club (ex: Sion)
+     * @param stadName : name of the stadium (ex: Tourbillon)
+     * @param country : country of the club (ex: Switzerland)
+     * @param league : league of the club (ex: Super League)
+     */
     public Club(String nameClub, String location, String stadName, Country country, League league) {
         this.players = new ArrayList<Player>();
         this.nameClub = nameClub;
@@ -116,6 +132,10 @@ public class Club {
         //return String.valueOf(id);// works too
     }
 
+    /**
+     * Alternative for the toString() method of the entity to convert the entity to a String.
+     * @return : String with all the attributes of the entity
+     */
     public String show() {
         return "Club{" +
                 "id=" + id +
@@ -128,6 +148,7 @@ public class Club {
                 '}';
     }
 
+    // L I S T E N E R S  @POST...
     @PostPersist
     public void acknowledgePersist()
     {

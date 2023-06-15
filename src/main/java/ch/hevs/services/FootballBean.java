@@ -2,21 +2,26 @@ package ch.hevs.services;
 
 import ch.hevs.businessobject.*;
 import ch.hevs.utils.exception.FootballException;
-import ch.hevs.utils.serverHSQLDB.HSQLDBServer;
 
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
-import javax.persistence.Query;
-import javax.security.auth.login.LoginException;
 import java.util.List;
 
+/**
+ * Implementation of the Football service (EJB) that implements the business logic.
+ * This class is a stateless EJB (session bean) that is used by the JSF controllers via the Football interface.
+ * @Stateless: stateless EJB (session bean) means that the EJB is stateless, i.e. it does not keep any state between two calls.
+ * @RolesAllowed: defines the roles that are allowed to access the methods of the EJB. Here every role is allowed to access every method.
+ *                But in the JSF we will make checks calls on roles to restrict the access to some buttons or pages
+ * @PersistenceContext: defines the persistence context (unit) that is used by the EJB. The unit name is defined in the persistence.xml file.
+ *                      Unit name is dbFootballPU wich is the name of the persistence unit defined in the persistence.xml file.
+ * @Resource: defines the SessionContext that is used to get access to security information (user name, role, ...).
+ */
 @Stateless
 @RolesAllowed(value = {"Manager", "Fan", "Player"})
 public class FootballBean implements Football
@@ -27,25 +32,41 @@ public class FootballBean implements Football
     @Resource
     private SessionContext ctx; // To get access to security information (user name, role, ...)
 
-    // General
-
+    // G E N E R A L
+    /**
+     * Get the current user name connected to te registry of wildfly
+     * @return : the current user name
+     */
+    @Override
     public String getCurrentUser()
     {
         return  ctx.getCallerPrincipal().getName();
     }
 
-    // Player
-
+    // P L A Y E R
+    /**
+     * Get all the players from the database
+     * @return : a list of all the players
+     */
     @Override
     public List<Player> getPlayers() {
         return em.createQuery("FROM Player").getResultList();
     }
 
+    /**
+     * Update a player in the database with the new information given in parameter
+     * @param player : the player to update
+     */
     @Override
     public void updatePlayer(Player player) {
         em.merge(player);
     }
 
+    /**
+     * Get all the players from a club for a fan (to display in the view)
+     * @param clubId : the id of the club to get the players from
+     * @return : a list of all the players from the club given in parameter
+     */
     @Override
     public List<Player> getPlayersFromClubForFan(Long clubId){
 
@@ -55,26 +76,32 @@ public class FootballBean implements Football
 
     }
 
-    // Club
-
+    // C L U B
+    /**
+     * Get all the clubs from the database
+     * @return : a list of all the clubs
+     */
     @Override
     public List<Club> getClubs() {
         return em.createQuery("FROM Club").getResultList();
     }
 
-    @Override
-    public Club getClubById(Long clubId) {
-        return em.find(Club.class, clubId);
-    }
-
+    /**
+     * Get a club from the database with the id given in parameter
+     * @param club : the club to update to the database
+     */
     @Override
     public void updateClub(Club club){
         em.merge(club);
     }
 
+    /**
+     * Delete a club from the database with a query, and delete all the fans associated to this club
+     * @param club : the club to delete
+     * @return : true if the club and the fans are deleted, false if not
+     */
     @Override
     public boolean deleteClub(Club club) {
-
         try {
             // Supprimer les fans associés au club
             Club clubtoRemove = em.merge(club);
@@ -97,6 +124,11 @@ public class FootballBean implements Football
         }
     }
 
+    /**
+     * Get all the clubs from a league with the id of the league given in parameter
+     * @param leagueId : the id of the league to get the clubs from
+     * @return : a list of all the clubs from the league given in parameter
+     */
     @Override
     public List<Club> getClubsFromLeague(Long leagueId) {
         return em.createQuery("SELECT c FROM Club c WHERE c.league.id = :leagueId")
@@ -104,22 +136,31 @@ public class FootballBean implements Football
                 .getResultList();
     }
 
-    //League
-
+    // L E A G U E
+    /**
+     * Get all the leagues from the database
+     * @return : a list of all the leagues
+     */
     @Override
     public List<League> getLeagues() {
         return em.createQuery("FROM League").getResultList();
     }
 
-    // Fan
-
+    // F A N
+    /**
+     * Get all the fans from the database
+     * @return : a list of all the fans
+     */
     @Override
     public List<Fan> getFans() {
         return em.createQuery("FROM Fan").getResultList();
     }
 
-    // Roles verifications
-
+    // R O L E S  V E R I F I C A T I O N
+    /**
+     * Verify if the current user has the role "Manager" to access the ressource (page or button)
+     * @return : true if the user has the role "Manager", false if not
+     */
     @Override
     public boolean verifyManagerRole(){
         String roleManager = "Manager";
@@ -138,6 +179,11 @@ public class FootballBean implements Football
         }
     }
 
+    /**
+     * Verify if the current user has the role "Player" to access the ressource (page or button)
+     * @return : true if the user has the role "Player", false if not
+     */
+    @Override
     public boolean verifyPlayerRole(){
         String rolePlayer = "Player";
         System.out.println("Verify allowed role");
@@ -155,6 +201,11 @@ public class FootballBean implements Football
         }
     }
 
+    /**
+     * Verify if the current user has the role "Fan" to access the ressource (page or button)
+     * @return : true if the user has the role "Fan", false if not
+     */
+    @Override
     public boolean verifyFanRole(){
         String roleFan = "Fan";
         System.out.println("Verify allowed role");
@@ -172,8 +223,12 @@ public class FootballBean implements Football
         }
     }
 
-    // Database
-
+    // D A T A B A S E  M A N A G E M E N T
+    /**
+     * Reset the database by deleting all data from the database. This method is used for testing & demo purposes.
+     * @return : true if the database has been reset successfully, false otherwise.
+     */
+    @Override
     public boolean resetDatabase() {
         System.out.println("Resetting the database...");
 
@@ -193,6 +248,10 @@ public class FootballBean implements Football
         }
     }
 
+    /**
+     * Seed the database with some data. This method is used for testing & demo purposes.
+     * @return : true if the database has been seeded successfully, false otherwise.
+     */
     @Override
     public boolean seedDB(){
         try {
@@ -204,16 +263,6 @@ public class FootballBean implements Football
             Country country6 = new Country("Portugal");
             Country country7 = new Country("Egypt");
             Country country8 = new Country("Italia");
-            /**
-             em.persist(country1);
-             em.persist(country2);
-             em.persist(country3);
-             em.persist(country4);
-             em.persist(country5);
-             em.persist(country6);
-             em.persist(country7);
-             em.persist(country8);
-             **/
 
 
             League leagueCH1 = new League("Super League", "Division 1",country3);
@@ -259,39 +308,39 @@ public class FootballBean implements Football
             Player player3 = new Player("Mason", "Mount", "10.01.1999", country2, "MF", 19, false, 185, 73,chelsea);
             Player player4 = new Player("Timo", "Werner", "06.03.1996", country5, "FW", 11, false, 180, 75,chelsea);
 
-// Pour les joueurs d'Arsenal
+        // Pour les joueurs d'Arsenal
             Player player5 = new Player("Pierre-Emerick", "Aubameyang", "18.06.1989", country1, "FW", 14, false, 187, 80,arsenal);
             Player player6 = new Player("Bukayo", "Saka", "05.09.2001", country2, "MF", 7, false, 178, 68,arsenal);
 
-// Pour les joueurs de Manchester United
+        // Pour les joueurs de Manchester United
             Player player7 = new Player("Bruno", "Fernandes", "08.09.1994", country6, "MF", 18, false, 179, 69,manu);
             Player player8 = new Player("Harry", "Maguire", "05.03.1993", country2, "DF", 5, true, 194, 88,manu);
 
-// Pour les joueurs de Liverpool FC
+        // Pour les joueurs de Liverpool FC
             Player player9 = new Player("Mohamed", "Salah", "15.06.1992", country7, "FW", 11, false, 175, 71,liverpool);
             Player player10 = new Player("Virgil", "van Dijk", "08.07.1991", country2, "DF", 4, true, 193, 92, liverpool);
 
-// Pour les joueurs de Juventus FC
+        // Pour les joueurs de Juventus FC
             Player player11 = new Player("Cristiano", "Ronaldo", "05.02.1985", country3, "FW", 7, false, 187, 83,juventus);
             Player player12 = new Player("Giorgio", "Chiellini", "14.08.1984", country8, "DF", 3, true, 187, 85,juventus);
 
-// Pour les joueurs de AS Roma
+        // Pour les joueurs de AS Roma
             Player player13 = new Player("Lorenzo", "Pellegrini", "19.06.1996", country8, "MF", 7, false, 185, 74,roma);
             Player player14 = new Player("Bryan", "Cristante", "03.03.1995", country8, "MF", 4, false, 188, 79, roma);
 
-// Pour les joueurs de AC Milan
+        // Pour les joueurs de AC Milan
             Player player15 = new Player("Zlatan", "Ibrahimović", "03.10.1981", country3, "FW", 11, false, 195, 95,acmilan);
             Player player16 = new Player("Gianluigi", "Donnarumma", "25.02.1999", country1, "GK", 99, true, 196, 90,acmilan);
 
-// Pour les joueurs de Inter Milan
+        // Pour les joueurs de Inter Milan
             Player player17 = new Player("Romelu", "Lukaku", "13.05.1993", country2, "FW", 9, false, 190, 94,intermilan);
             Player player18 = new Player("Stefan", "de Vrij", "05.02.1992", country2, "DF", 6, true, 188, 78,intermilan);
 
-// Pour les joueurs de FC Basel
+        // Pour les joueurs de FC Basel
             Player player19 = new Player("Valentin", "Stocker", "12.04.1989", country1, "MF", 14, false, 180, 72,basel);
             Player player20 = new Player("Noah", "Okafor", "24.05.2001", country1, "FW", 9, false, 176, 68,basel);
 
-// Pour les joueurs de BSC Young Boys
+        // Pour les joueurs de BSC Young Boys
             Player player21 = new Player("Jean-Pierre", "Nsame", "01.02.1993", country1, "FW", 9, false, 186, 79,yb);
             Player player22 = new Player("Nicolas", "Ngamaleu", "10.09.1991", country1, "MF", 7, false, 177, 71,yb);
 

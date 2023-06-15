@@ -1,7 +1,11 @@
 package ch.hevs.businessobject;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
+/**
+ * Business object Player, wich inherit from Person
+ */
 @Entity
 public class Player extends Person {
     // A T T R I B U T S
@@ -17,9 +21,25 @@ public class Player extends Person {
     private Club playsForClub;
 
     // C O N S T R U C T O R
+    /**
+     * Default constructor, required by JPA
+     */
     public Player() {
         super();
     }
+    /**
+     * Complete constructor to create a new player with all attributes
+     * @param firstname : firstname of the player (ex: John)
+     * @param lastname : lastname of the player (ex: Doe)
+     * @param birthdate : birthdate of the player (ex: 01.01.1990)
+     * @param country : country of the player (ex: Switzerland)
+     * @param positionPlayer : position of the player (ex: Goalkeeper)
+     * @param number : number of the player (ex: 1)
+     * @param isRightFooted : is the player right footed (ex: true)
+     * @param height : height of the player (ex: 1.80)
+     * @param weight : weight of the player (ex: 80.2)
+     * @param playsForClub : club the player plays for (ex: FC Sion)
+     */
     public Player(String firstname, String lastname,
                   String birthdate, Country country,
                   String positionPlayer, int number,

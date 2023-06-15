@@ -21,8 +21,10 @@ import java.util.List;
 /**
  * JSF Managed Bean
  * Controller for the different views of the application
+ * Contains all the methods used by the views to interact with the model (Football)
+ * Contains all the attributes used by the views to display the model (Football) data
  */
-@ManagedBean // TODO : Verifier le @ManagedBean
+@ManagedBean
 public class ClubBean {
     //  A T T R I B U T S
     // General

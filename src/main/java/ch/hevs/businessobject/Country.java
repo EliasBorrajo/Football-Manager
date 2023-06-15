@@ -2,7 +2,10 @@ package ch.hevs.businessobject;
 
 import javax.persistence.Embeddable;
 
-// NE SERA PAS DANS LA DB, mais sera dans PERSISTENCE.XML
+/**
+ * Business object Country, wich is an embeddable object
+ * Will not be in the DB, but will be in PERSISTENCE.XML file
+ */
 @Embeddable
 public class Country {
 
@@ -10,7 +13,14 @@ public class Country {
     private String nameCountry;
 
     // C O N S T R U C T O R S
+    /**
+     * Default constructor, required by JPA
+     */
     public Country(){    }
+    /**
+     * Complete constructor to create a new country with all attributes
+     * @param nameCountry
+     */
     public Country(String nameCountry) {
         this.nameCountry = nameCountry;
     }
@@ -22,5 +32,12 @@ public class Country {
     }
     public void setNameCountry(String name) {
         this.nameCountry = nameCountry;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "nameCountry='" + nameCountry + '\'' +
+                '}';
     }
 }
