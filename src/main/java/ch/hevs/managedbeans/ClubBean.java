@@ -22,7 +22,7 @@ import java.util.List;
  * JSF Managed Bean
  * Controller for the different views of the application
  */
-@ManagedBean // TODO : Verifier le @ManagedBean
+@ManagedBean
 public class ClubBean {
     //  A T T R I B U T S
     // General
@@ -33,10 +33,8 @@ public class ClubBean {
     // Player
     private List<Player> playersList;
     private Player       selectedPlayer;
-    private List<String> playerNames;          // Nécessaire pour le menu déroulant
-    private String       selectedPlayerName;   // Nécessaire pour le menu déroulant
-    private Player       playertoUpdate; // TODO Remove?
-    private Player       playerAdd;
+    private List<String> playerNames;
+    private String       selectedPlayerName;
     private List<Player> playersFromClubList;
     private List<String> playerFromClubNames;
     private String       selectedPlayerFromClubName;
@@ -44,40 +42,37 @@ public class ClubBean {
     // Club
     private List<Club>   clubs;
     private Club         selectedClub;
-    private List<String> clubNames;         // Nécessaire pour le menu déroulant
-    private String       selectedClubName;  // Nécessaire pour le menu déroulant
+    private List<String> clubNames;
+    private String       selectedClubName;
+    private List<Club> allClubs;
 
     //Fan
     private List<Fan> fansList;
     private Fan       selectedFan;
-    private List<String> fansNames;          // Nécessaire pour le menu déroulant
+    private List<String> fansNames;
     private String       selectedFanName;
 
     //League
     private List<League> leaguesList;
     private League       selectedLeague;
-    private List<String> leaguesNames;          // Nécessaire pour le menu déroulant
+    private List<String> leaguesNames;
     private String       selectedLeagueName;
 
-    private List<Club> allClubs;
+
 
 
     //  C O N S T R U C T O R S
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
-    public void initialize() throws NamingException
-    {
+    public void initialize() throws NamingException {
         System.out.println("initialize ClubBean");
         // use JNDI to inject reference to bank EJB
         InitialContext ctx = new InitialContext();
         football = (Football) ctx.lookup("java:global/Jakarta-Football-Manager-0.0.2-SNAPSHOT/FootballBean!ch.hevs.services.Football");
 
-
         initializeDB(); // Initial DB population && Reset si on change de User
-
     }
 
-    private void initAttributes()
-    {
+    private void initAttributes() {
         System.out.println("I N I T    A T T R I B U T E S");
 
         // General
@@ -97,6 +92,7 @@ public class ClubBean {
         for (Club club : clubs ) {
             this.clubNames.add(club.getNameClub());
         }
+        allClubs = football.getClubs();
 
         // get fans
         this.fansList = football.getFans();
@@ -111,22 +107,10 @@ public class ClubBean {
         for(League league : leaguesList){
             this.leaguesNames.add(league.getNameLeague());
         }
-
-        allClubs = football.getClubs();
-
-        // TODO : REMOVE ?
-        List<Player> players = new ArrayList<Player>();
-        List<Player> leagues = new ArrayList<Player>();
-
-        // new player -- Initialize new player for form in JSF page TODO DELETE ?
-        playerAdd = new Player("Firstname", "Lastname","01.09.1997",
-                new Country("Switzerland"), "Attaquant",
-                1, false, 188.0, 76.8, clubs.get(1));
     }
 
     //  M E T H O D S
-    public void populateDB()
-    {
+    public void populateDB() {
         // populate football database
         System.out.println("populate football database...");
         System.out.println("POPULATE : " + football.seedDB());
@@ -137,8 +121,7 @@ public class ClubBean {
      * Used when changing user (manager, player, fan)
      * Used initially to populate the DB with the initial data set (seedDB)
      */
-    public void initializeDB()
-    {
+    public void initializeDB() {
         // populate football database
         System.out.println("reset football database...");
         System.out.println("RESET : " + football.resetDatabase() );
@@ -147,16 +130,12 @@ public class ClubBean {
         System.out.println("DB POPULATED");
 
         initAttributes();
-
     }
-
-
 
     /**
      * BTN de Edit Club à Club (retour) & envoyer les modifications à la DB (save)
      */
-    public void updateClubInfos()
-    {
+    public void updateClubInfos() {
         // Récupérer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
         UIComponent component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:clubNameId");
         String nameClub = ((UIInput) component).getValue().toString();
@@ -170,11 +149,6 @@ public class ClubBean {
         String stadName = ((UIInput) component).getValue().toString();
         selectedClub.setStadName(stadName);
 
-//        component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:countryNameId");
-//        String countryName = ((UIInput) component).getValue().toString();
-//        selectedClub.getCountry().setNameCountry(countryName );
-
-
         // Effectuer la mise à jour des informations du club dans la base de données
         football.updateClub(selectedClub);
 
@@ -185,8 +159,7 @@ public class ClubBean {
         initAttributes();
     }
 
-    public void deleteClub()
-    {
+    public void deleteClub() {
         if (football.verifyManagerRole())
         {
             if( selectedClub != null)
@@ -220,12 +193,10 @@ public class ClubBean {
     public void updateClubSelected(ValueChangeEvent event) {
         selectedClubName = (String) event.getNewValue();
         selectedClub = null; // Réinitialiser selectedClub
-        //setSelectedClub(null);
 
         // Rechercher le club sélectionné dans la liste des clubs
         for (Club club : clubs) {
             if (club.getNameClub().equals(selectedClubName)) {
-                //setSelectedClub(club);
                 selectedClub = club;
                 break;
             }
@@ -268,7 +239,6 @@ public class ClubBean {
         }
     }
 
-
     public void updatePlayer() {
         // Mettre à jour le joueur dans la base de données avec les nouvelles informations
         football.updatePlayer(selectedPlayer);
@@ -278,8 +248,7 @@ public class ClubBean {
         initAttributes();
     }
 
-    public void updatePlayerInfos()
-    {
+    public void updatePlayerInfos() {
         // Récupérer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
         UIComponent component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:positionPlayerId");
         String positionPlayer = ((UIInput) component).getValue().toString();
@@ -319,8 +288,7 @@ public class ClubBean {
     * Player  --> Acces To Player & Club (readOnly)
     * Fan     --> Acces To Fan    & Player (readOnly)
     */
-    public void showClub()
-    {
+    public void showClub() {
         if (football.verifyManagerRole() || football.verifyPlayerRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
             navigationRedirection("/Club/showClubInfos.xhtml" );
@@ -330,8 +298,8 @@ public class ClubBean {
             navigationRedirection("/accessDenied.xhtml");
         }
     }
-    public void showLeague()
-    {
+
+    public void showLeague() {
         if (football.verifyManagerRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
             navigationRedirection("/League/leagueInfos.xhtml");
@@ -341,8 +309,8 @@ public class ClubBean {
             navigationRedirection("/accessDenied.xhtml");
         }
     }
-    public void showPlayer()
-    {
+
+    public void showPlayer() {
         if (football.verifyPlayerRole() || football.verifyFanRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
             navigationRedirection("/Player/playerInfos.xhtml");
@@ -352,8 +320,8 @@ public class ClubBean {
             navigationRedirection("/accessDenied.xhtml");
         }
     }
-    public void showFan()
-    {
+
+    public void showFan() {
         if (football.verifyFanRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
             navigationRedirection("/Fan/fanInfos.xhtml");
@@ -363,8 +331,8 @@ public class ClubBean {
             navigationRedirection("/accessDenied.xhtml");
         }
     }
-    public void showEditPlayer()
-    {
+
+    public void showEditPlayer() {
         if (football.verifyPlayerRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
             navigationRedirection("/Player/playerUpdate.xhtml");
@@ -374,13 +342,13 @@ public class ClubBean {
             navigationRedirection("/accessDenied.xhtml");
         }
     }
+
     /**
      * BTN de passage de Club à Edit Club
      * Réalise une redirection vers la page d'édition du club sélectionné
      * Recurperer le nom du club sélectionné
      */
-    public void showEditClub()
-    {
+    public void showEditClub() {
         if (football.verifyManagerRole())
         {
             // Récupérer l'instance de ExternalContext
@@ -413,8 +381,7 @@ public class ClubBean {
      *                        Exemple : "/Club/showClubInfos.xhtml"
      * @return true si la redirection a été effectuée, false sinon
      */
-    private boolean navigationRedirection(String xhtmlPageName )
-    {
+    private boolean navigationRedirection(String xhtmlPageName ) {
         // L'utilisateur a le rôle requis, redirection vers la page des clubs
         try {
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -427,9 +394,7 @@ public class ClubBean {
         }
     }
 
-
     public List<Club> getAllClubsInLeague() {
-        // Récupérer tous les clubs de la ligue à partir de l'entité League
         List<Club> clubs = football.getClubsFromLeague(selectedLeague.getId());
         return clubs;
     }
@@ -473,12 +438,6 @@ public class ClubBean {
     public void setPlayersList(List<Player> playersList) {
         this.playersList = playersList;
     }
-    public Player getPlayertoUpdate() {
-        return playertoUpdate;
-    }
-    public void setPlayertoUpdate(Player playertoUpdate) {
-        this.playertoUpdate = playertoUpdate;
-    }
     public List<Club> getClubs() {
         return clubs;
     }
@@ -502,12 +461,6 @@ public class ClubBean {
     }
     public void setClubNames(List<String> clubNames) {
         this.clubNames = clubNames;
-    }
-    public Player getPlayerAdd() {
-        return playerAdd;
-    }
-    public void setPlayerAdd(Player playerAdd) {
-        this.playerAdd = playerAdd;
     }
 
     public List<Fan> getFansList() {
