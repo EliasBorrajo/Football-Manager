@@ -29,7 +29,7 @@
                 <h:outputText value="#{clubBean.selectedLeague.country.nameCountry}"/>
                 <h:outputText value="Division: " style="font-weight: bold;"/>
                 <h:outputText value="#{clubBean.selectedLeague.division}"/>
-                <br/><br/>
+                <br/>
             </h:panelGrid>
 
             <h:dataTable value="#{clubBean.allClubsInLeague}" var="club" rendered="#{not empty clubBean.selectedLeague}">
@@ -47,7 +47,6 @@
                     #{club.location}
                 </h:column>
             </h:dataTable>
-
             <br />
             <h:commandButton value="Home" action="/welcomeFootball"/>
 

@@ -26,18 +26,23 @@
          <h:panelGrid columns="3" rendered="#{not empty clubBean.selectedClubName}">
             <h:outputText value="Name:" style="font-weight: bold;"/>
             <h:outputText  value="#{clubBean.selectedClub.nameClub}"  />
+            <!-- -->
 
             <h:outputText value="Location:" style="font-weight: bold;"/>
             <h:outputText  value="#{clubBean.selectedClub.location}" />
+            <!-- -->
 
             <h:outputText value="Stadium Name:" style="font-weight: bold;"/>
             <h:outputText  value="#{clubBean.selectedClub.stadName.toString()}" disabled="true" />
+            <!-- -->
 
             <h:outputText value="Country:" style="font-weight: bold;"/>
             <h:outputText value="#{clubBean.selectedClub.country.nameCountry.toString()}" disabled="true" />
+            <!-- -->
 
             <h:outputText value="League:" style="font-weight: bold;"/>
             <h:outputText  value="#{clubBean.selectedClub.league.nameLeague.toString()}" disabled="true" />
+            <!-- -->
 
          </h:panelGrid>
          <br />
