@@ -11,32 +11,32 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
-		<display-name>welcomeBank.xhtml</display-name>
-		<from-view-id>/welcomeBank.xhtml</from-view-id>
+		<display-name>welcomeFootball.xhtml</display-name>
+		<from-view-id>/welcomeFootball.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>playerInfos</from-outcome>
 			<to-view-id>/Player/playerInfos.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>welcomeBank.xhtml</display-name>
-		<from-view-id>/welcomeBank.xhtml</from-view-id>
+		<display-name>welcomeFootball.xhtml</display-name>
+		<from-view-id>/welcomeFootball.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>leagueInfos</from-outcome>
 			<to-view-id>/League/leagueInfos.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>welcomeBank.xhtml</display-name>
-		<from-view-id>/welcomeBank.xhtml</from-view-id>
+		<display-name>welcomeFootball.xhtml</display-name>
+		<from-view-id>/welcomeFootball.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>fanInfos</from-outcome>
 			<to-view-id>/Fan/fanInfos.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>welcomeBank.xhtml</display-name>
-		<from-view-id>/welcomeBank.xhtml</from-view-id>
+		<display-name>welcomeFootball.xhtml</display-name>
+		<from-view-id>/welcomeFootball.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>showClubInfos</from-outcome>
 			<to-view-id>/Club/showClubInfos.xhtml</to-view-id>

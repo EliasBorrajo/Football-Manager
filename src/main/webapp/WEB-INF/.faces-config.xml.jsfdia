@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#welcomeBank.xhtml" PATH="/welcomeBank.xhtml"
+ <PROCESS-ITEM NAME="rules:#welcomeFootball.xhtml" PATH="/welcomeFootball.xhtml"
   SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#welcomeBank.xhtml:0" NAME="item"
-   PATH="/welcomeBank.xhtml" model-entity="JSFProcessItem">
+  <PROCESS-ITEM ID="rules:#welcomeFootball.xhtml:0" NAME="item"
+   PATH="/welcomeFootball.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="transferForm::#transferForm.xhtml"
     NAME="output" PATH="/transferForm.xhtml"
     TARGET="rules:#transferForm.xhtml" TITLE="transferForm" model-entity="JSFProcessItemOutput"/>
