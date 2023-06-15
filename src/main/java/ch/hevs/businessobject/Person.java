@@ -24,8 +24,19 @@ public abstract class Person
     private Country country;
 
     // C O N S T R U C T O R S
+    /**
+     * Default constructor, required by JPA
+     */
     public Person() {
     }
+
+    /**
+     * Complete constructor to create a new person with all attributes
+     * @param firstname : firstname of the person (ex: John)
+     * @param lastname : lastname of the person (ex: Doe)
+     * @param birthdate : birthdate of the person (ex: 01.01.1990)
+     * @param country : country of the person (ex: Switzerland)
+     */
     public Person(String firstname, String lastname, String birthdate, Country country) {
         this.firstname = firstname;
         this.lastname = lastname;

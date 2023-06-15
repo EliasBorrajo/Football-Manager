@@ -120,9 +120,6 @@ public class createDB {
         em.createNativeQuery("DROP TABLE IF EXISTS Country CASCADE").executeUpdate();
         em.getTransaction().commit();
 
-//        // Régénérer les tables avec la méthode populate
-//        System.out.println("Regenerating the database...");
-//        football.seedDB();
 
         System.out.println("Database reset complete.");
     }
