@@ -69,7 +69,7 @@ public class ClubBean {
         System.out.println("initialize ClubBean");
         // use JNDI to inject reference to bank EJB
         InitialContext ctx = new InitialContext();
-        football = (Football) ctx.lookup("java:global/TP12-WEB-EJB-PC-EPC-E-0.0.1-SNAPSHOT/FootballBean!ch.hevs.services.Football");
+        football = (Football) ctx.lookup("java:global/Jakarta-Football-Manager-0.0.2-SNAPSHOT/FootballBean!ch.hevs.services.Football");
 
 
         initializeDB(); // Initial DB population && Reset si on change de User

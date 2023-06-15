@@ -20,6 +20,8 @@ De plus, il est possible, en tant que fan, d'obtenir des informations sur son cl
 | Admin       | Manager, Player, Fan  | Admin        |
 Ces utilisateurs sont à rentrer manuellement dans le registre du serveur WildFly car ils n'existent pas dans la DB.
 
+
+
 ## Optional - Configuration de la base de données HSQLDB - Lancement automatique
 On a re-crée la database HSQL pour qu'elle se lance automatiquement au démarrage de l'application.
 Normalement en cours nous devions lancer le scripte "startDB.bat" pour lancer la database HSQLDB, 
@@ -39,7 +41,8 @@ Ordre d'exécution avant le lancement :
 
 
 # Auteurs : 
-- Elias Borrajo
-- Theo Clerc
+- [Elias Borrajo](mailto:borrajo.elias@gmail.com)
+- [Theo Clerc](mailto:theo.clerc@hes-so.ch)
 
-GitLab repository : [Jakarta Footall Manager](https://gitlab.com/hes-so-elias/semestre6/jakarta_football)
+GitLab repository privé : [Jakarta Footall Manager](https://gitlab.com/hes-so-elias/semestre6/jakarta_football)
+Pour avoir accès, contacter les auteurs.

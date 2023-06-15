@@ -39,7 +39,7 @@
     <env-entry-type>java.lang.String</env-entry-type>
     <env-entry-value>am9kZXRlcHV0b2hhY2tlcg==</env-entry-value>
   </env-entry>
-  <display-name>TP12-WEB-EJB-PC-EPC-DAO-E</display-name>
+  <display-name>Jakarta-Football-Manager</display-name>
 
 
   <!-- ADD HERE THE SECURITY CONSTRAINTS -->
