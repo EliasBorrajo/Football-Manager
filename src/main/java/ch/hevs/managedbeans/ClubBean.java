@@ -64,6 +64,12 @@ public class ClubBean {
 
 
     //  C O N S T R U C T O R S
+
+    /**
+     *  Initialize the Managed Bean with the variables used by the views (xhtml) to display the data of the model (Football)
+     *  @PostConstruct : executed after the constructor and the injection of the dependencies (EJB) by the container
+     *  @throws NamingException : if the lookup fails to find the EJB with the specified JNDI name in the container registry (wildfly)
+     */
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
     public void initialize() throws NamingException {
         System.out.println("initialize ClubBean");
@@ -74,6 +80,26 @@ public class ClubBean {
         initializeDB(); // Initial DB population && Reset si on change de User
     }
 
+    //  M E T H O D S
+    /**
+     * Reset DB and populate it again with the initial data set
+     * Used when changing user (manager, player, fan)
+     * Used initially to populate the DB with the initial data set (seedDB)
+     */
+    public void initializeDB() {
+        // populate football database
+        System.out.println("reset football database...");
+        System.out.println("RESET : " + football.resetDatabase() );
+
+        System.out.println("DB RESET, NOW POPULATE... " + football.seedDB());
+        System.out.println("DB POPULATED");
+
+        initAttributes();
+    }
+
+    /**
+     * Initialize the variables used by the views (xhtml) to display the data
+     */
     private void initAttributes() {
         System.out.println("I N I T    A T T R I B U T E S");
 
@@ -111,28 +137,16 @@ public class ClubBean {
         }
     }
 
-    //  M E T H O D S
+    /**
+     * Populate the DB with the initial data set (seedDB)
+     * @Warning : If called twice, the data set will be duplicated in the DB
+     */
     public void populateDB() {
         // populate football database
         System.out.println("populate football database...");
         System.out.println("POPULATE : " + football.seedDB());
     }
 
-    /**
-     * Reset DB and populate it again with the initial data set
-     * Used when changing user (manager, player, fan)
-     * Used initially to populate the DB with the initial data set (seedDB)
-     */
-    public void initializeDB() {
-        // populate football database
-        System.out.println("reset football database...");
-        System.out.println("RESET : " + football.resetDatabase() );
-
-        System.out.println("DB RESET, NOW POPULATE... " + football.seedDB());
-        System.out.println("DB POPULATED");
-
-        initAttributes();
-    }
 
     /**
      * BTN de Edit Club à Club (retour) & envoyer les modifications à la DB (save)
