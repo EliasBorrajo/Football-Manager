@@ -1,4 +1,4 @@
-# FOOTBALL MANAGER - JAVA EE
+# FOOTBALL MANAGER - JAVA JAKARTA
 Dans ce mini projet, nous avons traité le thème "Football". Il est ainsi possible d'obtenir des informations sur des ligues, clubs et joueurs de foot.
 De plus, il est possible, en tant que fan, d'obtenir des informations sur son club favoris et retrouvé tous les joueurs y faisant partie.
 
