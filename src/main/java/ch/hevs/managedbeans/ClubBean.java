@@ -1,9 +1,6 @@
 package ch.hevs.managedbeans;
 
-import ch.hevs.businessobject.Club;
-import ch.hevs.businessobject.Fan;
-import ch.hevs.businessobject.League;
-import ch.hevs.businessobject.Player;
+import ch.hevs.businessobject.*;
 import ch.hevs.services.Football;
 import ch.hevs.utils.exception.FootballException;
 
@@ -43,6 +40,7 @@ public class ClubBean {
     private List<Player> playersFromClubList;
     private List<String> playerFromClubNames;
     private String       selectedPlayerFromClubName;
+    private Player newPlayer;
 
     // Club
     private List<Club>   clubs;
@@ -50,18 +48,23 @@ public class ClubBean {
     private List<String> clubNames;
     private String       selectedClubName;
     private List<Club> allClubs;
+    private Long clubNumber;
+    private Club newClub;
 
     //Fan
     private List<Fan> fansList;
     private Fan       selectedFan;
     private List<String> fansNames;
     private String       selectedFanName;
+    private Fan newFan;
 
     //League
     private List<League> leaguesList;
     private League       selectedLeague;
     private List<String> leaguesNames;
     private String       selectedLeagueName;
+    private Long leagueNumber;
+    private League newLeague;
 
 
 
@@ -137,6 +140,26 @@ public class ClubBean {
         for(League league : leaguesList){
             this.leaguesNames.add(league.getNameLeague());
         }
+
+        //Init league for add method
+        newLeague = new League();
+        newLeague.setCountry(new Country());
+
+        //Init fan for add method
+        newFan = new Fan();
+        newFan.setCountry(new Country());
+        newFan.setFanOfClub(new Club());
+
+        //Init player for add method
+        newPlayer = new Player();
+        newPlayer.setCountry(new Country());
+        newPlayer.setPlaysForClub(new Club());
+
+        //Init club for add method
+        newClub = new Club();
+        newClub.setCountry(new Country());
+        newClub.setLeague(new League());
+
     }
 
     /**
@@ -328,12 +351,64 @@ public class ClubBean {
         initAttributes();
     }
 
+    /**
+     * Adding a new league to the DB table
+     */
+    public void addLeague(){
+            football.addLeague(newLeague);
+            newLeague = new League();
+            newLeague.setCountry(new Country());
+
+            initAttributes();
+    }
+
+    /**
+     * Adding a new fan to the DB table
+     */
+    public void addFan(){
+
+            newFan.setFanOfClub(football.getClub(clubNumber));
+            football.addFan(newFan);
+            newFan = new Fan();
+            newFan.setCountry(new Country());
+            newFan.setFanOfClub(new Club());
+
+            initAttributes();
+    }
+
+    /**
+     * Adding a new player to the DB table
+     */
+    public void addPlayer(){
+
+            newPlayer.setPlaysForClub(football.getClub(clubNumber));
+            football.addPlayer(newPlayer);
+            newPlayer = new Player();
+            newPlayer.setCountry(new Country());
+            newPlayer.setPlaysForClub(new Club());
+
+            initAttributes();
+    }
+
+    /**
+     * Adding a new club to the DB table
+     */
+    public void addClub(){
+
+            newClub.setLeague(football.getLeague(leagueNumber));
+            football.addClub(newClub);
+            newClub = new Club();
+            newClub.setCountry(new Country());
+
+            initAttributes();
+    }
+
 
     // NAVIGATION BUTTONS
     /*
-    * Manager --> Acces To League & Club
-    * Player  --> Acces To Player & Club (readOnly)
-    * Fan     --> Acces To Fan    & Player (readOnly)
+    * Manager --> Acces To League (ALL) & Club (ALL)
+    * Player  --> Acces To Player (ALL) & Club (readOnly)
+    * Fan     --> Acces To Fan (ALL)    & Player (readOnly)
     */
     /**
      * Button to show the club page (if the user has the adequate role)
@@ -430,10 +505,66 @@ public class ClubBean {
             // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
             navigationRedirection("/accessDenied.xhtml");
         }
+    }
 
+    /**
+     * Button to show the add player page (if the user has the adequate role)
+     */
+    public void showAddPlayer() {
 
+        if (football.verifyPlayerRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            navigationRedirection("/Player/addPlayer.xhtml");
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+    }
 
+    /**
+     * Button to show the add fan page (if the user has the adequate role)
+     */
+    public void showAddFan() {
 
+        if (football.verifyFanRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            navigationRedirection("/Fan/addFan.xhtml");
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+    }
+
+    /**
+     * Button to show the add league page (if the user has the adequate role)
+     */
+    public void showAddLeague() {
+
+        if (football.verifyManagerRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            navigationRedirection("/League/addLeague.xhtml");
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+    }
+
+    /**
+     * Button to show the add club page (if the user has the adequate role)
+     */
+    public void showAddClub() {
+
+        if (football.verifyManagerRole()) {
+            // L'utilisateur a le rôle requis, redirection vers la page des clubs
+            navigationRedirection("/Club/addClub.xhtml");
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
     }
 
     /**
@@ -615,5 +746,53 @@ public class ClubBean {
     }
     public void setAllClubs(List<Club> allClubs) {
         this.allClubs = allClubs;
+    }
+
+    public League getNewLeague() {
+        return newLeague;
+    }
+
+    public void setNewLeague(League newLeague) {
+        this.newLeague = newLeague;
+    }
+
+    public Fan getNewFan() {
+        return newFan;
+    }
+
+    public void setNewFan(Fan newFan) {
+        this.newFan = newFan;
+    }
+
+    public Long getClubNumber() {
+        return clubNumber;
+    }
+
+    public void setClubNumber(Long clubNumber) {
+        this.clubNumber = clubNumber;
+    }
+
+    public Club getNewClub() {
+        return newClub;
+    }
+
+    public void setNewClub(Club newClub) {
+        this.newClub = newClub;
+    }
+
+    public Player getNewPlayer() {
+        return newPlayer;
+    }
+
+    public void setNewPlayer(Player newPlayer) {
+        this.newPlayer = newPlayer;
+    }
+
+    public Long getLeagueNumber() {
+        return leagueNumber;
+    }
+
+    public void setLeagueNumber(Long leagueNumber) {
+        this.leagueNumber = leagueNumber;
     }
 }

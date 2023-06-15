@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+    <ui:define name="content">
+        <h:form >
+            <script src="/Club/UpdateFilelds.js" type="text/javascript"></script>
+            <h:outputLabel value="Add Club:" style="font-weight: bold;"/>
+
+            <br /><br />
+
+
+            <h:panelGrid columns="3">
+                <h:outputText value="Name:" style="font-weight: bold;"/>
+                <h:inputText  value="#{clubBean.newClub.nameClub}"  />
+                <!-- -->
+
+                <h:outputText value="Location:" style="font-weight: bold;"/>
+                <h:inputText  value="#{clubBean.newClub.location}" />
+                <!-- -->
+
+                <h:outputText value="Stadium Name:" style="font-weight: bold;"/>
+                <h:inputText  value="#{clubBean.newClub.stadName}"/>
+                <!-- -->
+
+                <h:outputText value="Country:" style="font-weight: bold;"/>
+                <h:inputText value="#{clubBean.newClub.country.nameCountry}"/>
+                <!-- -->
+
+                <h:outputText value="League:" style="font-weight: bold;"/>
+                <h:selectOneMenu value="#{clubBean.leagueNumber}">
+                    <f:selectItems value="#{clubBean.leaguesList}" var="l"
+                                   itemLabel="#{l.nameLeague}" itemValue="#{l.id}" />
+                </h:selectOneMenu>
+                <!-- -->
+
+            </h:panelGrid>
+            <br />
+
+            <h:commandButton value="Home"          action="/welcomeFootball" />
+            <h:commandButton value="Save"          action="#{clubBean.addClub}" />
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+
+</html>

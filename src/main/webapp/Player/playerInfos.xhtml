@@ -47,7 +47,8 @@
 
             <br />
             <h:commandButton value="Home" action="/welcomeFootball"/>
-            <h:commandButton value="Edit Player" action="#{clubBean.showEditPlayer()}" rendered="#{not empty clubBean.selectedPlayer}"/>
+            <h:commandButton value="Edit Player" action="#{clubBean.showEditPlayer}" rendered="#{not empty clubBean.selectedPlayer}"/>
+            <h:commandButton value="Add Player" action="#{clubBean.showAddPlayer}"/>
         </h:form>
     </ui:define>
 </ui:composition>

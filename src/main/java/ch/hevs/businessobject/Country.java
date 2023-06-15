@@ -30,7 +30,7 @@ public class Country {
     public String getNameCountry() {
         return nameCountry;
     }
-    public void setNameCountry(String name) {
+    public void setNameCountry(String nameCountry) {
         this.nameCountry = nameCountry;
     }
 

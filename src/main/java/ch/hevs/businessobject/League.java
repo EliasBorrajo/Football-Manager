@@ -76,7 +76,7 @@ public class League
     {
         return nameLeague;
     }
-    public void setNameLeague(String name)
+    public void setNameLeague(String nameLeague)
     {
         this.nameLeague = nameLeague;
     }

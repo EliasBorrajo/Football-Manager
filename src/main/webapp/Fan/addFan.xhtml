@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <h:outputLabel value="Add a fan:" style="font-weight: bold;" />
+
+            <br/><br />
+
+            <h:panelGrid columns="2">
+                <h:outputText value="Lastname: " style="font-weight: bold;"/>
+                <h:inputText value="#{clubBean.newFan.lastname}"/>
+                <h:outputText value="Firstname: " style="font-weight: bold;"/>
+                <h:inputText value="#{clubBean.newFan.firstname}"/>
+                <h:outputText value="Birthdate: " style="font-weight: bold;"/>
+                <h:inputText value="#{clubBean.newFan.birthdate}"/>
+                <h:outputText value="Country: " style="font-weight: bold;"/>
+                <h:inputText value="#{clubBean.newFan.country.nameCountry}"/>
+                <h:outputText value="Subscription date: " style="font-weight: bold;"/>
+                <h:inputText value="#{clubBean.newFan.subscriptionDate}"/>
+                <h:outputText value="Favourite club: " style="font-weight: bold;"/>
+                <h:selectOneMenu value="#{clubBean.clubNumber}">
+                    <f:selectItems value="#{clubBean.clubs}" var="c"
+                                   itemLabel="#{c.nameClub}" itemValue="#{c.id}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+
+            <br />
+            <h:commandButton value="Home" action="/welcomeFootball"/>
+            <h:commandButton value="Save" action="#{clubBean.addFan}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

@@ -76,6 +76,15 @@ public class FootballBean implements Football
 
     }
 
+    /**
+     * Add a player into the database
+     * @param player : the player to persist
+     */
+    @Override
+    public void addPlayer(Player player){
+        em.persist(player);
+    }
+
     // C L U B
     /**
      * Get all the clubs from the database
@@ -136,6 +145,25 @@ public class FootballBean implements Football
                 .getResultList();
     }
 
+    /**
+     * Get a club by id from the database
+     * @param clubId : the id club
+     * @return : a club
+     */
+    @Override
+    public Club getClub(long clubId) {
+        return (Club) em.createQuery("FROM Club c where c.id=:id").setParameter("id", clubId).getSingleResult();
+    }
+
+    /**
+     * Add a club into the database
+     * @param club : the club to persist
+     */
+    @Override
+    public void addClub(Club club){
+        em.persist(club);
+    }
+
     // L E A G U E
     /**
      * Get all the leagues from the database
@@ -144,6 +172,15 @@ public class FootballBean implements Football
     @Override
     public List<League> getLeagues() {
         return em.createQuery("FROM League").getResultList();
+    }
+
+    /**
+     * Add a league into the database
+     * @param league : the league to persist
+     */
+    @Override
+    public void addLeague(League league){
+        em.persist(league);
     }
 
     // F A N
@@ -155,6 +192,26 @@ public class FootballBean implements Football
     public List<Fan> getFans() {
         return em.createQuery("FROM Fan").getResultList();
     }
+
+    /**
+     * Add a fan into the database
+     * @param fan : the fan to persist
+     */
+    @Override
+    public void addFan(Fan fan){
+        em.persist(fan);
+    }
+
+    /**
+     * Get a league by id from the database
+     * @param leagueId : the id league
+     * @return : the league
+     */
+    @Override
+    public League getLeague(long leagueId){
+        return (League) em.createQuery("FROM League l where l.id=:id").setParameter("id", leagueId).getSingleResult();
+    }
+
 
     // R O L E S  V E R I F I C A T I O N
     /**
