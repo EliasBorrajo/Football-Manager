@@ -31,6 +31,8 @@
                 <h:outputText value="#{clubBean.selectedFan.birthdate}"/>
                 <h:outputText value="Country: " style="font-weight: bold;"/>
                 <h:outputText value="#{clubBean.selectedFan.country.nameCountry}"/>
+                <h:outputText value="Subscription date: " style="font-weight: bold;"/>
+                <h:outputText value="#{clubBean.selectedFan.subscriptionDate}"/>
                 <h:outputText value="Favourite club: " style="font-weight: bold;"/>
                 <h:outputText value="#{clubBean.selectedFan.fanOfClub.nameClub}"/>
             </h:panelGrid>
@@ -42,10 +44,11 @@
                 <h:selectOneMenu value="#{clubBean.selectedPlayerFromClubName}">
                     <f:selectItems value="#{clubBean.playerFromClubNames}" />
                 </h:selectOneMenu>
+                <h:commandButton value="Player infos" action="/Player/playerInfos"/>
             </h:panelGrid>
 
             <br />
-            <h:commandButton value="Back" action="/welcomeBank"/>
+            <h:commandButton value="Home" action="/welcomeBank"/>
         </h:form>
     </ui:define>
 </ui:composition>

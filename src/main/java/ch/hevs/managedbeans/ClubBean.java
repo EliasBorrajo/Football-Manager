@@ -59,6 +59,8 @@ public class ClubBean {
     private List<String> leaguesNames;          // Nécessaire pour le menu déroulant
     private String       selectedLeagueName;
 
+    private List<Club> allClubs;
+
 
     //  C O N S T R U C T O R S
     @PostConstruct // exécutée QUE si l'interface graphique est utilisée
@@ -109,6 +111,8 @@ public class ClubBean {
         for(League league : leaguesList){
             this.leaguesNames.add(league.getNameLeague());
         }
+
+        allClubs = football.getClubs();
 
         // TODO : REMOVE ?
         List<Player> players = new ArrayList<Player>();
@@ -399,6 +403,8 @@ public class ClubBean {
         }
 
 
+
+
     }
 
     /**
@@ -422,7 +428,11 @@ public class ClubBean {
     }
 
 
-
+    public List<Club> getAllClubsInLeague() {
+        // Récupérer tous les clubs de la ligue à partir de l'entité League
+        List<Club> clubs = football.getClubsFromLeague(selectedLeague.getId());
+        return clubs;
+    }
 
 
     //  G E T T E R S   &   S E T T E R S
@@ -605,5 +615,13 @@ public class ClubBean {
 
     public void setCurrentUser(String currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public List<Club> getAllClubs() {
+        return allClubs;
+    }
+
+    public void setAllClubs(List<Club> allClubs) {
+        this.allClubs = allClubs;
     }
 }

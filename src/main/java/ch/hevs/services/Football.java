@@ -28,6 +28,8 @@ public interface Football
     // Fan
     List<Fan> getFans();
 
+    List<Club> getClubsFromLeague(Long leagueId);
+
     // Roles verifications
     boolean verifyManagerRole();
     boolean verifyPlayerRole();

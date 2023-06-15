@@ -122,6 +122,13 @@ public class FootballBean implements Football
         //em.flush();
     }
 
+    @Override
+    public List<Club> getClubsFromLeague(Long leagueId) {
+        return em.createQuery("SELECT c FROM Club c WHERE c.league.id = :leagueId")
+                .setParameter("leagueId", leagueId)
+                .getResultList();
+    }
+
 
     public boolean resetDatabase() {
         System.out.println("Resetting the database...");
