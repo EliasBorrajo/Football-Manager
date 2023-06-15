@@ -68,6 +68,42 @@
 	</navigation-rule>
 
 	<navigation-rule>
+		<display-name>addClub.xhtml</display-name>
+		<from-view-id>/Club/addClub.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>#{clubBean.addClub}</from-outcome>
+			<to-view-id>/Club/showClubInfos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<display-name>addFan.xhtml</display-name>
+		<from-view-id>/Fan/addFan.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>#{clubBean.addFan}</from-outcome>
+			<to-view-id>/Fan/fanInfos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<display-name>addLeague.xhtml</display-name>
+		<from-view-id>/League/addLeague.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>#{clubBean.addLeague}</from-outcome>
+			<to-view-id>/League/leagueInfos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<display-name>addPlayer.xhtml</display-name>
+		<from-view-id>/Player/addPlayer.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>#{clubBean.addPlayer}</from-outcome>
+			<to-view-id>/League/leagueInfos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
 		<display-name>welcomeFootball.xhtml</display-name>
 		<from-view-id>/welcomeFootball.xhtml</from-view-id>
 		<navigation-case>
