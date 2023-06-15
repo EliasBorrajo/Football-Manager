@@ -12,9 +12,6 @@
          <h:outputLabel value="Edit Club informations:" style="font-weight: bold;"/>
          <br /><br />
 
-         <!-- Afffichage du club selectionné dans un form à 3 colonnes, avec en première colonne chaque label Nom Club, stade etc...
-         , puis 2 ème colonne a les valeurs de cet objeet, et la 3ème colonne permet d'entrer des nouvelles valeurs afin de mettre à jour l'objet selectionné  -->
-         <!-- Affichage du club sélectionné dans un formulaire -->
          <h:panelGrid columns="3" rendered="#{not empty clubBean.selectedClubName}">
             <h:outputText value="Club name:" style="font-weight: bold;"/>
             <h:outputText value="#{clubBean.selectedClub.nameClub}" />
@@ -28,17 +25,11 @@
             <h:outputText value="#{clubBean.selectedClub.stadName}" />
             <h:inputText value="#{clubBean.selectedClub.stadName}" id="stadNameId"/>
 
-<!--            <h:outputText value="Country:" />-->
-<!--            <h:outputText value="#{clubBean.selectedClub.country.nameCountry}" />-->
-<!--            <h:inputText value="#{clubBean.selectedClub.country.nameCountry}" id="countryNameId"/>-->
-
          </h:panelGrid>
          <br/>
 
          <h:commandButton value="Home" action="/welcomeFootball"  />
          <h:commandButton value="Save" action="#{clubBean.updateClubInfos}" rendered="#{not empty clubBean.selectedClub}" />
-
-
 
       </h:form>
    </ui:define>

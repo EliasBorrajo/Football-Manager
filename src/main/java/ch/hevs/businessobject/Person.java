@@ -1,11 +1,10 @@
 package ch.hevs.businessobject;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Inheritance ( strategy = InheritanceType.TABLE_PER_CLASS )
-public abstract class Person  // TODO LAISSER ABSTRACT ? Ou ça casse tout ?
+public abstract class Person
 {
     // A T T R I B U T S
     @Id

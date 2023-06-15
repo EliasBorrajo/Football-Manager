@@ -27,10 +27,14 @@ public class FootballBean implements Football
     @Resource
     private SessionContext ctx; // To get access to security information (user name, role, ...)
 
+    // General
+
     public String getCurrentUser()
     {
         return  ctx.getCallerPrincipal().getName();
     }
+
+    // Player
 
     @Override
     public List<Player> getPlayers() {
@@ -38,20 +42,24 @@ public class FootballBean implements Football
     }
 
     @Override
+    public void updatePlayer(Player player) {
+        em.merge(player);
+    }
+
+    @Override
+    public List<Player> getPlayersFromClubForFan(Long clubId){
+
+        return em.createQuery("From Player p WHERE p.playsForClub.id = :clubId")
+                .setParameter("clubId",clubId)
+                .getResultList();
+
+    }
+
+    // Club
+
+    @Override
     public List<Club> getClubs() {
         return em.createQuery("FROM Club").getResultList();
-    }
-
-    @Override
-    public List<League> getLeagues() {
-        return em.createQuery("FROM League").getResultList();
-    }
-
-    @Override
-    public void updateClub(Club club)
-    {
-        em.merge(club);
-        // em.flush(); pas nécessaire, se fait automatiquement à la fin de la transaction (commit)
     }
 
     @Override
@@ -60,27 +68,17 @@ public class FootballBean implements Football
     }
 
     @Override
+    public void updateClub(Club club){
+        em.merge(club);
+    }
+
+    @Override
     public boolean deleteClub(Club club) {
 
-        /**
         try {
-            Club clubToRemove = em.merge(club);
-            //Supprimer les fans et ensuite supprimer le club
-
-
-
-            em.remove(clubToRemove);
-            System.out.println("ENTITY REMOVED");
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-        **/
-
-       try {
             // Supprimer les fans associés au club
-           Club clubtoRemove = em.merge(club);
-           List<Fan> fans = em.createQuery("FROM Fan f WHERE f.fanOfClub = :club")
+            Club clubtoRemove = em.merge(club);
+            List<Fan> fans = em.createQuery("FROM Fan f WHERE f.fanOfClub = :club")
                     .setParameter("club", clubtoRemove)
                     .getResultList();
 
@@ -99,29 +97,6 @@ public class FootballBean implements Football
         }
     }
 
-
-
-    @Override
-    public List<Fan> getFans() {
-        return em.createQuery("FROM Fan").getResultList();
-    }
-
-    @Override
-    public List<Player> getPlayersFromClubForFan(Long clubId){
-
-        return em.createQuery("From Player p WHERE p.playsForClub.id = :clubId")
-                .setParameter("clubId",clubId)
-                .getResultList();
-
-    }
-
-
-    @Override
-    public void updatePlayer(Player player) {
-        em.merge(player);
-        //em.flush();
-    }
-
     @Override
     public List<Club> getClubsFromLeague(Long leagueId) {
         return em.createQuery("SELECT c FROM Club c WHERE c.league.id = :leagueId")
@@ -129,6 +104,75 @@ public class FootballBean implements Football
                 .getResultList();
     }
 
+    //League
+
+    @Override
+    public List<League> getLeagues() {
+        return em.createQuery("FROM League").getResultList();
+    }
+
+    // Fan
+
+    @Override
+    public List<Fan> getFans() {
+        return em.createQuery("FROM Fan").getResultList();
+    }
+
+    // Roles verifications
+
+    @Override
+    public boolean verifyManagerRole(){
+        String roleManager = "Manager";
+        System.out.println("Verify allowed role");
+        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
+
+        if (ctx.isCallerInRole(roleManager))
+        {
+            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+roleManager+" and is allowed to access the ressource");
+            return true;
+        }
+        else
+        {
+            System.out.println("Current role is not allowed to access the ressource");
+            return false;
+        }
+    }
+
+    public boolean verifyPlayerRole(){
+        String rolePlayer = "Player";
+        System.out.println("Verify allowed role");
+        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
+
+        if (ctx.isCallerInRole(rolePlayer))
+        {
+            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+rolePlayer+" and is allowed to access the ressource");
+            return true;
+        }
+        else
+        {
+            System.out.println("Current role is not allowed to access the ressource");
+            return false;
+        }
+    }
+
+    public boolean verifyFanRole(){
+        String roleFan = "Fan";
+        System.out.println("Verify allowed role");
+        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
+
+        if (ctx.isCallerInRole(roleFan))
+        {
+            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+roleFan+" and is allowed to access the ressource");
+            return true;
+        }
+        else
+        {
+            System.out.println("Current role is not allowed to access the ressource");
+            return false;
+        }
+    }
+
+    // Database
 
     public boolean resetDatabase() {
         System.out.println("Resetting the database...");
@@ -149,63 +193,8 @@ public class FootballBean implements Football
         }
     }
 
-
     @Override
-    public boolean verifyManagerRole()
-    {
-        String roleManager = "Manager";
-        System.out.println("Verify allowed role");
-        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
-
-        if (ctx.isCallerInRole(roleManager))
-        {
-            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+roleManager+" and is allowed to access the ressource");
-            return true;
-        }
-        else
-        {
-            System.out.println("Current role is not allowed to access the ressource");
-            return false;
-        }
-    }
-    public boolean verifyPlayerRole()
-    {
-        String rolePlayer = "Player";
-        System.out.println("Verify allowed role");
-        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
-
-        if (ctx.isCallerInRole(rolePlayer))
-        {
-            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+rolePlayer+" and is allowed to access the ressource");
-            return true;
-        }
-        else
-        {
-            System.out.println("Current role is not allowed to access the ressource");
-            return false;
-        }
-    }
-    public boolean verifyFanRole()
-    {
-        String roleFan = "Fan";
-        System.out.println("Verify allowed role");
-        System.out.println( "Current user : " + ctx.getCallerPrincipal().getName() +" is looking to access the ressource");
-
-        if (ctx.isCallerInRole(roleFan))
-        {
-            System.out.println("User +"+ ctx.getCallerPrincipal().getName() +"is a "+roleFan+" and is allowed to access the ressource");
-            return true;
-        }
-        else
-        {
-            System.out.println("Current role is not allowed to access the ressource");
-            return false;
-        }
-    }
-
-    @Override
-    public boolean seedDB()
-    {
+    public boolean seedDB(){
         try {
             Country country1 = new Country("France");
             Country country2 = new Country("England");
@@ -346,79 +335,5 @@ public class FootballBean implements Football
 
 
     }
-
-
-
-    // CLUB - Use Cases :
-    // 1) MAJ infos du club
-    //  1.1) ajout suppresion jueur
-    // 2) Inscrire un club à une ligue
-    // 3) Consulter les infos de la ligue
-    //  3.1) obtenir liste des clubs
-
-//
-//    @Override
-//    public void addPlayer(Club club, Player player)
-//    {
-//        // TODO : Check if player is already in a club
-//        Club clubAddingMember = em.merge(club);
-//        Player playerAdding   = em.merge(player);
-//
-//        club.addPlayer(playerAdding);
-//        player.setPlaysForClub(clubAddingMember);
-//    }
-//
-//    @Override
-//    public void removePlayer(Player player)
-//    {
-//        // TODO : UTILISER LE EM POUR FAIRE LES MERGE ?
-//        // Remove player from club, and remove club from player, and delete player from DB
-//        Player playerRemoving = em.merge(player); // ID DEPUIS LE FRONTEND
-//        Club club = playerRemoving.getPlaysForClub();
-//        club.removePlayer(playerRemoving);
-//        playerRemoving.setPlaysForClub(null);
-//        em.remove(playerRemoving);
-//    }
-//
-//    @Override
-//    public void subscribeToLeague(League league, Club club)
-//    {
-//        League leagueSubscribing = em.merge(league);
-//        Club clubSubscribing     = em.merge(club);
-//
-//        league.addClub(clubSubscribing);
-//        club.setLeague(leagueSubscribing);
-//    }
-//
-//
-//    // FAN - Use Cases :
-//    // 1) Consulter les infos de son joueur préféré
-//    @Override
-//    public Player getPlayerInfo(Player player)
-//    {
-//        Player playerInfo = em.merge(player);
-//        return playerInfo;
-//    }
-//
-//    // PLAYER - Use Cases :
-//    // 1) MAJ infos du joueur
-//    // 2) Consulter les infos du club
-//    //  2.1) obtenir liste des joueurs
-//    @Override
-//    public void updatePlayerInfo(Player player)
-//    {
-//        Player playerUpdating = em.merge(player);
-//        em.persist(playerUpdating);
-//    }
-//
-//    @Override
-//    public Club getClubInfo(Club club)
-//    {
-//        Club clubInfo = em.merge(club);
-//        return clubInfo;
-//    }
-
-
-
 
 }

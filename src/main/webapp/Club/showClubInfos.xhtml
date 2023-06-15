@@ -14,10 +14,6 @@
 
          <br /><br />
 
-         <!-- liste déroulante de tous les clubs, et sélectionner son propre club -->
-         <!-- crée une liste déroulante des clubs où chaque élément de la liste est représenté par un objet club.
-              Lorsque l'utilisateur sélectionne un club dans la liste,
-              la propriété selectedClub dans le bean clubBean sera mise à jour avec le club sélectionné. -->
          <h:panelGrid columns="5">
             <h:outputText value="Select Club: " />
             <h:selectOneMenu value="#{clubBean.selectedClubName}" onchange="submit()" valueChangeListener="#{clubBean.updateClubSelected}" >
@@ -27,31 +23,21 @@
 
          <br />
 
-         <!-- Afficher un form avec les infos du club, on peut modifier directement la donné dans la table & cliquer sur SEND -->
          <h:panelGrid columns="3" rendered="#{not empty clubBean.selectedClubName}">
             <h:outputText value="Name:" style="font-weight: bold;"/>
             <h:outputText  value="#{clubBean.selectedClub.nameClub}"  />
-<!--            <h:inputText  value="#{clubBean.selectedClub.nameClub}"  />-->
-
 
             <h:outputText value="Location:" style="font-weight: bold;"/>
             <h:outputText  value="#{clubBean.selectedClub.location}" />
-<!--            <h:inputText  value="#{clubBean.selectedClub.location}" />-->
-
 
             <h:outputText value="Stadium Name:" style="font-weight: bold;"/>
             <h:outputText  value="#{clubBean.selectedClub.stadName.toString()}" disabled="true" />
-<!--            <h:inputText  value="#{clubBean.selectedClub.stadName}" disabled="true" />-->
-
 
             <h:outputText value="Country:" style="font-weight: bold;"/>
             <h:outputText value="#{clubBean.selectedClub.country.nameCountry.toString()}" disabled="true" />
-<!--            <h:inputText value="#{clubBean.selectedClub.country.nameCountry}" disabled="true" />-->
 
             <h:outputText value="League:" style="font-weight: bold;"/>
             <h:outputText  value="#{clubBean.selectedClub.league.nameLeague.toString()}" disabled="true" />
-<!--            <h:inputText  value="#{clubBean.selectedClub.league.nameLeague}" disabled="true" />-->
-
 
          </h:panelGrid>
          <br />

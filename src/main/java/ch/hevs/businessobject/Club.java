@@ -23,10 +23,7 @@ public class Club {
     private Country country;
 
     // Club <-1..*------1..1-> League
-    @ManyToOne /*(cascade = { CascadeType.PERSIST,
-                            CascadeType.MERGE,
-                            CascadeType.REFRESH,
-                            CascadeType.DETACH})*/
+    @ManyToOne
     private League league;
 
     // Club <-1..1------1..*-> Player

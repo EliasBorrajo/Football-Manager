@@ -1,7 +1,6 @@
 package ch.hevs.businessobject;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Player extends Person {
@@ -14,7 +13,7 @@ public class Player extends Person {
 
     // R E L A T I O N S
     // PLAYER <-1..*------1..1-> CLUB
-    @ManyToOne /*(cascade = CascadeType.ALL)*/
+    @ManyToOne
     private Club playsForClub;
 
     // C O N S T R U C T O R
@@ -33,10 +32,8 @@ public class Player extends Person {
         this.isRightFooted = isRightFooted;
         this.height = height;
         this.weight = weight;
-        this.playsForClub = playsForClub; // TODO METTRE ? JE PENSE PAS CAR MIS AVEC METHODES DEPUIS GRAPHIQUE
+        this.playsForClub = playsForClub;
     }
-
-
 
     // G E T T E R S   &   S E T T E R S
     // position
