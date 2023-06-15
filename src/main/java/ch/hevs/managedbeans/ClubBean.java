@@ -64,7 +64,6 @@ public class ClubBean {
 
 
     //  C O N S T R U C T O R S
-
     /**
      *  Initialize the Managed Bean with the variables used by the views (xhtml) to display the data of the model (Football)
      *  @PostConstruct : executed after the constructor and the injection of the dependencies (EJB) by the container
@@ -149,7 +148,7 @@ public class ClubBean {
 
 
     /**
-     * BTN de Edit Club à Club (retour) & envoyer les modifications à la DB (save)
+     * Button to get the inputs from the view (xhtml), update the model in the DB and refresh the view (xhtml) to display the changes
      */
     public void updateClubInfos() {
         // Récupérer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
@@ -175,95 +174,10 @@ public class ClubBean {
         initAttributes();
     }
 
-    public void deleteClub() {
-        if (football.verifyManagerRole())
-        {
-            if( selectedClub != null)
-            {
-                System.out.println("Selected Club tu delete : " + selectedClub.getNameClub());
-                boolean isSuccess = football.deleteClub(selectedClub);
 
-                if(isSuccess)
-                    FacesContext.getCurrentInstance()
-                            .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club deleted successfully", null));
-                else
-                    FacesContext.getCurrentInstance()
-                            .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Club deletion could not happen", null));
-
-                initAttributes();
-
-            }
-            else
-            {
-                FacesContext.getCurrentInstance()
-                        .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No club selected", null));
-            }
-        }
-        else {
-            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
-            navigationRedirection("/accessDenied.xhtml");
-        }
-    }
-
-    // DROP DOWN LIST UPDATERS
-    public void updateClubSelected(ValueChangeEvent event) {
-        selectedClubName = (String) event.getNewValue();
-        selectedClub = null; // Réinitialiser selectedClub
-
-        // Rechercher le club sélectionné dans la liste des clubs
-        for (Club club : clubs) {
-            if (club.getNameClub().equals(selectedClubName)) {
-                selectedClub = club;
-                break;
-            }
-        }
-    }
-
-    public void updateSelectedPlayer(ValueChangeEvent event) {
-        selectedPlayerName = (String) event.getNewValue();
-        selectedPlayer = null; // Réinitialiser selectedPlayer
-
-        for (Player player : playersList) {
-            if (player.getLastname().equals(selectedPlayerName)) {
-                selectedPlayer = player;
-                break;
-            }
-        }
-    }
-
-    public void updateSelectedFan(ValueChangeEvent event) {
-        selectedFanName = (String) event.getNewValue();
-        selectedFan = null; // Réinitialiser selectedFan
-
-        for (Fan fan : fansList) {
-            if (fan.getLastname().equals(selectedFanName)) {
-                selectedFan = fan;
-                break;
-            }
-        }
-    }
-
-    public void updateSelectedLeague(ValueChangeEvent event) {
-        selectedLeagueName = (String) event.getNewValue();
-        selectedLeague = null; // Réinitialiser selectedLeague
-
-        for (League league : leaguesList) {
-            if (league.getNameLeague().equals(selectedLeagueName)) {
-                selectedLeague = league;
-                break;
-            }
-        }
-    }
-
-    public void updatePlayer() {
-        // Mettre à jour le joueur dans la base de données avec les nouvelles informations
-        football.updatePlayer(selectedPlayer);
-        // Réinitialiser la propriété selectedPlayer pour désélectionner le joueur
-        selectedPlayer = null;
-
-        initAttributes();
-    }
-
+    /**
+     * Button to get the inputs from the view (xhtml), update the model in the DB and refresh the view (xhtml) to display the changes
+     */
     public void updatePlayerInfos() {
         // Récupérer les informations du champ InutText et les mettre dans le club sélectionné (selectedClub)
         UIComponent component = FacesContext.getCurrentInstance().getViewRoot().findComponent("formId:positionPlayerId");
@@ -298,12 +212,129 @@ public class ClubBean {
         initAttributes();
     }
 
+    /**
+     * Button to delete the selected club
+     * Verify that the user has the adequate role, and then delete the club
+     * @Warning : If the club has players & fans, all of them will be deletet too
+     */
+    public void deleteClub() {
+        if (football.verifyManagerRole())
+        {
+            if( selectedClub != null)
+            {
+                System.out.println("Selected Club tu delete : " + selectedClub.getNameClub());
+                boolean isSuccess = football.deleteClub(selectedClub);
+
+                if(isSuccess)
+                    FacesContext.getCurrentInstance()
+                            .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Club deleted successfully", null));
+                else
+                    FacesContext.getCurrentInstance()
+                            .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Club deletion could not happen", null));
+
+                initAttributes();
+
+            }
+            else
+            {
+                FacesContext.getCurrentInstance()
+                        .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No club selected", null));
+            }
+        }
+        else {
+            // L'utilisateur n'a pas le rôle requis, redirection vers la page d'accès refusé
+            navigationRedirection("/accessDenied.xhtml");
+        }
+    }
+
+    // DROP DOWN LIST UPDATERS
+    /**
+     * Update the selected club when the user selects a club from the drop down list
+     * @param event : the event that triggered the method (selecting a club from the drop down list)
+     */
+    public void updateClubSelected(ValueChangeEvent event) {
+        selectedClubName = (String) event.getNewValue();
+        selectedClub = null; // Réinitialiser selectedClub
+
+        // Rechercher le club sélectionné dans la liste des clubs
+        for (Club club : clubs) {
+            if (club.getNameClub().equals(selectedClubName)) {
+                selectedClub = club;
+                break;
+            }
+        }
+    }
+
+    /**
+     * Update the selected player when the user selects a player from the drop down list
+     * @param event : the event that triggered the method (selecting a player from the drop down list)
+     */
+    public void updateSelectedPlayer(ValueChangeEvent event) {
+        selectedPlayerName = (String) event.getNewValue();
+        selectedPlayer = null; // Réinitialiser selectedPlayer
+
+        for (Player player : playersList) {
+            if (player.getLastname().equals(selectedPlayerName)) {
+                selectedPlayer = player;
+                break;
+            }
+        }
+    }
+
+    /**
+     * Update the selected fan when the user selects a fan from the drop down list
+     * @param event : the event that triggered the method (selecting a fan from the drop down list)
+     */
+    public void updateSelectedFan(ValueChangeEvent event) {
+        selectedFanName = (String) event.getNewValue();
+        selectedFan = null; // Réinitialiser selectedFan
+
+        for (Fan fan : fansList) {
+            if (fan.getLastname().equals(selectedFanName)) {
+                selectedFan = fan;
+                break;
+            }
+        }
+    }
+
+    /**
+     * Update the selected league when the user selects a league from the drop down list
+     * @param event : the event that triggered the method (selecting a league from the drop down list)
+     */
+    public void updateSelectedLeague(ValueChangeEvent event) {
+        selectedLeagueName = (String) event.getNewValue();
+        selectedLeague = null; // Réinitialiser selectedLeague
+
+        for (League league : leaguesList) {
+            if (league.getNameLeague().equals(selectedLeagueName)) {
+                selectedLeague = league;
+                break;
+            }
+        }
+    }
+
+    /**
+     * Button to update the selected player with the new informations entered by the user in the form to the DB
+     */
+    public void updatePlayer() {
+        // Mettre à jour le joueur dans la base de données avec les nouvelles informations
+        football.updatePlayer(selectedPlayer);
+        // Réinitialiser la propriété selectedPlayer pour désélectionner le joueur
+        selectedPlayer = null;
+
+        initAttributes();
+    }
+
+
     // NAVIGATION BUTTONS
     /*
     * Manager --> Acces To League & Club
     * Player  --> Acces To Player & Club (readOnly)
     * Fan     --> Acces To Fan    & Player (readOnly)
     */
+    /**
+     * Button to show the club page (if the user has the adequate role)
+     */
     public void showClub() {
         if (football.verifyManagerRole() || football.verifyPlayerRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
@@ -315,6 +346,9 @@ public class ClubBean {
         }
     }
 
+    /**
+     * Button to show the league page (if the user has the adequate role)
+     */
     public void showLeague() {
         if (football.verifyManagerRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
@@ -326,6 +360,9 @@ public class ClubBean {
         }
     }
 
+    /**
+     * Button to show the player page (if the user has the adequate role)
+     */
     public void showPlayer() {
         if (football.verifyPlayerRole() || football.verifyFanRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
@@ -337,6 +374,9 @@ public class ClubBean {
         }
     }
 
+    /**
+     * Button to show the fan page (if the user has the adequate role)
+     */
     public void showFan() {
         if (football.verifyFanRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
@@ -348,6 +388,9 @@ public class ClubBean {
         }
     }
 
+    /**
+     * Button to show the edit player page (if the user has the adequate role)
+     */
     public void showEditPlayer() {
         if (football.verifyPlayerRole()) {
             // L'utilisateur a le rôle requis, redirection vers la page des clubs
@@ -360,9 +403,8 @@ public class ClubBean {
     }
 
     /**
-     * BTN de passage de Club à Edit Club
-     * Réalise une redirection vers la page d'édition du club sélectionné
-     * Recurperer le nom du club sélectionné
+     * Button to show the edit Club page (if the user has the adequate role)
+     * Redirect to the editClub page with the selected club name as parameter
      */
     public void showEditClub() {
         if (football.verifyManagerRole())
@@ -392,10 +434,10 @@ public class ClubBean {
     }
 
     /**
-     * Redirection vers la page xhtml passée en paramètre (avec le chemin relatif)
-     * @param xhtmlPageName : nom de la page xhtml (avec le chemin relatif)
-     *                        Exemple : "/Club/showClubInfos.xhtml"
-     * @return true si la redirection a été effectuée, false sinon
+     * Redirection to the page passed as parameter (with the relative path)
+     * @param xhtmlPageName : name of the xhtml page (with the relative path)
+     *                      Example : "/Club/showClubInfos.xhtml"
+     * @return true if the redirection has been done, false otherwise
      */
     private boolean navigationRedirection(String xhtmlPageName ) {
         // L'utilisateur a le rôle requis, redirection vers la page des clubs
@@ -410,6 +452,10 @@ public class ClubBean {
         }
     }
 
+    /**
+     * Data table to show all the clubs in the league selected by the user in the league list (leagueInfos.xhtml)
+     * @return : list of all the clubs in the league selected by the user
+     */
     public List<Club> getAllClubsInLeague() {
         List<Club> clubs = football.getClubsFromLeague(selectedLeague.getId());
         return clubs;
@@ -478,15 +524,12 @@ public class ClubBean {
     public void setClubNames(List<String> clubNames) {
         this.clubNames = clubNames;
     }
-
     public List<Fan> getFansList() {
         return fansList;
     }
-
     public void setFansList(List<Fan> fansList) {
         this.fansList = fansList;
     }
-
     public Fan getSelectedFan() {
         if(selectedFan!=null){
             this.playersFromClubList = football.getPlayersFromClubForFan(this.selectedFan.getFanOfClub().getId());
@@ -500,96 +543,73 @@ public class ClubBean {
         return selectedFan;
 
     }
-
     public void setSelectedFan(Fan selectedFan) {
         this.selectedFan = selectedFan;
     }
-
     public List<String> getFansNames() {
         return fansNames;
     }
-
     public void setFansNames(List<String> fansNames) {
         this.fansNames = fansNames;
     }
-
     public String getSelectedFanName() {
         System.out.println("Get Selected Fan name: "+selectedFanName);
         return selectedFanName;
     }
-
     public void setSelectedFanName(String selectedFanName) {
         this.selectedFanName = selectedFanName;
     }
-
     public List<Player> getPlayersFromClubList() {
         return playersFromClubList;
     }
-
     public void setPlayersFromClubList(List<Player> playersFromClubList) {
         this.playersFromClubList = playersFromClubList;
     }
-
     public List<String> getPlayerFromClubNames() {
         return playerFromClubNames;
     }
-
     public void setPlayerFromClubNames(List<String> playerFromClubNames) {
         this.playerFromClubNames = playerFromClubNames;
     }
-
     public String getSelectedPlayerFromClubName() {
         return selectedPlayerFromClubName;
     }
-
     public void setSelectedPlayerFromClubName(String selectedPlayerFromClubName) {
         this.selectedPlayerFromClubName = selectedPlayerFromClubName;
     }
-
     public List<League> getLeaguesList() {
         return leaguesList;
     }
-
     public void setLeaguesList(List<League> leaguesList) {
         this.leaguesList = leaguesList;
     }
-
     public League getSelectedLeague() {
         return selectedLeague;
     }
-
     public void setSelectedLeague(League selectedLeague) {
         this.selectedLeague = selectedLeague;
     }
-
     public List<String> getLeaguesNames() {
         return leaguesNames;
     }
-
     public void setLeaguesNames(List<String> leaguesNames) {
         this.leaguesNames = leaguesNames;
     }
-
     public String getSelectedLeagueName() {
         return selectedLeagueName;
     }
-
     public void setSelectedLeagueName(String selectedLeagueName) {
         this.selectedLeagueName = selectedLeagueName;
     }
-
     public String getCurrentUser() {
         return currentUser;
     }
-
     public void setCurrentUser(String currentUser) {
         this.currentUser = currentUser;
     }
-
     public List<Club> getAllClubs() {
         return allClubs;
     }
-
     public void setAllClubs(List<Club> allClubs) {
         this.allClubs = allClubs;
     }
