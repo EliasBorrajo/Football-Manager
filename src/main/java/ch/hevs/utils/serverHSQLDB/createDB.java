@@ -1,7 +1,5 @@
 package ch.hevs.utils.serverHSQLDB;
 
-import ch.hevs.services.Football;
-import ch.hevs.services.FootballBean;
 import ch.hevs.utils.exception.FootballException;
 
 import javax.persistence.EntityManager;

@@ -1,6 +1,9 @@
 package ch.hevs.managedbeans;
 
-import ch.hevs.businessobject.*;
+import ch.hevs.businessobject.Club;
+import ch.hevs.businessobject.Fan;
+import ch.hevs.businessobject.League;
+import ch.hevs.businessobject.Player;
 import ch.hevs.services.Football;
 import ch.hevs.utils.exception.FootballException;
 
