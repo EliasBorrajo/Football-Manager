@@ -68,7 +68,7 @@ public class Club {
     public void removePlayer(Player player)
     {
         this.players.remove(player);
-        player.setPlaysForClub(null); // TODO : Peut on laisser null ?  Voir RELATION
+        player.setPlaysForClub(null);
     }
 
 

@@ -27,6 +27,7 @@ import java.util.List;
 @ManagedBean
 public class ClubBean {
     //  A T T R I B U T S
+
     // General
     private Football football;
     private boolean  serviceLayerResult;

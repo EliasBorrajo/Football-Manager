@@ -56,7 +56,7 @@ public class League
     public void removeClub(Club club)
     {
         this.clubs.remove(club);
-        club.setLeague(null); // TODO : Peut on laisser null ?  Voir RELATION
+        club.setLeague(null);
     }
 
 
