@@ -26,7 +26,7 @@ The primary goal is to demonstrate an end‑to‑end **Java EE 7** stack — 
 | Application Server | WildFly JBoss                             | 23.0.2.Final |
 | Database           | HSQLDB (in‑memory)                        | 1.8.0.10     |
 
-\--- 
+---
 
 ## 🎯 Learning Objectives
 
@@ -97,7 +97,6 @@ Role mapping is handled by WildFly’s *Application Realm*; create the followin
 | Eric     | Fan                  | Eric     |
 | Admin    | Manager, Player, Fan | Admin    |
 
----
 
 ---
 
